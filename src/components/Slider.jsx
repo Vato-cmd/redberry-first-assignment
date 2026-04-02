@@ -41,18 +41,28 @@ export default function Slider() {
   }, []);
 
   const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
+    setCurrent((prev) => {
+      if (prev < slides.length - 1) {
+        return prev + 1;
+      }
+      return prev;
+    });
   };
 
   const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrent((prev) => {
+      if (prev > 0) {
+        return prev - 1;
+      }
+      return prev;
+    });
   };
 
   const isFirst = current === 0;
   const isLast = current === slides.length - 1;
 
   return (
-    <div className="relative w-full mt-[64px] overflow-hidden">
+    <div className="relative w-391.5 mx-auto mt-16 overflow-hidden">
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${current * 100}%)` }}
@@ -69,11 +79,11 @@ export default function Slider() {
             />
 
             <div className="absolute inset-0 flex flex-col justify-center items-start px-[48px] pt-[48px] pb-[140px] text-white bg-black/30">
-              <h2 className="text-[48px] font-[700]">{slide.title}</h2>
-              <p className="text-[24px] font-[300] w-[1218px] mb-[40px]">
+              <h2 className="text-[48px] font-bold">{slide.title}</h2>
+              <p className="text-[24px] font-light w-[1218px] mb-[40px]">
                 {slide.text}
               </p>
-              <Button className="bg-[#4F46E5] w-[206px] h-[64px] rounded-[8px] py-[17px] px-[25px] text-[20px] font-[500]">
+              <Button className="bg-[#4F46E5] w-[206px] h-[64px] rounded-[8px] py-[17px] px-[25px] text-[20px] font-medium">
                 {slide.buttonText}
               </Button>
             </div>
