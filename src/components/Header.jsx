@@ -13,10 +13,10 @@ export default function Header() {
             Browse Courses
           </p>
           <div className="flex gap-[15px]">
-            <Button classes="border-[2px] border-[#958FEF] text-[#4F46E5] h-[60px] w-[114px] py-[12px] px-[16px] rounded-[8px]">
+            <Button className="border-[2px] border-[#958FEF] text-[#4F46E5] h-[60px] w-[114px] py-[12px] px-[16px] rounded-[8px]">
               Log In
             </Button>
-            <Button classes="bg-[#4F46E5] text-white h-[60px] w-[114px] py-[12px] px-[16px] rounded-[8px]">
+            <Button className="bg-[#4F46E5] text-white h-[60px] w-[114px] py-[12px] px-[16px] rounded-[8px]">
               Sign Up
             </Button>
           </div>

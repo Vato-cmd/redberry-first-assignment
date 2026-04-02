@@ -1,3 +1,7 @@
-export default function Button({ classes, children }) {
-  return <button className={`font-inherit ${classes}`}>{children}</button>;
+export default function Button({ className, children, ...props }) {
+  return (
+    <button className={`font-inherit cursor-pointer ${className}`} {...props}>
+      {children}
+    </button>
+  );
 }
