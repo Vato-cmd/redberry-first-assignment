@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Slider from "./components/Slider";
 import FeaturedCourses from "./components/FeaturedCourses";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <Header />
       <Slider />
       <FeaturedCourses />
+      <Footer />
     </div>
   );
 }

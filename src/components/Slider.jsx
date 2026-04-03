@@ -64,13 +64,13 @@ export default function Slider() {
   return (
     <div className="relative w-391.5 mx-auto mt-16 overflow-hidden">
       <div
-        className="flex transition-transform duration-700 ease-in-out"
+        className="flex transition-transform duration-700 ease-in-out h-105"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
         {slides.map((slide, index) => (
           <div
             key={index}
-            className="w-full h-[420px] flex-shrink-0 relative rounded-[30px] overflow-hidden"
+            className="w-full h-full shrink-0 relative rounded-[30px] overflow-hidden"
           >
             <img
               src={slide.image}
@@ -78,12 +78,12 @@ export default function Slider() {
               className="w-full h-full object-cover"
             />
 
-            <div className="absolute inset-0 flex flex-col justify-center items-start px-[48px] pt-[48px] pb-[140px] text-white bg-black/30">
+            <div className="absolute inset-0 flex flex-col justify-center items-start px-12 pt-12 pb-35 text-white bg-black/30">
               <h2 className="text-[48px] font-bold">{slide.title}</h2>
-              <p className="text-[24px] font-light w-[1218px] mb-[40px]">
+              <p className="text-[24px] font-light w-304.5 mb-10">
                 {slide.text}
               </p>
-              <Button className="bg-[#4F46E5] w-[206px] h-[64px] rounded-[8px] py-[17px] px-[25px] text-[20px] font-medium">
+              <Button className="bg-[#4F46E5] w-51.5 h-16 rounded-lg py-4.25 px-6.25 text-[20px] font-medium">
                 {slide.buttonText}
               </Button>
             </div>
@@ -91,15 +91,15 @@ export default function Slider() {
         ))}
       </div>
 
-      <div className="flex gap-[30px] absolute right-[48px] bottom-[55px]">
-        <Button className="w-[54px] h-[54px]" onClick={prevSlide}>
+      <div className="flex gap-7.5 absolute right-12 bottom-13.75">
+        <Button className="w-13.5 h-13.5" onClick={prevSlide}>
           <img
             src={isFirst ? ArrowLeftGreyed : ArrowLeftWhite}
             alt="left arrow"
           />
         </Button>
 
-        <Button className="w-[54px] h-[54px]" onClick={nextSlide}>
+        <Button className="w-13.5 h-13.5" onClick={nextSlide}>
           <img
             src={isLast ? ArrowRightGreyed : ArrowRightWhite}
             alt="right arrow"
@@ -107,12 +107,12 @@ export default function Slider() {
         </Button>
       </div>
 
-      <div className="absolute bottom-[78px] left-1/2 transform -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-19.5 left-1/2 transform -translate-x-1/2 flex gap-2">
         {slides.map((slide, index) => (
           <span
             key={index}
-            className={`w-14.25 h-2 mr-[12px] rounded-full ${
-              current === index ? "bg-white" : "bg-white/50"
+            className={`w-14.25 h-2 mr-3 rounded-full ${
+              current === index ? "bg-white" : "bg-[#C1BCBC80]"
             }`}
           ></span>
         ))}

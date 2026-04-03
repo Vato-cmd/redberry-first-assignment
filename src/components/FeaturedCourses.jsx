@@ -8,7 +8,7 @@ export default function FeaturedCourses() {
   useEffect(() => {
     fetch("https://api.redclass.redberryinternship.ge/api/courses/featured")
       .then((response) => response.json())
-      .then((data) => (console.log(data.data), setCourses(data.data)));
+      .then((data) => setCourses(data.data));
   }, []);
 
   return (
@@ -34,12 +34,17 @@ export default function FeaturedCourses() {
                 alt={course.title}
               />
               <div className="flex items-center justify-between mt-[16.5px] mb-[12.5px]">
-                <p className="text-[14px] font-medium">
-                  {course.instructor.name}
+                <p className="text-[14px] font-medium text-[#8A8A8A]">
+                  Lecturer{" "}
+                  <span className="font-semibold text-[#666666]">
+                    {course.instructor.name}
+                  </span>
                 </p>
                 <div className="flex items-center gap-[0.5px]">
                   <img className="w-4.5 h-4.5" src={star} alt="star" />
-                  <p>{course.avgRating}</p>
+                  <p className="text-[#525252] text-[14px] font-medium">
+                    {course.avgRating}
+                  </p>
                 </div>
               </div>
               <h2 className="text-[24px] text-[#141414] font-semibold mt-3 mb-4">
