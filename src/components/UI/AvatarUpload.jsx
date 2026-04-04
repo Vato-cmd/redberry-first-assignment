@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import trash from "../../assets/trash.png";
+import uploadicon from "../../assets/upload-icon.png";
 import Button from "./Button";
 
 export default function AvatarUpload({ onChange, onRemove, error, file }) {
@@ -18,17 +19,22 @@ export default function AvatarUpload({ onChange, onRemove, error, file }) {
   }, [file]);
 
   return (
-    <div className="flex flex-col gap-2">
-      <label className="text-[14px] font-medium text-[#0A0A0A]">
+    <div className="flex flex-col">
+      <label className="text-[14px] mb-3 font-medium text-[#3D3D3D]">
         Upload Avatar
       </label>
 
       {!file && (
         <label
-          className={`flex items-center justify-center h-35 cursor-pointer border-[#D1D1D1] rounded-lg border-[1.5px] bg-[#F8F8F8] text-center  ${
+          className={`flex flex-col items-center justify-center h-35 cursor-pointer border-[1.5px] border-[#D1D1D1] rounded-lg bg-[#F8F8F8] text-center  ${
             error && "border-red-500"
           }`}
         >
+          <img
+            src={uploadicon}
+            alt="upload icon"
+            className="w-8.5 h-8.5 mb-2"
+          />
           <input
             type="file"
             accept=".jpg, .jpeg, .png, .webp"
@@ -39,12 +45,14 @@ export default function AvatarUpload({ onChange, onRemove, error, file }) {
           <div className="text-[#4A4A4A]">
             <p className="text-[16px]">
               Drag and drop or{" "}
-              <span className="text-[#4F46E5] underline font-medium">
+              <span className="text-[#281ED2] underline underline-offset-[25%] font-medium">
                 Upload file
               </span>
             </p>
 
-            <p className="mt-2 text-[14px] text-[#A0A0A0]">JPG, PNG or WebP</p>
+            <p className="mt-1.5 text-[12px] text-[#ADADAD]">
+              JPG, PNG or WebP
+            </p>
           </div>
         </label>
       )}
