@@ -5,6 +5,7 @@ import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import AvatarUpload from "../UI/AvatarUpload";
+import { registerUser } from "../../api/auth";
 
 import { validateSignup } from "../../utils/validateSignup";
 
@@ -89,41 +90,13 @@ export default function SignupModal() {
     try {
       setIsLoading(true);
 
-      const body = new FormData();
-      body.append("username", formData.username);
-      body.append("email", formData.email);
-      body.append("password", formData.password);
-      body.append("password_confirmation", formData.confirmPassword);
-
-      if (formData.avatar) {
-        body.append("avatar", formData.avatar);
-      }
-
-      const response = await fetch(
-        "https://api.redclass.redberryinternship.ge/api/register",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-          },
-          body,
-        },
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setErrors({
-          general: data.message || "Registration failed",
-        });
-        return;
-      }
+      await registerUser(formData);
 
       closeModal();
       openModal("login");
     } catch (error) {
       setErrors({
-        general: "Something went wrong",
+        general: error.message || "Something went wrong",
       });
     } finally {
       setIsLoading(false);

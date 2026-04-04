@@ -3,6 +3,7 @@ import { useState } from "react";
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
+import { loginUser } from "../../api/auth.js";
 
 export default function LoginModal() {
   const { closeModal, openModal } = useModal();
@@ -46,35 +47,16 @@ export default function LoginModal() {
 
     try {
       setIsLoading(true);
-      const response = await fetch(
-        "https://api.redclass.redberryinternship.ge/api/login",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            password: formData.password,
-          }),
-        },
-      );
-      const data = await response.json();
 
-      if (!response.ok) {
-        setErrors({
-          general: data.message || "Login failed",
-        });
-        return;
-      }
+      const data = await loginUser(formData);
+
       localStorage.setItem("token", data.data.token);
       localStorage.setItem("user", JSON.stringify(data.data.user));
 
       closeModal();
     } catch (error) {
       setErrors({
-        general: "Something went wrong",
+        general: error.message || "Something went wrong",
       });
     } finally {
       setIsLoading(false);
