@@ -70,7 +70,7 @@ export default function Slider() {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className="w-full h-full shrink-0 relative rounded-[30px] overflow-hidden"
+            className="w-full h-full shrink-0 relative rounded-[30px] overflow-hidden cursor-pointer"
           >
             <img
               src={slide.image}

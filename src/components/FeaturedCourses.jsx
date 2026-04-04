@@ -26,7 +26,7 @@ export default function FeaturedCourses() {
           return (
             <div
               key={course.id}
-              className="bg-[#FFFFFF] w-126.5 rounded-xl p-6"
+              className="bg-[#FFFFFF] w-126.5 rounded-xl p-6 cursor-pointer"
             >
               <img
                 className="w-116.5 h-65.5 object-cover rounded-[10px]"
