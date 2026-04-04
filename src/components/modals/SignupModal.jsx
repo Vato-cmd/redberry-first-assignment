@@ -23,16 +23,18 @@ export default function SignupModal() {
     avatar: null,
   });
 
-  useEffect(() => {
-    setErrors({});
-  }, [step]);
-
   function handleChange(e) {
     const { name, value } = e.target;
 
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+      general: "",
     }));
   }
 
@@ -70,18 +72,18 @@ export default function SignupModal() {
   }
   function handleNextStep() {
     const newErrors = validateSignup(formData, step);
-
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) return;
 
+    setErrors({});
     setStep((prev) => prev + 1);
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const newErrors = validateSignup(formData, 3);
+    const newErrors = validateSignup(formData, step);
 
     setErrors(newErrors);
 
@@ -89,7 +91,6 @@ export default function SignupModal() {
 
     try {
       setIsLoading(true);
-
       await registerUser(formData);
 
       closeModal();
@@ -196,6 +197,11 @@ export default function SignupModal() {
               onRemove={handleRemoveAvatar}
             />
           </>
+        )}
+        {errors.general && (
+          <p className="text-red-500 text-[14px] text-center">
+            {errors.general}
+          </p>
         )}
         {step < 3 ? (
           <Button

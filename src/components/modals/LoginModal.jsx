@@ -13,6 +13,7 @@ export default function LoginModal() {
     email: "",
     password: "",
   });
+  console.log(errors);
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -91,6 +92,12 @@ export default function LoginModal() {
           error={errors.password}
           required
         />
+
+        {errors.general && (
+          <p className="text-red-500 text-[14px] text-center">
+            {errors.general}
+          </p>
+        )}
 
         <Button
           disabled={isLoading}

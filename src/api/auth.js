@@ -15,10 +15,7 @@ export async function loginUser(formData) {
   const data = await response.json();
 
   if (!response.ok) {
-    setErrors({
-      general: data.message || "Login failed",
-    });
-    return;
+    throw new Error(data.message || "Login failed");
   }
 
   return data;
