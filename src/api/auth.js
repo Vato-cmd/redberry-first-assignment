@@ -21,6 +21,22 @@ export async function loginUser(formData) {
   return data;
 }
 
+export async function authenticatedUser(token) {
+  const response = await fetch(`${BASE_URL}/me`, {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Fetching User Failed");
+  }
+
+  return data;
+}
+
 export async function registerUser(formData) {
   const body = new FormData();
 

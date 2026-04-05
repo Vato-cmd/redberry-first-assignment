@@ -1,4 +1,4 @@
-import mainlogo from "../assets/mainlogo.png";
+import mainlogo from "../assets/logo.svg";
 import facebook from "../assets/Facebook.png";
 import instagram from "../assets/Instagram.png";
 import linkedin from "../assets/LinkedIn.png";

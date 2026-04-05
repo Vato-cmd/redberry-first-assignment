@@ -37,7 +37,7 @@ export default function Input({
           placeholder={placeholder}
           className={`w-full rounded-lg border-[1.5px] px-4 py-3 outline-none transition ${
             error
-              ? "border-red-500 focus:border-red-500"
+              ? "text-[#F4161A] focus:text-[#F4161A]"
               : "border-[#D1D1D1] focus:border-[#4F46E5]"
           }`}
         />
@@ -51,7 +51,7 @@ export default function Input({
         )}
       </div>
 
-      {error && <p className="text-[12px] text-red-500">{error}</p>}
+      {error && <p className="text-[12px] text-text-[#F4161A]">{error}</p>}
     </div>
   );
 }

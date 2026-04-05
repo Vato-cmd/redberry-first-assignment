@@ -73,7 +73,7 @@ export default function AvatarUpload({ onChange, onRemove, error, file }) {
         </div>
       )}
 
-      {error && <p className="text-[12px] text-red-500">{error}</p>}
+      {error && <p className="text-[12px] text-[#F4161A]">{error}</p>}
     </div>
   );
 }

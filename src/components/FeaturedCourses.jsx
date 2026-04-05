@@ -1,4 +1,4 @@
-import star from "../assets/star.png";
+import star from "../assets/star.svg";
 import Button from "./UI/Button";
 import { getFeaturedCourses } from "../api/courses";
 import { Link } from "react-router-dom";

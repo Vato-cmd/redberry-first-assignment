@@ -1,15 +1,18 @@
 import { useModal } from "../../context/ModalContext";
 import { useState } from "react";
 import { loginUser } from "../../api/auth.js";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 
 export default function LoginModal() {
-  const { closeModal, openModal } = useModal();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+
+  const { closeModal, openModal } = useModal();
+  const { login } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -52,8 +55,7 @@ export default function LoginModal() {
 
       const data = await loginUser(formData);
 
-      localStorage.setItem("token", data.data.token);
-      localStorage.setItem("user", JSON.stringify(data.data.user));
+      login(data.data.user, data.data.token);
 
       closeModal();
     } catch (error) {
@@ -95,7 +97,7 @@ export default function LoginModal() {
         />
 
         {errors.general && (
-          <p className="text-red-500 text-[14px] text-center">
+          <p className="text-[#F4161A] text-[14px] text-center">
             {errors.general}
           </p>
         )}

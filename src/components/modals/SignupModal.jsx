@@ -70,6 +70,7 @@ export default function SignupModal() {
       avatar: file,
     }));
   }
+  
   function handleNextStep() {
     const newErrors = validateSignup(formData, step);
     setErrors(newErrors);
