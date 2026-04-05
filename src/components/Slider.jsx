@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Button from "./UI/Button";
 import slide1 from "../assets/slide1.png";
 import slide2 from "../assets/slide2.png";
@@ -63,35 +64,37 @@ export default function Slider() {
 
   return (
     <div className="relative w-391.5 mx-auto mt-16 overflow-hidden">
-      <div
-        className="flex transition-transform duration-700 ease-in-out h-105"
-        style={{ transform: `translateX(-${current * 100}%)` }}
-      >
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className="w-full h-full shrink-0 relative rounded-[30px] overflow-hidden cursor-pointer"
-          >
-            <img
-              src={slide.image}
-              alt={slide.title}
-              className="w-full h-full object-cover"
-            />
+      <Link to="/courses">
+        <div
+          className="flex transition-transform duration-700 ease-in-out h-105"
+          style={{ transform: `translateX(-${current * 100}%)` }}
+        >
+          {slides.map((slide, index) => (
+            <div
+              key={index}
+              className="w-full h-full shrink-0 relative rounded-[30px] overflow-hidden cursor-pointer"
+            >
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover"
+              />
 
-            <div className="absolute inset-0 flex flex-col justify-center items-start px-12 pt-12 pb-35 text-white bg-black/30">
-              <h2 className="text-[48px] font-bold">{slide.title}</h2>
-              <p className="text-[24px] font-light w-304.5 mb-10">
-                {slide.text}
-              </p>
-              <Button className="bg-[#4F46E5] w-51.5 h-16 rounded-lg py-4.25 px-6.25 text-[20px] font-medium">
-                {slide.buttonText}
-              </Button>
+              <div className="absolute inset-0 flex flex-col justify-center items-start px-12 pt-12 pb-35 text-white bg-black/30">
+                <h2 className="text-[48px] font-bold">{slide.title}</h2>
+                <p className="text-[24px] font-light w-304.5 mb-10">
+                  {slide.text}
+                </p>
+                <Button className="bg-[#4F46E5] w-51.5 h-16 rounded-lg py-4.25 px-6.25 text-[20px] font-medium">
+                  {slide.buttonText}
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Link>
 
-      <div className="flex gap-7.5 absolute right-12 bottom-13.75">
+      <div className="flex items-center justify-center gap-7.5 absolute right-12 bottom-13.75">
         <Button className="w-13.5 h-13.5" onClick={prevSlide}>
           <img
             src={isFirst ? ArrowLeftGreyed : ArrowLeftWhite}
@@ -103,6 +106,7 @@ export default function Slider() {
           <img
             src={isLast ? ArrowRightGreyed : ArrowRightWhite}
             alt="right arrow"
+            className={isLast ? `w-11.5 h-11.5` : `w-13.5 h-13.5`}
           />
         </Button>
       </div>

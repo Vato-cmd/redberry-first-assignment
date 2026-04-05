@@ -1,19 +1,20 @@
 import { useModal } from "../../context/ModalContext";
 import { useState } from "react";
+import { loginUser } from "../../api/auth.js";
+
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
-import { loginUser } from "../../api/auth.js";
 
 export default function LoginModal() {
   const { closeModal, openModal } = useModal();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  console.log(errors);
 
   function handleChange(e) {
     const { name, value } = e.target;
