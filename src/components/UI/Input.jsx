@@ -11,6 +11,9 @@ export default function Input({
   placeholder = "",
   error = "",
   required = false,
+  disabled = false,
+  readOnly = false,
+  onBlur,
 }) {
   const [visible, setIsVisible] = useState(false);
   const isPassword = type === "password";
@@ -34,6 +37,9 @@ export default function Input({
           type={inputType}
           value={value}
           onChange={onChange}
+          disabled={disabled}
+          readOnly={readOnly}
+          onBlur={onBlur}
           placeholder={placeholder}
           className={`w-full rounded-lg border-[1.5px] px-4 py-3 outline-none transition ${
             error
@@ -51,7 +57,7 @@ export default function Input({
         )}
       </div>
 
-      {error && <p className="text-[12px] text-text-[#F4161A]">{error}</p>}
+      {error && <p className="text-[12px] text-[#F4161A]">{error}</p>}
     </div>
   );
 }

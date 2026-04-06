@@ -2,7 +2,6 @@ import star from "../assets/star.svg";
 import Button from "./UI/Button";
 import { getFeaturedCourses } from "../api/courses";
 import { Link } from "react-router-dom";
-
 import { useState, useEffect } from "react";
 
 export default function FeaturedCourses() {
@@ -15,26 +14,33 @@ export default function FeaturedCourses() {
     }
     loadFeaturedCourses();
   }, []);
+
   return (
     <section className="w-391.5 mt-16 mx-auto">
       <div className="mb-8">
-        <h1 className="text-[40px] text-[#0A0A0A] font-semibold ">
+        <h1 className="text-[40px] text-[#0A0A0A] font-semibold">
           Start Learning Today
         </h1>
         <p className="text-[#3D3D3D] text-[18px] font-medium">
           Choose from our most popular courses and begin your journey
         </p>
       </div>
-      <div className="w-full flex gap-6 ">
+
+      <div className="w-full flex gap-6 items-stretch">
         {courses.map((course) => {
           return (
-            <Link key={course.id} to={`courses/${course.id}`}>
-              <div className="bg-[#FFFFFF] w-126.5 rounded-xl p-6 cursor-pointer">
+            <Link
+              key={course.id}
+              to={`/courses/${course.id}`}
+              className="block w-126.5"
+            >
+              <div className="bg-white rounded-xl p-6 cursor-pointer h-full flex flex-col">
                 <img
                   className="w-116.5 h-65.5 object-cover rounded-[10px]"
                   src={course.image}
                   alt={course.title}
                 />
+
                 <div className="flex items-center justify-between mt-[16.5px] mb-[12.5px]">
                   <p className="text-[14px] font-medium text-[#8A8A8A]">
                     Lecturer{" "}
@@ -42,21 +48,24 @@ export default function FeaturedCourses() {
                       {course.instructor.name}
                     </span>
                   </p>
-                  <div className="flex items-center gap-[0.5px]">
+
+                  <div className="flex items-center gap-0.5">
                     <img className="w-4.5 h-4.5" src={star} alt="star" />
                     <p className="text-[#525252] text-[14px] font-medium">
                       {course.avgRating}
                     </p>
                   </div>
                 </div>
-                <h2 className="text-[24px] text-[#141414] font-semibold mt-3 mb-4">
+
+                <h2 className="text-[24px] text-[#141414] font-semibold mb-4">
                   {course.title}
                 </h2>
+
                 <p className="text-4 font-medium text-[#666666] mb-6">
                   {course.description}
                 </p>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-end justify-between mt-auto">
                   <div className="flex items-center gap-2">
                     <p className="text-3 font-medium text-[#8A8A8A]">
                       Starting from
