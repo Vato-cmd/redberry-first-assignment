@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { authenticatedUser } from "../../api/auth";
 import profileOrange from "../../assets/profile-orange.svg";
 import profileGreen from "../../assets/profile-green.svg";
+import AvatarUpload from "../UI/AvatarUpload";
 
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
@@ -12,19 +13,37 @@ import Button from "../UI/Button";
 export default function ProfileModal() {
   const [userProfile, setUserProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
+  const [loadError, setLoadError] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    mobileNumber: "",
+    age: "",
+    avatar: null,
+  });
 
   const { closeModal } = useModal();
   const { token, isProfileComplete } = useAuth();
+  console.log(userProfile);
 
   useEffect(() => {
     async function loadProfile() {
       try {
         setIsLoading(true);
         const data = await authenticatedUser(token);
+
         setUserProfile(data.data);
+
+        setFormData({
+          fullName: data.data.fullName || "",
+          email: data.data.email || "",
+          mobileNumber: data.data.mobileNumber || "",
+          age: data.data.age !== null ? String(data.data.age) : "",
+        });
       } catch (error) {
-        setError(error.message || "Failed to load profile");
+        setLoadError(error.message || "Failed to load profile");
       } finally {
         setIsLoading(false);
       }
@@ -34,12 +53,53 @@ export default function ProfileModal() {
     }
   }, [token]);
 
+  function handleChange(e) {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  function handleAvatarChange(e) {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+    if (!allowedTypes.includes(file.type)) {
+      setErrors((prev) => ({
+        ...prev,
+        avatar: "Avatar must be .JPG, .PNG, .WebP",
+      }));
+      return;
+    }
+    setErrors((prev) => ({
+      ...prev,
+      avatar: "",
+    }));
+
+    setFormData((prev) => ({
+      ...prev,
+      avatar: file,
+    }));
+  }
+
+  function handleRemoveAvatar() {
+    setFormData((prev) => ({
+      ...prev,
+      avatar: null,
+    }));
+  }
+
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115">
       {isLoading ? (
         <div>User credentials...</div>
-      ) : error ? (
-        <div className="text-[#F4161A]">{error}</div>
+      ) : loadError ? (
+        <div className="text-[#F4161A]">{loadError}</div>
       ) : (
         <div className="w-90 mx-auto flex flex-col gap-6">
           <h1 className="text-[32px] font-semibold text-[#141414] text-center">
@@ -72,6 +132,60 @@ export default function ProfileModal() {
               </p>
             </div>
           </div>
+          <form className="flex flex-col gap-5">
+            <Input
+              label="Full Name"
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              disabled={!isEditing}
+            />
+
+            <Input
+              label="Email"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              disabled={true}
+            />
+            <div className="flex gap-3">
+              <Input
+                label="Mobile Number"
+                type="text"
+                name="mobileNumber"
+                value={formData.mobileNumber}
+                onChange={handleChange}
+                disabled={!isEditing}
+              />
+
+              <Input
+                label="Age"
+                type="number"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+                disabled={!isEditing}
+              />
+            </div>
+            <AvatarUpload
+              file={formData.avatar}
+              onChange={handleAvatarChange}
+              onRemove={handleRemoveAvatar}
+            />
+
+            <Button
+              type="button"
+              onClick={() => {
+                if (!isEditing) {
+                  setIsEditing(true);
+                }
+              }}
+            >
+              {isEditing ? "Save Profile" : "Update Profile"}
+            </Button>
+          </form>
         </div>
       )}
     </Modal>

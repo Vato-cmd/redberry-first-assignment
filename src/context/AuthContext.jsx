@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
   }
 
   const isAuthorized = !!user;
-  const isProfileIsComplete = !!user?.profileComplete;
+  const isProfileComplete = !!user?.profileComplete;
 
   return (
     <AuthContext.Provider
@@ -40,7 +40,7 @@ export function AuthProvider({ children }) {
         login,
         token,
         updateUser,
-        isProfileIsComplete,
+        isProfileComplete,
       }}
     >
       {children}
