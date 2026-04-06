@@ -18,7 +18,7 @@ export default function Modal({
       onClick={onClose}
     >
       <div
-        className={`relative w-full max-w-115 rounded-xl bg-white p-12.5 ${className}`}
+        className={`relative w-full max-w-115 max-h-screen rounded-xl bg-white p-5 ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         <Button

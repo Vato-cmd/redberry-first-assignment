@@ -32,7 +32,8 @@ export default function AvatarUpload({
 
       {!file && (
         <label
-          className={`flex flex-col items-center justify-center h-35 cursor-pointer border-[1.5px] border-[#D1D1D1] rounded-lg bg-[#F8F8F8] text-center  
+          className={`flex flex-col items-center justify-center h-35 cursor-pointer border-[1.5px] border-[#D1D1D1] rounded-lg bg-[#F8F8F8] text-center hover:bg-[#EEEDFC]
+            focus-within:bg-[#DDDBFA]
             ${error && "text-[#F4161A] border-[#F4161A]"}
             ${disabled ? "opacity-50 pointer-events-none" : "cursor-pointer"}
             `}
@@ -67,7 +68,7 @@ export default function AvatarUpload({
 
       {file && (
         <div
-          className={`mt-2 flex items-center gap-3 rounded-lg border-[1.5px] p-3 h-35
+          className={`mt-2 flex items-center gap-3 rounded-lg border-[1.5px] p-3 h-35 bg-[#EEEDFC]
         ${error ? "border-[#F4161A]" : "border-[#1DC31D]"} 
         ${disabled ? "opacity-50" : ""}`}
         >

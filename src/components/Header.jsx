@@ -3,6 +3,7 @@ import navicon from "../assets/Nav-icon.png";
 import Button from "./UI/Button.jsx";
 import userLogo from "../assets/User.svg";
 import bookIcon from "../assets/book.svg";
+import { Sparkles, BookOpen } from "lucide-react";
 import profileOrange from "../assets/profile-orange.svg";
 import profileGreen from "../assets/profile-green.svg";
 
@@ -28,9 +29,9 @@ export default function Header() {
         <div className="flex items-center">
           <Link
             to="/courses"
-            className="flex gap-2 text-[#525252] mr-9 cursor-pointer"
+            className="flex gap-2 text-[#525252] mr-9 cursor-pointer hover:text-[#4F46E5]"
           >
-            <img className="h-6.5 w-6.5" src={navicon} alt="browse courses" />
+            <Sparkles className="h-6.5 w-6.5" alt="browse courses" />
             Browse Courses
           </Link>
 
@@ -55,18 +56,18 @@ export default function Header() {
               <>
                 <Link
                   to=""
-                  className="flex items-center gap-2 mr-9 text-[#525252]  cursor-pointer"
+                  className="flex items-center gap-2 mr-9 text-[#525252] cursor-pointer hover:text-[#4F46E5]"
                 >
-                  <img className="w-6.5 h-6.5" src={bookIcon} alt="book logo" />
+                  <BookOpen className="w-6.5 h-6.5 " alt="book logo" />
                   <p className="text-[20px]">Enrolled Courses</p>
                 </Link>
                 <div
                   onClick={() => openModal("profile")}
-                  className="relative bg-[#EEEDFC] w-14 h-14 flex items-center justify-center rounded-full cursor-pointer"
+                  className="relative bg-[#EEEDFC] w-14 h-14 flex items-center justify-center rounded-full cursor-pointer border-2 border-transparent hover:border-[#b7b3f4]"
                 >
                   <img src={userLogo} alt="user logo" />
                   <img
-                    className="absolute top-10.25 left-10.25"
+                    className="absolute top-9.75 left-9.75"
                     src={isProfileComplete ? profileGreen : profileOrange}
                     alt="profile indicator"
                   />

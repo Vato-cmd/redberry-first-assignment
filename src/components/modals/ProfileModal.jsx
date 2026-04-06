@@ -9,6 +9,10 @@ import profileOrange from "../../assets/profile-orange.svg";
 import profileGreen from "../../assets/profile-green.svg";
 import AvatarUpload from "../UI/AvatarUpload";
 
+import tick from "../../assets/tick.svg";
+import pen from "../../assets/pen.svg";
+import user from "../../assets/user.svg";
+
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
@@ -32,6 +36,7 @@ export default function ProfileModal() {
   const { closeModal } = useModal();
   const { token, isProfileComplete, updateUser } = useAuth();
   console.log(userProfile);
+  const ageOptions = Array.from({ length: 120 }, (_, i) => i + 1);
 
   useEffect(() => {
     async function loadProfile() {
@@ -181,7 +186,7 @@ export default function ProfileModal() {
   const validationErrors = validateProfile(formData);
   const isFormValid = Object.keys(validationErrors).length === 0;
   return (
-    <Modal isOpen={true} onClose={handleCloseModal} className="max-w-115">
+    <Modal isOpen={true} onClose={handleCloseModal}>
       {isLoading ? (
         <div>User credentials...</div>
       ) : loadError ? (
@@ -193,13 +198,19 @@ export default function ProfileModal() {
           </h1>
           <div className="flex items-center gap-3">
             <div className="relative">
+              {userProfile.avatar ? (
+                <img
+                  className="rounded-full w-14 h-14"
+                  src={userProfile.avatar}
+                  alt="user image"
+                />
+              ) : (
+                <div className="relative bg-[#EEEDFC] w-14 h-14 flex items-center justify-center rounded-full cursor-pointer border-2 border-transparent hover:border-[#b7b3f4]">
+                  <img src={user} alt="user logo" />
+                </div>
+              )}
               <img
-                className="rounded-full w-14 h-14"
-                src={userProfile.avatar}
-                alt="user image"
-              />
-              <img
-                className="absolute top-10.25 left-10.25"
+                className="absolute top-9.75 left-9.75"
                 src={isProfileComplete ? profileGreen : profileOrange}
                 alt="profile indicator"
               />
@@ -218,11 +229,12 @@ export default function ProfileModal() {
               </p>
             </div>
           </div>
-          <form className="flex flex-col gap-5">
+          <form className="flex flex-col gap-3">
             <Input
               label="Full Name"
               type="text"
               name="fullName"
+              placeholder="Username"
               value={formData.fullName}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -231,6 +243,15 @@ export default function ProfileModal() {
                 isTouched.fullName && !errors.fullName && !!formData.fullName
               }
               disabled={!isEditing}
+              icons={
+                isEditing
+                  ? pen
+                  : isTouched.fullName &&
+                      !errors.fullName &&
+                      !!formData.fullName
+                    ? tick
+                    : null
+              }
             />
 
             <Input
@@ -240,10 +261,12 @@ export default function ProfileModal() {
               value={formData.email}
               onChange={handleChange}
               disabled={true}
+              icons={tick}
             />
             <div className="flex gap-3">
               <Input
                 label="Mobile Number"
+                placeholder="599209820"
                 type="text"
                 name="mobileNumber"
                 value={formData.mobileNumber}
@@ -256,19 +279,38 @@ export default function ProfileModal() {
                   !!formData.mobileNumber
                 }
                 disabled={!isEditing}
+                icons={
+                  isEditing
+                    ? pen
+                    : isTouched.mobileNumber &&
+                        !errors.mobileNumber &&
+                        !!formData.mobileNumber
+                      ? tick
+                      : null
+                }
               />
-
-              <Input
-                label="Age"
-                type="number"
-                name="age"
-                value={formData.age}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={isTouched.age ? errors.age : ""}
-                isValid={isTouched.age && !errors.age && !!formData.age}
-                disabled={!isEditing}
-              />
+              <div className="w-21.25">
+                <Input
+                  label="Age"
+                  type="select"
+                  name="age"
+                  placeholder="Age"
+                  options={ageOptions}
+                  value={formData.age}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={isTouched.age ? errors.age : ""}
+                  isValid={isTouched.age && !errors.age && !!formData.age}
+                  disabled={!isEditing}
+                  icons={
+                    isEditing
+                      ? pen
+                      : isTouched.age && !errors.age && !!formData.age
+                        ? tick
+                        : null
+                  }
+                />
+              </div>
             </div>
             <AvatarUpload
               file={formData.avatar}
