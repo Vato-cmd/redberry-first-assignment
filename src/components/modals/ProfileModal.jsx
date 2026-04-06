@@ -30,7 +30,7 @@ export default function ProfileModal() {
   });
 
   const { closeModal } = useModal();
-  const { token, isProfileComplete } = useAuth();
+  const { token, isProfileComplete, updateUser } = useAuth();
   console.log(userProfile);
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function ProfileModal() {
       age: true,
     });
 
-    if (Object.keys(validationErrors) > 0) {
+    if (Object.keys(validationErrors).length > 0) {
       return;
     }
     try {
@@ -103,6 +103,7 @@ export default function ProfileModal() {
       const data = await updateProfile(formData, token);
 
       setUserProfile(data.data);
+      updateUser(data.data);
 
       setFormData({
         fullName: data.data.fullName || "",
@@ -112,7 +113,6 @@ export default function ProfileModal() {
         avatar: null,
       });
       setIsEditing(false);
-      closeModal();
     } catch (error) {
       setLoadError(error.message || "Failed to update profile");
     } finally {
@@ -166,8 +166,22 @@ export default function ProfileModal() {
     }));
   }
 
+  function handleCloseModal() {
+    if (!isProfileComplete) {
+      const confirmClose = window.confirm(
+        "Your profile is incomplete. You won't be able to enroll in courses until you complete it. Close anyway?",
+      );
+
+      if (!confirmClose) {
+        return;
+      }
+    }
+    closeModal();
+  }
+  const validationErrors = validateProfile(formData);
+  const isFormValid = Object.keys(validationErrors).length === 0;
   return (
-    <Modal isOpen={true} onClose={closeModal} className="max-w-115">
+    <Modal isOpen={true} onClose={handleCloseModal} className="max-w-115">
       {isLoading ? (
         <div>User credentials...</div>
       ) : loadError ? (
@@ -266,9 +280,11 @@ export default function ProfileModal() {
 
             <Button
               type="button"
-              className="rounded-lg bg-[#4F46E5] text-white font-medium text-[20px] py-4.25 px-6.25"
+              className={`rounded-lg bg-[#4F46E5] text-white font-medium text-[20px] py-4.25 px-6.25
+                      ${isSubmitting || (isEditing && !isFormValid) ? "opacity-50" : ""}
+                `}
               onClick={handleProfileAction}
-              disabled={isSubmitting}
+              disabled={isSubmitting || (isEditing && !isFormValid)}
             >
               {isSubmitting
                 ? "Saving..."

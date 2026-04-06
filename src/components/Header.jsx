@@ -4,6 +4,7 @@ import Button from "./UI/Button.jsx";
 import userLogo from "../assets/User.svg";
 import bookIcon from "../assets/book.svg";
 import profileOrange from "../assets/profile-orange.svg";
+import profileGreen from "../assets/profile-green.svg";
 
 import { useModal } from "../context/ModalContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
@@ -11,7 +12,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   const { openModal } = useModal();
-  const { isAuthorized, user } = useAuth();
+  const { isAuthorized, user, isProfileComplete } = useAuth();
 
   return (
     <header className="w-full h-27 border-b border-[#D1D1D1] py-6 px-44.25">
@@ -66,7 +67,7 @@ export default function Header() {
                   <img src={userLogo} alt="user logo" />
                   <img
                     className="absolute top-10.25 left-10.25"
-                    src={profileOrange}
+                    src={isProfileComplete ? profileGreen : profileOrange}
                     alt="profile indicator"
                   />
                 </div>
