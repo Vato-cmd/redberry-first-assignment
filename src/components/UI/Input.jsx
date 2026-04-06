@@ -13,6 +13,7 @@ export default function Input({
   required = false,
   disabled = false,
   readOnly = false,
+  isValid = false,
   onBlur,
 }) {
   const [visible, setIsVisible] = useState(false);
@@ -42,9 +43,13 @@ export default function Input({
           onBlur={onBlur}
           placeholder={placeholder}
           className={`w-full rounded-lg border-[1.5px] px-4 py-3 outline-none transition ${
-            error
-              ? "text-[#F4161A] focus:text-[#F4161A]"
-              : "border-[#D1D1D1] focus:border-[#4F46E5]"
+            disabled
+              ? "border-[#D1D1D1] bg-[#F5F5F5] text-[#8A8A8A]"
+              : error
+                ? "text-[#F4161A] border-[#F4161A] focus:border-[#F4161A]"
+                : isValid
+                  ? "text-[#1DC31D] border-[#1DC31D] focus:border-[#1DC31D]"
+                  : "border-[#D1D1D1] text-[#141414] focus:border-[#D1D1D1]"
           }`}
         />
         {isPassword && (

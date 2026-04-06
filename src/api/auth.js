@@ -65,3 +65,33 @@ export async function registerUser(formData) {
 
   return data;
 }
+
+export async function updateProfile(formData, token) {
+  const body = new FormData();
+
+  body.append("full_name", formData.fullName.trim());
+  body.append("mobile_number", formData.mobileNumber.replace(/\s+/g, ""));
+  body.append("age", formData.age);
+
+  if (formData.avatar) {
+    body.append("avatar", formData.avatar);
+  }
+
+  const response = await fetch(`${BASE_URL}/profile`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+
+    body,
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Profile update failed");
+  }
+
+  return data;
+}

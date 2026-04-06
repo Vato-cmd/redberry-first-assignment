@@ -2,6 +2,9 @@ import { useModal } from "../../context/ModalContext";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import { authenticatedUser } from "../../api/auth";
+import { validateProfile } from "../../utils/validateProfile";
+import { updateProfile } from "../../api/auth";
+
 import profileOrange from "../../assets/profile-orange.svg";
 import profileGreen from "../../assets/profile-green.svg";
 import AvatarUpload from "../UI/AvatarUpload";
@@ -14,6 +17,8 @@ export default function ProfileModal() {
   const [userProfile, setUserProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isTouched, setIsTouched] = useState({});
   const [loadError, setLoadError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
@@ -41,6 +46,7 @@ export default function ProfileModal() {
           email: data.data.email || "",
           mobileNumber: data.data.mobileNumber || "",
           age: data.data.age !== null ? String(data.data.age) : "",
+          avatar: null,
         });
       } catch (error) {
         setLoadError(error.message || "Failed to load profile");
@@ -56,10 +62,62 @@ export default function ProfileModal() {
   function handleChange(e) {
     const { name, value } = e.target;
 
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => {
+      const updatedFormData = {
+        ...prev,
+        [name]: value,
+      };
+
+      if (isTouched[name]) {
+        const validationErrors = validateProfile(updatedFormData);
+
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: validationErrors[name] || "",
+        }));
+      }
+      return updatedFormData;
+    });
+  }
+
+  async function handleProfileAction() {
+    if (!isEditing) {
+      setIsEditing(true);
+      return;
+    }
+    const validationErrors = validateProfile(formData);
+    setErrors(validationErrors);
+
+    setIsTouched({
+      fullName: true,
+      mobileNumber: true,
+      age: true,
+    });
+
+    if (Object.keys(validationErrors) > 0) {
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+
+      const data = await updateProfile(formData, token);
+
+      setUserProfile(data.data);
+
+      setFormData({
+        fullName: data.data.fullName || "",
+        email: data.data.email || "",
+        mobileNumber: data.data.mobileNumber || "",
+        age: data.data.age !== null ? String(data.data.age) : "",
+        avatar: null,
+      });
+      setIsEditing(false);
+      closeModal();
+    } catch (error) {
+      setLoadError(error.message || "Failed to update profile");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   function handleAvatarChange(e) {
@@ -91,6 +149,20 @@ export default function ProfileModal() {
     setFormData((prev) => ({
       ...prev,
       avatar: null,
+    }));
+  }
+
+  function handleBlur(e) {
+    const { name } = e.target;
+    setIsTouched((prev) => ({
+      ...prev,
+      [name]: true,
+    }));
+
+    const validationErrors = validateProfile(formData);
+    setErrors((prev) => ({
+      ...prev,
+      [name]: validationErrors[name] || "",
     }));
   }
 
@@ -139,6 +211,11 @@ export default function ProfileModal() {
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
+              onBlur={handleBlur}
+              error={isTouched.fullName ? errors.fullName : ""}
+              isValid={
+                isTouched.fullName && !errors.fullName && !!formData.fullName
+              }
               disabled={!isEditing}
             />
 
@@ -157,6 +234,13 @@ export default function ProfileModal() {
                 name="mobileNumber"
                 value={formData.mobileNumber}
                 onChange={handleChange}
+                onBlur={handleBlur}
+                error={isTouched.mobileNumber ? errors.mobileNumber : ""}
+                isValid={
+                  isTouched.mobileNumber &&
+                  !errors.mobileNumber &&
+                  !!formData.mobileNumber
+                }
                 disabled={!isEditing}
               />
 
@@ -166,24 +250,31 @@ export default function ProfileModal() {
                 name="age"
                 value={formData.age}
                 onChange={handleChange}
+                onBlur={handleBlur}
+                error={isTouched.age ? errors.age : ""}
+                isValid={isTouched.age && !errors.age && !!formData.age}
                 disabled={!isEditing}
               />
             </div>
             <AvatarUpload
               file={formData.avatar}
+              disabled={!isEditing}
               onChange={handleAvatarChange}
               onRemove={handleRemoveAvatar}
+              error={errors.avatar}
             />
 
             <Button
               type="button"
-              onClick={() => {
-                if (!isEditing) {
-                  setIsEditing(true);
-                }
-              }}
+              className="rounded-lg bg-[#4F46E5] text-white font-medium text-[20px] py-4.25 px-6.25"
+              onClick={handleProfileAction}
+              disabled={isSubmitting}
             >
-              {isEditing ? "Save Profile" : "Update Profile"}
+              {isSubmitting
+                ? "Saving..."
+                : isEditing
+                  ? "Save Profile"
+                  : "Update Profile"}
             </Button>
           </form>
         </div>

@@ -3,7 +3,13 @@ import trash from "../../assets/trash.png";
 import uploadicon from "../../assets/upload-icon.png";
 import Button from "./Button";
 
-export default function AvatarUpload({ onChange, onRemove, error, file }) {
+export default function AvatarUpload({
+  onChange,
+  onRemove,
+  error,
+  file,
+  disabled = false,
+}) {
   const [previewUrl, setPreviewUrl] = useState(null);
 
   useEffect(() => {
@@ -26,9 +32,10 @@ export default function AvatarUpload({ onChange, onRemove, error, file }) {
 
       {!file && (
         <label
-          className={`flex flex-col items-center justify-center h-35 cursor-pointer border-[1.5px] border-[#D1D1D1] rounded-lg bg-[#F8F8F8] text-center  ${
-            error && "border-red-500"
-          }`}
+          className={`flex flex-col items-center justify-center h-35 cursor-pointer border-[1.5px] border-[#D1D1D1] rounded-lg bg-[#F8F8F8] text-center  
+            ${error && "text-[#F4161A] border-[#F4161A]"}
+            ${disabled ? "opacity-50 pointer-events-none" : "cursor-pointer"}
+            `}
         >
           <img
             src={uploadicon}
@@ -40,6 +47,7 @@ export default function AvatarUpload({ onChange, onRemove, error, file }) {
             accept=".jpg, .jpeg, .png, .webp"
             onChange={onChange}
             className="hidden"
+            disabled={disabled}
           />
 
           <div className="text-[#4A4A4A]">
@@ -58,15 +66,32 @@ export default function AvatarUpload({ onChange, onRemove, error, file }) {
       )}
 
       {file && (
-        <div className="mt-2 flex items-center gap-3">
+        <div
+          className={`mt-2 flex items-center gap-3 rounded-lg border-[1.5px] p-3 h-35
+        ${error ? "border-[#F4161A]" : "border-[#1DC31D]"} 
+        ${disabled ? "opacity-50" : ""}`}
+        >
           <img
             src={previewUrl}
             alt="Selected avatar preview"
             className="h-16 w-16 rounded-full object-cover"
           />
-
-          <p className="text-[12px] text-[#666666]">{file.name}</p>
-
+          <div className="flex flex-col flex-1">
+            <p className="text-[12px] text-[#666666]">{file.name}</p>
+            <p className="text-[12px] text-[#666666]">
+              Size - {(file.size / (1024 * 1024)).toFixed(2)}MB
+            </p>
+            <label className="text-[12px] text-[#5950e6] font-semibold underline underline-offset-[25%] hover:text-[#2017bd] cursor-pointer">
+              Change
+              <input
+                type="file"
+                accept=".jpg, .jpeg, .png, .webp"
+                onChange={onChange}
+                className="hidden"
+                disabled={disabled}
+              />
+            </label>
+          </div>
           <Button type="button" onClick={onRemove} className="w-10 h-10">
             <img src={trash} alt="trash bin" />
           </Button>
