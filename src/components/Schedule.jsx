@@ -5,9 +5,9 @@ import {
 } from "../api/schedule";
 import {
   getOptionClasses,
-  formatWeeklyLabel,
   formatTimeSlotLabel,
   formatSessionTypeName,
+  formatWeekdayLabel,
 } from "../utils/scheduleHelpers";
 import { useEffect, useState } from "react";
 import Button from "./UI/Button";
@@ -21,7 +21,7 @@ export default function Schedule({ courseId }) {
 
   const [sessionTypes, setSessionTypes] = useState([]);
   const [selectedSessionTypeId, setSelectedSessionTypeId] = useState(null);
-  console.log(timeSlots, sessionTypes);
+
   useEffect(() => {
     const loadSessionTypes = async () => {
       const getSessionTypes = await getSessionType(
@@ -79,7 +79,7 @@ export default function Schedule({ courseId }) {
                 selectedWeeklyScheduleId === weekSchedule.id,
               )}
             >
-              <div>{formatWeeklyLabel(weekSchedule.label)}</div>
+              <div>{formatWeekdayLabel(weekSchedule.label)}</div>
             </Button>
           );
         })}

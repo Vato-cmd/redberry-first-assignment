@@ -22,3 +22,13 @@ export function formatSessionTypeName(name) {
   if (name === "online") return "Online";
   if (name === "hybrid") return "Hybrid";
 }
+
+export function formatWeekdayLabel(label) {
+  if (label === "Weekend Only") return "Weekend";
+  const cleanWeekDays = label.split(" - ");
+  const firstDay = cleanWeekDays[0].slice(0, 3);
+  const secondDay = cleanWeekDays[cleanWeekDays.length - 1].slice(0, 3);
+  const joinedDays = `${firstDay}-${secondDay}`;
+
+  return joinedDays;
+}
