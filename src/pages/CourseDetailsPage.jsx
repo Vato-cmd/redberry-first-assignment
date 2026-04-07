@@ -32,7 +32,7 @@ export default function CourseDetailsPage() {
         <h1 className="text-[#141414] font-semibold text-[40px] mb-6">
           {course.title}
         </h1>
-        <div className="w-full flex justify-between">
+        <div className="w-full flex gap-33.25">
           <div className="w-225.75">
             <img
               className="rounded-[10px] w-full h-[475.15px] object-cover"

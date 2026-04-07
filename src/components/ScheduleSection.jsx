@@ -3,11 +3,14 @@ export default function ScheduleSection({
   isLoading,
   loadingText,
   children,
+  className,
 }) {
   return (
     <section>
       <h1>{title}</h1>
-      <div>{isLoading ? <p>{loadingText}</p> : children}</div>
+      <div className={className}>
+        {isLoading ? <p>{loadingText}</p> : children}
+      </div>
     </section>
   );
 }

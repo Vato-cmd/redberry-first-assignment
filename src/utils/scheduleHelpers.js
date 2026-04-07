@@ -1,7 +1,31 @@
-export function getOptionClasses(isSelected) {
+export function getWeeklyScheduleKey(label) {
+  if (label === "Monday - Wednesday") return "mon-wed";
+  if (label === "Tuesday - Thursday") return "tue-thu";
+  if (label === "Friday - Saturday") return "fri-sat";
+  if (label === "Weekend Only") return "weekend";
+
+  return null;
+}
+
+export function getTimeSlotKey(label) {
+  if (label.startsWith("Morning")) return "morning";
+  if (label.startsWith("Afternoon")) return "afternoon";
+  if (label.startsWith("Evening")) return "evening";
+
+  return null;
+}
+
+export function getSessionTypeKey(name) {
+  return name;
+}
+
+export function getOptionClasses(isSelected, disabled = false) {
+  if (disabled) {
+    return "border-[#D1D1D1] bg-[#F5F5F5] text-[#D1D1D1]";
+  }
   return isSelected
-    ? "border-[#8B7FFF] bg-[#F5F3FF] text-[#6D5DF6]"
-    : "border-[#D1D1D1] bg-white text-[#141414]";
+    ? "border-[#958FEF] bg-[#dddbfa] text-[#4F46E5]"
+    : "border-[#D1D1D1] bg-white text-[#666666]";
 }
 
 export function formatWeeklyLabel(label) {
