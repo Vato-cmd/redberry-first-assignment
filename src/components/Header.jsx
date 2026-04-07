@@ -1,8 +1,6 @@
 import mainlogo from "../assets/logo.svg";
-import navicon from "../assets/Nav-icon.png";
 import Button from "./UI/Button.jsx";
 import userLogo from "../assets/User.svg";
-import bookIcon from "../assets/book.svg";
 import { Sparkles, BookOpen } from "lucide-react";
 import profileOrange from "../assets/profile-orange.svg";
 import profileGreen from "../assets/profile-green.svg";

@@ -3,6 +3,12 @@ import {
   getTimeSlot,
   getSessionType,
 } from "../api/schedule";
+import {
+  getOptionClasses,
+  formatWeeklyLabel,
+  formatTimeSlotLabel,
+  formatSessionTypeName,
+} from "../utils/scheduleHelpers";
 import { useEffect, useState } from "react";
 import Button from "./UI/Button";
 
@@ -15,7 +21,7 @@ export default function Schedule({ courseId }) {
 
   const [sessionTypes, setSessionTypes] = useState([]);
   const [selectedSessionTypeId, setSelectedSessionTypeId] = useState(null);
-  console.log(weeklySchedules, timeSlots, sessionTypes);
+  console.log(timeSlots, sessionTypes);
   useEffect(() => {
     const loadSessionTypes = async () => {
       const getSessionTypes = await getSessionType(
@@ -69,17 +75,11 @@ export default function Schedule({ courseId }) {
                 setTimeSlots([]);
                 setSessionTypes([]);
               }}
-              className={
-                selectedWeeklyScheduleId === weekSchedule.id
-                  ? "border-[#8B7FFF] bg-[#F5F3FF] text-[#6D5DF6]"
-                  : "border-[#D1D1D1] bg-white text-[#141414]"
-              }
+              className={getOptionClasses(
+                selectedWeeklyScheduleId === weekSchedule.id,
+              )}
             >
-              <div>
-                {weekSchedule.label !== "Weekend Only"
-                  ? weekSchedule.label
-                  : "Weekend"}
-              </div>
+              <div>{formatWeeklyLabel(weekSchedule.label)}</div>
             </Button>
           );
         })}
@@ -88,6 +88,7 @@ export default function Schedule({ courseId }) {
 
       <div>
         {timeSlots.map((timeSlot) => {
+          const { period, timeRange } = formatTimeSlotLabel(timeSlot.label);
           return (
             <Button
               key={timeSlot.id}
@@ -97,13 +98,10 @@ export default function Schedule({ courseId }) {
                 setSelectedSessionTypeId(null);
                 setSessionTypes([]);
               }}
-              className={
-                selectedTimeSlotId === timeSlot.id
-                  ? "border-[#8B7FFF] bg-[#F5F3FF] text-[#6D5DF6]"
-                  : "border-[#D1D1D1] bg-white text-[#141414]"
-              }
+              className={getOptionClasses(selectedTimeSlotId === timeSlot.id)}
             >
-              {timeSlot.label}
+              <span>{period}</span>
+              <p>{timeRange}</p>
             </Button>
           );
         })}
@@ -120,13 +118,11 @@ export default function Schedule({ courseId }) {
               onClick={() => {
                 setSelectedSessionTypeId(sessionType.id);
               }}
-              className={
-                selectedSessionTypeId === sessionType.id
-                  ? "border-[#8B7FFF] bg-[#F5F3FF] text-[#6D5DF6]"
-                  : "border-[#D1D1D1] bg-white text-[#141414]"
-              }
+              className={getOptionClasses(
+                selectedSessionTypeId === sessionType.id,
+              )}
             >
-              {sessionType.name}
+              {formatSessionTypeName(sessionType.name)}
             </Button>
           );
         })}

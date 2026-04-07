@@ -10,7 +10,7 @@ import contact from "../assets/contact.png";
 
 export default function Footer() {
   return (
-    <footer className="w-391.5 mx-auto flex flex-col mt-30 border-t border-[#C1BCBC80]">
+    <footer className="w-full flex flex-col mt-30 px-44.25 border-t border-[#C1BCBC80]">
       <div className="flex justify-between">
         <div className="flex flex-col mt-20">
           <div className="flex items-center gap-3 mb-4">

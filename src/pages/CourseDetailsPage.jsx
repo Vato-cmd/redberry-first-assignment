@@ -17,72 +17,77 @@ export default function CourseDetailsPage() {
       setCourse(data);
     }
     loadCourseDetails();
-  }, []);
-  {
-    if (!course) return <p>Loading...</p>;
-  }
+  }, [id]);
+
+  if (!course) return <p>Loading...</p>;
+
   const avgRating =
     course?.reviews.length === 0
       ? 0
       : course.reviews.reduce((curr, total) => curr + total.rating, 0) /
         course.reviews.length;
   return (
-    <section className="w-225.75">
+    <section className="w-full px-44.25 mt-16">
       <div>
         <h1 className="text-[#141414] font-semibold text-[40px] mb-6">
           {course.title}
         </h1>
-
-        <img
-          className="rounded-[10px] w-full h-[475.15px] object-cover"
-          src={course.image}
-          alt={course.title}
-        />
-        <div className="mt-[26.5px] flex justify-between gap-4 mb-4.5">
-          <div className="flex justify-between items-center flex-1 text-[#525252] font-medium">
-            <div className="flex items-center gap-3.75">
-              <p className="flex items-center gap-1">
-                <img className="w-6 h-6" src={calendar} alt="calendar" />
-                {course.durationWeeks} Weeks
-              </p>
-              <p className="flex items-center gap-1 ">
-                <img className="w-6 h-6" src={clock} alt="clock" />
-                128 Hours
-              </p>
+        <div className="w-full flex justify-between">
+          <div className="w-225.75">
+            <img
+              className="rounded-[10px] w-full h-[475.15px] object-cover"
+              src={course.image}
+              alt={course.title}
+            />
+            <div className="mt-[26.5px] flex justify-between gap-4 mb-4.5">
+              <div className="flex justify-between items-center flex-1 text-[#525252] font-medium">
+                <div className="flex items-center gap-3.75">
+                  <p className="flex items-center gap-1">
+                    <img className="w-6 h-6" src={calendar} alt="calendar" />
+                    {course.durationWeeks} Weeks
+                  </p>
+                  <p className="flex items-center gap-1 ">
+                    <img className="w-6 h-6" src={clock} alt="clock" />
+                    128 Hours
+                  </p>
+                </div>
+                <p className="flex items-center gap-1">
+                  <img className="w-6 h-6" src={star} alt="star" />
+                  {avgRating}
+                </p>
+              </div>
+              <div className="bg-[#FFFFFF] px-3 py-2 rounded-xl">
+                <p className="flex items-center gap-2.5 text-[#666666] font-medium">
+                  <img
+                    className="w-6 h-6"
+                    src={developmentLogo}
+                    alt="development"
+                  />
+                  {course.category.name}
+                </p>
+              </div>
             </div>
-            <p className="flex items-center gap-1">
-              <img className="w-6 h-6" src={star} alt="star" />
-              {avgRating}
-            </p>
-          </div>
-          <div className="bg-[#FFFFFF] px-3 py-2 rounded-xl">
-            <p className="flex items-center gap-2.5 text-[#666666] font-medium">
+            <div className="inline-flex items-center gap-3 text-[16px] font-medium text-[#666666] bg-[#FFFFFF] px-3 py-2 rounded-xl mb-4.5">
               <img
-                className="w-6 h-6"
-                src={developmentLogo}
-                alt="development"
+                className="w-7.5 h-7.5 rounded object-cover"
+                src={course.instructor.avatar}
+                alt="Instructor"
               />
-              {course.category.name}
+              <p>{course.instructor.name}</p>
+            </div>
+
+            <h2 className="text-[#8A8A8A] text-[20px] font-semibold mb-6">
+              Course Description
+            </h2>
+            <p className="text-[#525252] font-medium text-[16px]">
+              {course.description}
             </p>
           </div>
+          <div className="w-132.5">
+            <Schedule courseId={id} />
+          </div>
         </div>
-        <div className="inline-flex items-center gap-3 text-[16px] font-medium text-[#666666] bg-[#FFFFFF] px-3 py-2 rounded-xl mb-4.5">
-          <img
-            className="w-7.5 h-7.5 rounded object-cover"
-            src={course.instructor.avatar}
-            alt="Instructor"
-          />
-          <p>{course.instructor.name}</p>
-        </div>
-
-        <h2 className="text-[#8A8A8A] text-[20px] font-semibold mb-6">
-          Course Description
-        </h2>
-        <p className="text-[#525252] font-medium text-[16px]">
-          {course.description}
-        </p>
       </div>
-      <Schedule courseId={id} />
     </section>
   );
 }
