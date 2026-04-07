@@ -36,7 +36,7 @@ export default function ProfileModal() {
   const { closeModal } = useModal();
   const { token, isProfileComplete, updateUser } = useAuth();
   console.log(userProfile);
-  const ageOptions = Array.from({ length: 120 }, (_, i) => i + 1);
+  const ageOptions = Array.from({ length: 121 }, (_, i) => i + 1);
 
   useEffect(() => {
     async function loadProfile() {

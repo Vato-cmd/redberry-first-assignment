@@ -25,7 +25,7 @@ export async function getCourseById(id) {
   const response = await fetch(`${BASE_URL}/courses/${id}`);
 
   if (!response.ok) {
-    throw new Error("Failed to fetch the course details");
+    throw new Error("Failed to load the course details");
   }
 
   const data = await response.json();

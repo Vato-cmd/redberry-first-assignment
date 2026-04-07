@@ -3,13 +3,16 @@ import { useState, useEffect } from "react";
 import { getCourseById } from "../api/courses";
 import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
+import clock from "../assets/clock.svg";
+import developmentLogo from "../assets/development-logo.svg";
 
 export default function CourseDetailsPage() {
-  const params = useParams();
+  const { id } = useParams();
   const [course, setCourse] = useState(null);
+
   useEffect(() => {
     async function loadCourseDetails() {
-      const data = await getCourseById(params.id);
+      const data = await getCourseById(id);
       setCourse(data);
     }
     loadCourseDetails();
@@ -23,31 +26,60 @@ export default function CourseDetailsPage() {
       : course.reviews.reduce((curr, total) => curr + total.rating, 0) /
         course.reviews.length;
   return (
-    <section>
+    <section className="w-225.75">
       <div>
-        <h1 className="">{course.title}</h1>
+        <h1 className="text-[#141414] font-semibold text-[40px]">
+          {course.title}
+        </h1>
 
-        <img src={course.image} alt={course.title} />
-        <p className="flex">
-          <img src={calendar} alt="calendar" />
-          {course.durationWeeks} Weeks
-        </p>
-        <p className="flex">
-          <img className="w-6.5 h-6.5" src={star} alt="star" />
-          {avgRating}
-        </p>
-        <div className="flex">
+        <img
+          className="rounded-[10px] w-full h-[475.15px] object-cover"
+          src={course.image}
+          alt={course.title}
+        />
+        <div className="mt-[26.5px] flex justify-between gap-4 mb-4.5">
+          <div className="flex justify-between items-center flex-1 text-[#525252] font-medium">
+            <div className="flex items-center gap-3.75">
+              <p className="flex items-center gap-1">
+                <img className="w-6 h-6" src={calendar} alt="calendar" />
+                {course.durationWeeks} Weeks
+              </p>
+              <p className="flex items-center gap-1 ">
+                <img className="w-6 h-6" src={clock} alt="clock" />
+                128 Hours
+              </p>
+            </div>
+            <p className="flex items-center gap-1">
+              <img className="w-6 h-6" src={star} alt="star" />
+              {avgRating}
+            </p>
+          </div>
+          <div>
+            <p className="flex items-center gap-2.5 text-[#666666] font-medium">
+              <img
+                className="w-6 h-6"
+                src={developmentLogo}
+                alt="development"
+              />
+              {course.category.name}
+            </p>
+          </div>
+        </div>
+        <div className="inline-flex items-center gap-3 text-[16px] font-medium text-[#666666] bg-[#FFFFFF] px-3 py-2 rounded-xl mb-4.5">
           <img
-            className="w-8.5 h-8.5 rounded"
+            className="w-7.5 h-7.5 rounded object-cover"
             src={course.instructor.avatar}
             alt="Instructor"
           />
           <p>{course.instructor.name}</p>
         </div>
-        <p>{course.category.name}</p>
 
-        <h2>Course Description</h2>
-        <p>{course.description}</p>
+        <h2 className="text-[#8A8A8A] text-[20px] font-semibold mb-6">
+          Course Description
+        </h2>
+        <p className="text-[#525252] font-medium text-[16px]">
+          {course.description}
+        </p>
       </div>
     </section>
   );
