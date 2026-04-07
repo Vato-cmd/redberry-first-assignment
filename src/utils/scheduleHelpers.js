@@ -21,6 +21,7 @@ export function formatSessionTypeName(name) {
   if (name === "in_person") return "In-Person";
   if (name === "online") return "Online";
   if (name === "hybrid") return "Hybrid";
+  return name;
 }
 
 export function formatWeekdayLabel(label) {
