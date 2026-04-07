@@ -15,7 +15,7 @@ export default function Schedule({ courseId }) {
 
   const [sessionTypes, setSessionTypes] = useState([]);
   const [selectedSessionTypeId, setSelectedSessionTypeId] = useState(null);
-
+  console.log(weeklySchedules, timeSlots, sessionTypes);
   useEffect(() => {
     const loadSessionTypes = async () => {
       const getSessionTypes = await getSessionType(
@@ -65,12 +65,21 @@ export default function Schedule({ courseId }) {
               onClick={() => {
                 setSelectedWeeklyScheduleId(weekSchedule.id);
                 setSelectedTimeSlotId(null);
+                setSelectedSessionTypeId(null);
                 setTimeSlots([]);
+                setSessionTypes([]);
               }}
+              className={
+                selectedWeeklyScheduleId === weekSchedule.id
+                  ? "border-[#8B7FFF] bg-[#F5F3FF] text-[#6D5DF6]"
+                  : "border-[#D1D1D1] bg-white text-[#141414]"
+              }
             >
-              {weekSchedule.label !== "Weekend Only"
-                ? weekSchedule.label
-                : "Weekend"}
+              <div>
+                {weekSchedule.label !== "Weekend Only"
+                  ? weekSchedule.label
+                  : "Weekend"}
+              </div>
             </Button>
           );
         })}
@@ -88,6 +97,11 @@ export default function Schedule({ courseId }) {
                 setSelectedSessionTypeId(null);
                 setSessionTypes([]);
               }}
+              className={
+                selectedTimeSlotId === timeSlot.id
+                  ? "border-[#8B7FFF] bg-[#F5F3FF] text-[#6D5DF6]"
+                  : "border-[#D1D1D1] bg-white text-[#141414]"
+              }
             >
               {timeSlot.label}
             </Button>
@@ -106,6 +120,11 @@ export default function Schedule({ courseId }) {
               onClick={() => {
                 setSelectedSessionTypeId(sessionType.id);
               }}
+              className={
+                selectedSessionTypeId === sessionType.id
+                  ? "border-[#8B7FFF] bg-[#F5F3FF] text-[#6D5DF6]"
+                  : "border-[#D1D1D1] bg-white text-[#141414]"
+              }
             >
               {sessionType.name}
             </Button>
