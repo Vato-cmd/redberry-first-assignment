@@ -1,7 +1,5 @@
 const BASE_URL = "https://api.redclass.redberryinternship.ge/api";
-// const asd =
-//   "https://api.redclass.redberryinternship.ge/api/courses/1/time-slots?weekly_schedule_id=1";
-//  'https://api.redclass.redberryinternship.ge/api/courses/2/session-types?weekly_schedule_id=2&time_slot_id=2'
+
 export async function getWeeklySchedule(courseId) {
   const response = await fetch(
     `${BASE_URL}/courses/${courseId}/weekly-schedules`,
