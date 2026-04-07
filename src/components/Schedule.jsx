@@ -5,6 +5,8 @@ import {
   formatWeekdayLabel,
 } from "../utils/scheduleHelpers";
 import Button from "./UI/Button";
+import ScheduleSection from "./ScheduleSection";
+
 import { useCourseSchedule } from "../hooks/useCourseSchedule";
 
 export default function Schedule({ courseId }) {
@@ -27,73 +29,68 @@ export default function Schedule({ courseId }) {
   return (
     <div>
       {error && <p className="text-[#F4161A] mb-4">{error}</p>}
-      <h1>Weekly Schedule</h1>
-      <div>
-        {isLoadingWeeklySchedules ? (
-          <p>Loading weekly schedules</p>
-        ) : (
-          weeklySchedules.map((weekSchedule) => {
-            return (
-              <Button
-                type="button"
-                key={weekSchedule.id}
-                onClick={() => handleWeeklyScheduleSelect(weekSchedule.id)}
-                className={getOptionClasses(
-                  selectedWeeklyScheduleId === weekSchedule.id,
-                )}
-              >
-                <div>{formatWeekdayLabel(weekSchedule.label)}</div>
-              </Button>
-            );
-          })
-        )}
-      </div>
+      <ScheduleSection
+        title="Weekly Schedule"
+        loadingText="Loading weekly schedules"
+        isLoading={isLoadingWeeklySchedules}
+      >
+        {weeklySchedules.map((weekSchedule) => {
+          return (
+            <Button
+              type="button"
+              key={weekSchedule.id}
+              onClick={() => handleWeeklyScheduleSelect(weekSchedule.id)}
+              className={getOptionClasses(
+                selectedWeeklyScheduleId === weekSchedule.id,
+              )}
+            >
+              <div>{formatWeekdayLabel(weekSchedule.label)}</div>
+            </Button>
+          );
+        })}
+      </ScheduleSection>
 
-      <h1>Time Slot</h1>
+      <ScheduleSection
+        title="Time Slot"
+        loadingText="Loading time slots"
+        isLoading={isLoadingTimeSlots}
+      >
+        {timeSlots.map((timeSlot) => {
+          const { period, timeRange } = formatTimeSlotLabel(timeSlot.label);
+          return (
+            <Button
+              key={timeSlot.id}
+              type="button"
+              onClick={() => handleTimeSlotSelect(timeSlot.id)}
+              className={getOptionClasses(selectedTimeSlotId === timeSlot.id)}
+            >
+              <span>{period}</span>
+              <p>{timeRange}</p>
+            </Button>
+          );
+        })}
+      </ScheduleSection>
 
-      <div>
-        {isLoadingTimeSlots ? (
-          <p>Loading time slots</p>
-        ) : (
-          timeSlots.map((timeSlot) => {
-            const { period, timeRange } = formatTimeSlotLabel(timeSlot.label);
-            return (
-              <Button
-                key={timeSlot.id}
-                type="button"
-                onClick={() => handleTimeSlotSelect(timeSlot.id)}
-                className={getOptionClasses(selectedTimeSlotId === timeSlot.id)}
-              >
-                <span>{period}</span>
-                <p>{timeRange}</p>
-              </Button>
-            );
-          })
-        )}
-      </div>
-
-      <h1>Session Types</h1>
-
-      <div>
-        {isLoadingSessionTypes ? (
-          <p>Loading time slots</p>
-        ) : (
-          sessionTypes.map((sessionType) => {
-            return (
-              <Button
-                key={sessionType.id}
-                type="button"
-                onClick={() => handleSessionTypeSelect(sessionType.id)}
-                className={getOptionClasses(
-                  selectedSessionTypeId === sessionType.id,
-                )}
-              >
-                {formatSessionTypeName(sessionType.name)}
-              </Button>
-            );
-          })
-        )}
-      </div>
+      <ScheduleSection
+        title="Session Types"
+        loadingText="Loading session types"
+        isLoading={isLoadingSessionTypes}
+      >
+        {sessionTypes.map((sessionType) => {
+          return (
+            <Button
+              key={sessionType.id}
+              type="button"
+              onClick={() => handleSessionTypeSelect(sessionType.id)}
+              className={getOptionClasses(
+                selectedSessionTypeId === sessionType.id,
+              )}
+            >
+              {formatSessionTypeName(sessionType.name)}
+            </Button>
+          );
+        })}
+      </ScheduleSection>
     </div>
   );
 }
