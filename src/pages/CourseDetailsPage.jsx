@@ -5,6 +5,7 @@ import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
 import clock from "../assets/clock.svg";
 import developmentLogo from "../assets/development-logo.svg";
+import Schedule from "../components/Schedule";
 
 export default function CourseDetailsPage() {
   const { id } = useParams();
@@ -28,7 +29,7 @@ export default function CourseDetailsPage() {
   return (
     <section className="w-225.75">
       <div>
-        <h1 className="text-[#141414] font-semibold text-[40px]">
+        <h1 className="text-[#141414] font-semibold text-[40px] mb-6">
           {course.title}
         </h1>
 
@@ -54,7 +55,7 @@ export default function CourseDetailsPage() {
               {avgRating}
             </p>
           </div>
-          <div>
+          <div className="bg-[#FFFFFF] px-3 py-2 rounded-xl">
             <p className="flex items-center gap-2.5 text-[#666666] font-medium">
               <img
                 className="w-6 h-6"
@@ -81,6 +82,7 @@ export default function CourseDetailsPage() {
           {course.description}
         </p>
       </div>
+      <Schedule courseId={id} />
     </section>
   );
 }
