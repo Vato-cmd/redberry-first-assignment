@@ -265,7 +265,7 @@ export default function Schedule({ courseId }) {
                   matchedSessionType.availableSeats < 5 &&
                   !isDisabled && <TriangleAlert className="w-4 h-4" />}
                 {matchedSessionType
-                  ? `${matchedSessionType.availableSeats && !isDisabled ? matchedSessionType.availableSeats : "No"} Seats Available`
+                  ? `${matchedSessionType.availableSeats && !isDisabled ? matchedSessionType.availableSeats + " Seats Available" : "Fully Booked"}`
                   : "No Seats Available"}
               </p>
             </div>
