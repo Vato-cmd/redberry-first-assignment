@@ -6,6 +6,7 @@ import star from "../assets/star.svg";
 import clock from "../assets/clock.svg";
 import developmentLogo from "../assets/development-logo.svg";
 import Schedule from "../components/Schedule";
+import Summaray from "../components/Summary";
 
 export default function CourseDetailsPage() {
   const { id } = useParams();
@@ -85,6 +86,7 @@ export default function CourseDetailsPage() {
           </div>
           <div className="w-132.5">
             <Schedule courseId={id} />
+            <Summaray />
           </div>
         </div>
       </div>
