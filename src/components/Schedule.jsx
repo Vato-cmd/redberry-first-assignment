@@ -6,7 +6,7 @@ import {
 import ScheduleSection from "./ScheduleSection";
 import ScheduleOption from "./ScheduleOption";
 import Summaray from "../components/Summary";
-
+import { getTotalPrice } from "../utils/priceCalculation";
 import { useCourseSchedule } from "../hooks/useCourseSchedule";
 import {
   DEFAULT_TIME_SLOTS,
@@ -48,6 +48,14 @@ export default function Schedule({ courseId, basePrice }) {
     setOpenSection,
     toggleSection,
   } = useCourseSchedule(courseId);
+  const selectedSessionType =
+    sessionTypes.find((type) => type.id === selectedSessionTypeId) || null;
+
+  const { sessionExtra, totalPrice } = getTotalPrice(
+    basePrice,
+    selectedSessionType,
+  );
+
   return (
     <div>
       {error && <p className="text-[#F4161A] mb-4">{error}</p>}
@@ -280,7 +288,11 @@ export default function Schedule({ courseId, basePrice }) {
           );
         })}
       </ScheduleSection>
-      <Summaray basePrice={basePrice} />
+      <Summaray
+        basePrice={basePrice}
+        sessionExtra={sessionExtra}
+        totalPrice={totalPrice}
+      />
     </div>
   );
 }

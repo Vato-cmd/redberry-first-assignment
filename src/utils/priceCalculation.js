@@ -7,7 +7,7 @@ export function getSessionExtra(sessionTypeName) {
 export function getTotalPrice(basePrice, sessionType) {
   const sessionExtra = getSessionExtra(sessionType?.name);
 
-  const totalPrice = basePrice + sessionExtra;
+  const totalPrice = Number(basePrice) + Number(sessionExtra);
 
   return {
     sessionExtra,
