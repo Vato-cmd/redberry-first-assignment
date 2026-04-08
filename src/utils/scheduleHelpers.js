@@ -19,13 +19,13 @@ export function getSessionTypeKey(name) {
   return name;
 }
 
-export function getOptionClasses(isSelected, disabled = false) {
+export function getOptionClasses(isSelected, disabled = false, slotType = "") {
   if (disabled) {
     return "border-[#D1D1D1] bg-[#F5F5F5] text-[#D1D1D1]";
   }
   return isSelected
-    ? "border-[#958FEF] bg-[#dddbfa] text-[#4F46E5]"
-    : "border-[#D1D1D1] bg-white text-[#666666]";
+    ? `border-[#958FEF] bg-[#dddbfa] text-[#4F46E5]`
+    : `border-[#D1D1D1] bg-white ${slotType === "week" ? "text-[#292929]" : "text-[#666666]"}`;
 }
 
 export function formatWeeklyLabel(label) {
