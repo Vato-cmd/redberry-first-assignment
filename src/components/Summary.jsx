@@ -17,7 +17,7 @@ export default function Sumamry({ basePrice, sessionExtra, totalPrice }) {
       </div>
       <Button
         type="button"
-        className="bg-[#4f46e5] text-[#ffff] text-[20px] rounded-xl p-2.5 h-15.75 hover:bg-[#281ED2] duration-300 ease-in-out"
+        className="bg-[#4f46e5] text-[#ffff] text-[20px] cursor-pointer rounded-xl p-2.5 h-15.75 hover:bg-[#281ED2] duration-300 ease-in-out"
       >
         Enroll Now
       </Button>

@@ -5,6 +5,7 @@ import {
 } from "../utils/scheduleHelpers";
 import ScheduleSection from "./ScheduleSection";
 import ScheduleOption from "./ScheduleOption";
+
 import Summaray from "../components/Summary";
 import { getTotalPrice } from "../utils/priceCalculation";
 import { useCourseSchedule } from "../hooks/useCourseSchedule";
@@ -90,7 +91,8 @@ export default function Schedule({ courseId, basePrice }) {
                 handleWeeklyScheduleSelect(matchedWeeklySchedule.id)
               }
               slotType="week"
-              className={`text-[16px] border rounded-xl bg-[#FFFFFF] h-22.75 w-[123.5px] font-semibold ${!isDisabled ? "hover:bg-[#dddbfa] hover:text-[#4F46E5] hover:border-[#958FEF]" : ""}`}
+              className={`text-[16px] border rounded-xl bg-[#FFFFFF] h-22.75 w-[123.5px] font-semibold
+                 ${!isDisabled ? "hover:bg-[#dddbfa] hover:text-[#4F46E5] hover:border-[#958FEF]" : ""}`}
             >
               {matchedWeeklySchedule ? (
                 <div>{formatWeekdayLabel(matchedWeeklySchedule.label)}</div>
@@ -140,7 +142,7 @@ export default function Schedule({ courseId, basePrice }) {
                   )}
                   <div>
                     <p>{formatTimeSlotLabel(matchedTimeSlot.label).period}</p>
-                    <p className="text-[10px] font-regular">
+                    <p className="text-[10px] font-normal">
                       {formatTimeSlotLabel(matchedTimeSlot.label).timeRange}
                     </p>
                   </div>
@@ -156,7 +158,7 @@ export default function Schedule({ courseId, basePrice }) {
                   )}
                   <div>
                     <p>{defaultSlot.label}</p>
-                    <p className="text-[10px] font-regular">
+                    <p className="text-[10px] font-normal">
                       {defaultSlot.label === "Morning"
                         ? "9:00 AM - 12:00 PM"
                         : defaultSlot.label === "Afternoon"
@@ -217,12 +219,12 @@ export default function Schedule({ courseId, basePrice }) {
                       {formatSessionTypeName(matchedSessionType.name)}
                     </p>
                     {matchedSessionType.location ? (
-                      <p className="text-[12px] font-regular flex items-center">
+                      <p className="text-[12px] font-normal flex items-center">
                         <MapPin className="w-3 h-3 mr-0.5" />
                         {matchedSessionType.location}
                       </p>
                     ) : (
-                      <p className="text-[12px] font-regular">Google Meet</p>
+                      <p className="text-[12px] font-normal">Google Meet</p>
                     )}
                     {matchedSessionType.name === "in_person" ? (
                       <p
@@ -256,7 +258,7 @@ export default function Schedule({ courseId, basePrice }) {
                     <p className="font-semibold text-[16px]">
                       {defaultSessionType.label}
                     </p>
-                    <p className="text-[10px] font-regular flex items-center gap-0.5">
+                    <p className="text-[10px] font-normal flex items-center gap-0.5">
                       {defaultSessionType.label !== "Online" && (
                         <MapPin className="w-3 h-3 mr-0.5" />
                       )}

@@ -70,7 +70,7 @@ export default function SignupModal() {
       avatar: file,
     }));
   }
-  
+
   function handleNextStep() {
     const newErrors = validateSignup(formData, step);
     setErrors(newErrors);
@@ -234,7 +234,7 @@ export default function SignupModal() {
             or
           </span>
         </div>
-        <p className="flex items-center justify-center gap-2 text-center mt-6 mr-2 text-[12px] font-regular text-[#666666]">
+        <p className="flex items-center justify-center gap-2 text-center mt-6 mr-2 text-[12px] font-normal text-[#666666]">
           Already have an account?
           <Button
             type="button"
