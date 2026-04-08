@@ -58,6 +58,8 @@ export default function Schedule({ courseId }) {
         isOpen={openSection.weekly}
         isDisabled={false}
         onToggle={() => toggleSection("weekly")}
+        step={1}
+        isCompleted={!openSection.weekly && selectedWeeklyScheduleId}
       >
         {DEFAULT_WEEKLY_SCHEDULES.map((defaultSchedule) => {
           const matchedWeeklySchedule = weeklySchedules.find(
@@ -98,6 +100,8 @@ export default function Schedule({ courseId }) {
         isOpen={openSection.time}
         isDisabled={!selectedWeeklyScheduleId}
         onToggle={() => toggleSection("time")}
+        step={2}
+        isCompleted={!openSection.time && selectedTimeSlotId}
       >
         {DEFAULT_TIME_SLOTS.map((defaultSlot) => {
           const matchedTimeSlot = timeSlots.find(
@@ -165,6 +169,8 @@ export default function Schedule({ courseId }) {
         isOpen={openSection.session}
         isDisabled={!selectedTimeSlotId}
         onToggle={() => toggleSection("session")}
+        step={3}
+        isCompleted={!openSection.session && selectedSessionTypeId}
       >
         {DEFAULT_SESSION_TYPES.map((defaultSessionType) => {
           const matchedSessionType = sessionTypes.find(

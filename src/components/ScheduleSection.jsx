@@ -1,5 +1,6 @@
 import Button from "./UI/Button";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import StepIcon from "./UI/StepIcon";
 
 export default function ScheduleSection({
   title,
@@ -10,6 +11,8 @@ export default function ScheduleSection({
   isOpen = false,
   isDisabled = false,
   onToggle,
+  step,
+  isCompleted,
 }) {
   return (
     <section className={`${isDisabled ? "opacity-50" : ""}`}>
@@ -19,11 +22,18 @@ export default function ScheduleSection({
         className="flex items-center justify-between w-full mb-4.5"
         disabled={isDisabled}
       >
-        <h1
-          className={`text-[24px] font-semibold ${!isDisabled ? "text-[#130E67]" : ""}`}
-        >
-          {title}
-        </h1>
+        <div className="flex items-center gap-2">
+          <StepIcon
+            number={step}
+            active={!isDisabled}
+            completed={isCompleted}
+          />
+          <h1
+            className={`text-[24px] font-semibold ${!isDisabled ? "text-[#130E67]" : ""}`}
+          >
+            {title}
+          </h1>
+        </div>
         <span>
           {isOpen ? (
             <ChevronDown
@@ -37,11 +47,7 @@ export default function ScheduleSection({
         </span>
       </Button>
 
-      {isOpen && (
-        <div className={className}>
-          {isLoading ? <p>{loadingText}</p> : children}
-        </div>
-      )}
+      {isOpen && <div className={`${className} mb-8`}>{children}</div>}
     </section>
   );
 }
