@@ -6,7 +6,6 @@ import star from "../assets/star.svg";
 import clock from "../assets/clock.svg";
 import developmentLogo from "../assets/development-logo.svg";
 import Schedule from "../components/Schedule";
-import Summaray from "../components/Summary";
 
 export default function CourseDetailsPage() {
   const { id } = useParams();
@@ -49,7 +48,7 @@ export default function CourseDetailsPage() {
                   </p>
                   <p className="flex items-center gap-1 ">
                     <img className="w-6 h-6" src={clock} alt="clock" />
-                    128 Hours
+                    {course.hours} Hours
                   </p>
                 </div>
                 <p className="flex items-center gap-1">
@@ -85,8 +84,7 @@ export default function CourseDetailsPage() {
             </p>
           </div>
           <div className="w-132.5">
-            <Schedule courseId={id} />
-            <Summaray />
+            <Schedule courseId={id} basePrice={course.basePrice} />
           </div>
         </div>
       </div>

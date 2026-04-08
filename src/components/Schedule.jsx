@@ -5,6 +5,8 @@ import {
 } from "../utils/scheduleHelpers";
 import ScheduleSection from "./ScheduleSection";
 import ScheduleOption from "./ScheduleOption";
+import Summaray from "../components/Summary";
+
 import { useCourseSchedule } from "../hooks/useCourseSchedule";
 import {
   DEFAULT_TIME_SLOTS,
@@ -27,7 +29,7 @@ import {
   TriangleAlert,
 } from "lucide-react";
 
-export default function Schedule({ courseId }) {
+export default function Schedule({ courseId, basePrice }) {
   const {
     weeklySchedules,
     selectedWeeklyScheduleId,
@@ -278,6 +280,7 @@ export default function Schedule({ courseId }) {
           );
         })}
       </ScheduleSection>
+      <Summaray basePrice={basePrice} />
     </div>
   );
 }
