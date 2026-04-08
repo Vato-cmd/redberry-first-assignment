@@ -21,6 +21,48 @@ export function useCourseSchedule(courseId) {
   const [isLoadingSessionTypes, setIsLoadingSessionTypes] = useState(false);
 
   const [error, setError] = useState("");
+  const [openSection, setOpenSection] = useState({
+    weekly: true,
+    time: false,
+    session: false,
+  });
+
+  const timeSlots = timeSlotsByWeekId[selectedWeeklyScheduleId] || [];
+  const sessionKey = `${selectedWeeklyScheduleId}-${selectedTimeSlotId}`;
+  const sessionTypes = sessionTypesByKey[sessionKey] || [];
+
+  function toggleSection(sectionName) {
+    setOpenSection((prev) => ({
+      ...prev,
+      [sectionName]: !prev[sectionName],
+    }));
+  }
+
+  useEffect(() => {
+    if (
+      selectedWeeklyScheduleId &&
+      !isLoadingTimeSlots &&
+      timeSlots.length > 0
+    ) {
+      setOpenSection((prev) => ({
+        ...prev,
+        time: true,
+      }));
+    }
+  }, [selectedWeeklyScheduleId, isLoadingTimeSlots, timeSlots.length]);
+
+  useEffect(() => {
+    if (
+      selectedTimeSlotId &&
+      !isLoadingSessionTypes &&
+      sessionTypes.length > 0
+    ) {
+      setOpenSection((prev) => ({
+        ...prev,
+        session: true,
+      }));
+    }
+  }, [selectedTimeSlotId, isLoadingSessionTypes, sessionTypes.length]);
 
   useEffect(() => {
     async function loadWeeklySchedules() {
@@ -97,10 +139,6 @@ export function useCourseSchedule(courseId) {
     setSelectedSessionTypeId(id);
   }
 
-  const timeSlots = timeSlotsByWeekId[selectedWeeklyScheduleId] || [];
-  const sessionKey = `${selectedWeeklyScheduleId}-${selectedTimeSlotId}`;
-  const sessionTypes = sessionTypesByKey[sessionKey] || [];
-
   return {
     weeklySchedules,
     timeSlots,
@@ -115,5 +153,8 @@ export function useCourseSchedule(courseId) {
     handleWeeklyScheduleSelect,
     handleTimeSlotSelect,
     handleSessionTypeSelect,
+    openSection,
+    setOpenSection,
+    toggleSection,
   };
 }

@@ -67,7 +67,7 @@ export default function CourseDetailsPage() {
                 </p>
               </div>
             </div>
-            <div className="inline-flex items-center gap-3 text-[16px] font-medium text-[#666666] bg-[#FFFFFF] px-3 py-2 rounded-xl mb-4.5">
+            <div className="inline-flex items-center gap-3 text-[16px] font-medium text-[#666666] bg-[#FFFFFF] px-3 py-2 rounded-xl mb-4.5 cursor-pointer hover:text-[#4F46E5] hover:bg-[#dddbfa]">
               <img
                 className="w-7.5 h-7.5 rounded object-cover"
                 src={course.instructor.avatar}

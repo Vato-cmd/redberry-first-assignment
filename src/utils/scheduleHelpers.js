@@ -37,7 +37,10 @@ export function formatTimeSlotLabel(label) {
 
   return {
     period: label.slice(0, firstSpaceIndex),
-    timeRange: label.slice(firstSpaceIndex + 1),
+    timeRange: label
+      .slice(firstSpaceIndex + 1)
+      .replace("(", "")
+      .replace(")", ""),
   };
 }
 

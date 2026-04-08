@@ -42,8 +42,10 @@ export default function Schedule({ courseId }) {
     handleWeeklyScheduleSelect,
     handleTimeSlotSelect,
     handleSessionTypeSelect,
+    openSection,
+    setOpenSection,
+    toggleSection,
   } = useCourseSchedule(courseId);
-  console.log(sessionTypes);
   return (
     <div>
       {error && <p className="text-[#F4161A] mb-4">{error}</p>}
@@ -53,6 +55,9 @@ export default function Schedule({ courseId }) {
         loadingText="Loading weekly schedules"
         isLoading={isLoadingWeeklySchedules}
         className="flex gap-3"
+        isOpen={openSection.weekly}
+        isDisabled={false}
+        onToggle={() => toggleSection("weekly")}
       >
         {DEFAULT_WEEKLY_SCHEDULES.map((defaultSchedule) => {
           const matchedWeeklySchedule = weeklySchedules.find(
@@ -90,6 +95,9 @@ export default function Schedule({ courseId }) {
         loadingText="Loading time slots"
         isLoading={isLoadingTimeSlots}
         className="flex justify-between gap-2"
+        isOpen={openSection.time}
+        isDisabled={!selectedWeeklyScheduleId}
+        onToggle={() => toggleSection("time")}
       >
         {DEFAULT_TIME_SLOTS.map((defaultSlot) => {
           const matchedTimeSlot = timeSlots.find(
@@ -154,18 +162,24 @@ export default function Schedule({ courseId }) {
         loadingText="Loading session types"
         isLoading={isLoadingSessionTypes}
         className="flex justify-between gap-2"
+        isOpen={openSection.session}
+        isDisabled={!selectedTimeSlotId}
+        onToggle={() => toggleSection("session")}
       >
         {DEFAULT_SESSION_TYPES.map((defaultSessionType) => {
           const matchedSessionType = sessionTypes.find(
             (type) => getSessionTypeKey(type.name) === defaultSessionType.key,
           );
 
-          const isDisabled = !matchedSessionType;
+          const isDisabled =
+            !matchedSessionType || matchedSessionType.availableSeats === 0;
 
           return (
-            <div className="flex flex-col items-center">
+            <div
+              className="flex flex-col items-center"
+              key={defaultSessionType.key}
+            >
               <ScheduleOption
-                key={defaultSessionType.key}
                 isSelected={selectedSessionTypeId === matchedSessionType?.id}
                 onClick={() =>
                   matchedSessionType &&
@@ -195,15 +209,21 @@ export default function Schedule({ courseId }) {
                       <p className="text-[12px] font-regular">Google Meet</p>
                     )}
                     {matchedSessionType.name === "in_person" ? (
-                      <p className="text-[14px] font-medium text-[#736BEA]">
+                      <p
+                        className={`text-[14px] font-medium ${isDisabled ? "text-[]" : "text-[#736BEA]"}`}
+                      >
                         + 30$
                       </p>
                     ) : matchedSessionType.name === "online" ? (
-                      <p className="text-[14px] font-medium text-[#736BEA]">
+                      <p
+                        className={`text-[14px] font-medium ${isDisabled ? "text-[]" : "text-[#736BEA]"}`}
+                      >
                         Included
                       </p>
                     ) : (
-                      <p className="text-[14px] font-medium text-[#736BEA]">
+                      <p
+                        className={`text-[14px] font-medium ${isDisabled ? "text-[]" : "text-[#736BEA]"}`}
+                      >
                         + 50$
                       </p>
                     )}
@@ -239,14 +259,13 @@ export default function Schedule({ courseId }) {
                 )}
               </ScheduleOption>
               <p
-                className={`text-[12px] font-medium ${matchedSessionType && matchedSessionType.availableSeats < 5 ? "text-[#F4A316]" : "text-[#3D3D3D]"} mt-2 flex gap-1`}
+                className={`text-[12px] font-medium ${matchedSessionType && matchedSessionType.availableSeats < 5 && !isDisabled ? "text-[#F4A316]" : "text-[#3D3D3D]"} mt-2 flex gap-1`}
               >
                 {matchedSessionType &&
-                  matchedSessionType.availableSeats < 5 && (
-                    <TriangleAlert className="w-4 h-4" />
-                  )}
+                  matchedSessionType.availableSeats < 5 &&
+                  !isDisabled && <TriangleAlert className="w-4 h-4" />}
                 {matchedSessionType
-                  ? `${matchedSessionType.availableSeats} Seats Available`
+                  ? `${matchedSessionType.availableSeats && !isDisabled ? matchedSessionType.availableSeats : "No"} Seats Available`
                   : "No Seats Available"}
               </p>
             </div>
