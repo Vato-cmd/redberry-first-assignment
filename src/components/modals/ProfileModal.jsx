@@ -321,7 +321,7 @@ export default function ProfileModal() {
 
             <Button
               type="button"
-              className={`rounded-lg bg-[#4F46E5] text-white font-medium text-[20px] py-4.25 px-6.25
+              className={`flex items-center justify-center h-11.75 rounded-lg bg-[#4F46E5] text-white font-medium text-[20px] py-4.25 px-6.25 mt-2 
                       ${isSubmitting || (isEditing && !isFormValid) ? "opacity-50" : ""}
                 `}
               onClick={handleProfileAction}
