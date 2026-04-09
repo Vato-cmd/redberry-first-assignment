@@ -1,6 +1,6 @@
 import Button from "./UI/Button";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import StepIcon from "./UI/StepIcon";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function ScheduleSection({
   title,

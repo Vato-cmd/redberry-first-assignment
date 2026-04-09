@@ -6,7 +6,7 @@ import {
 import ScheduleSection from "./ScheduleSection";
 import ScheduleOption from "./ScheduleOption";
 
-import Summaray from "../components/Summary";
+import Summary from "../components/Summary";
 import { getTotalPrice } from "../utils/priceCalculation";
 import { useCourseSchedule } from "../hooks/useCourseSchedule";
 import {
@@ -290,10 +290,11 @@ export default function Schedule({ courseId, basePrice }) {
           );
         })}
       </ScheduleSection>
-      <Summaray
+      <Summary
         basePrice={basePrice}
         sessionExtra={sessionExtra}
         totalPrice={totalPrice}
+        isDisabled={!selectedSessionType}
       />
     </div>
   );

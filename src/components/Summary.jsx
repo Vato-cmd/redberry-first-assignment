@@ -1,6 +1,11 @@
 import Button from "./UI/Button";
 
-export default function Sumamry({ basePrice, sessionExtra, totalPrice }) {
+export default function Summary({
+  basePrice,
+  sessionExtra,
+  totalPrice,
+  isDisabled,
+}) {
   return (
     <section className="flex flex-col p-10 bg-[#FFFFFF] rounded-xl border border-[#F5F5F5]">
       <div className="flex justify-between mb-8 text-[#8A8A8A] font-semibold">
@@ -17,7 +22,11 @@ export default function Sumamry({ basePrice, sessionExtra, totalPrice }) {
       </div>
       <Button
         type="button"
-        className="bg-[#4f46e5] text-[#ffff] text-[20px] cursor-pointer rounded-xl p-2.5 h-15.75 hover:bg-[#281ED2] duration-300 ease-in-out"
+        className={` 
+          cursor-pointer rounded-xl p-2.5 h-15.75 text-[20px] font-semibold  
+          ${isDisabled ? "bg-[#EEEDFC] text-[#B7B3F4]" : "bg-[#4f46e5] text-[#ffff]  hover:bg-[#281ED2] duration-300 ease-in-out"}
+          `}
+        disabled={isDisabled}
       >
         Enroll Now
       </Button>
