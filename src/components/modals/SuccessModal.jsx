@@ -6,7 +6,9 @@ import success from "../../assets/success.svg";
 import Button from "../UI/Button";
 
 export default function SuccessModal() {
-  const { closeModal } = useModal();
+  const { closeModal, modal } = useModal();
+  const title = modal?.props?.title;
+
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115">
       <div className="text-center flex flex-col items-center p-15">
@@ -15,7 +17,7 @@ export default function SuccessModal() {
           Congratulations!
         </h1>
         <p className="text-[#3D3D3D] text-[20px] font-medium w-89 mb-10">
-          You've completed “Advanced React & TypeScript Development” Course!
+          You've completed “{title}” Course!
         </p>
         <div className=" flex gap-2">
           <Button

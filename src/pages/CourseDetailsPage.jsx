@@ -25,6 +25,7 @@ export default function CourseDetailsPage() {
     setCourse(data);
     setCurrentCourse(data);
   }
+  console.log(course);
 
   useEffect(() => {
     loadCourseDetails();
@@ -99,6 +100,7 @@ export default function CourseDetailsPage() {
               <EnrolledCourseCard
                 onEnrollSuccess={loadCourseDetails}
                 enrollment={course.enrollment}
+                course={course}
               />
             ) : (
               <Schedule

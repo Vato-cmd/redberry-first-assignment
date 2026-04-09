@@ -16,17 +16,22 @@ import {
 } from "../utils/scheduleHelpers";
 import { useEnroll } from "../context/EnrollContext";
 
-export default function EnrolledCourseCard({ enrollment, onEnrollSuccess }) {
+export default function EnrolledCourseCard({
+  enrollment,
+  onEnrollSuccess,
+  course,
+}) {
   const { timeRange } = formatTimeSlotLabel(enrollment.schedule.timeSlot.label);
   const { completeCourse } = useEnroll();
   const { openModal } = useModal();
   const progress = enrollment.progress;
-
   async function handleComplete() {
     try {
       await completeCourse(enrollment.id);
       await onEnrollSuccess?.();
-      openModal("success");
+      openModal("success", {
+        title: course.title,
+      });
     } catch (error) {}
   }
 
