@@ -58,7 +58,7 @@ export default function CourseDetailsPage() {
                 </div>
                 <p className="flex items-center gap-1">
                   <img className="w-6 h-6" src={star} alt="star" />
-                  {avgRating}
+                  {avgRating.toFixed(1)}
                 </p>
               </div>
               <div className="bg-[#FFFFFF] px-3 py-2 rounded-xl">

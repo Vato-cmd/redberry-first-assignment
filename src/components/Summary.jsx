@@ -1,17 +1,21 @@
 import Button from "./UI/Button";
 import { useModal } from "../context/ModalContext";
 import { useAuth } from "../context/AuthContext";
+import { useEnroll } from "../context/EnrollContext";
 
 export default function Summary({
   basePrice,
   sessionExtra,
   totalPrice,
   isDisabled,
+  courseId,
+  selectedSessionType,
 }) {
   const { openModal } = useModal();
   const { isAuthorized, isProfileComplete } = useAuth();
+  const { isEnrolling, enroll, enrollError } = useEnroll();
 
-  function handleEnrollClick() {
+  async function handleEnrollClick() {
     if (!isAuthorized) {
       openModal("login");
       return;
@@ -20,6 +24,8 @@ export default function Summary({
       openModal("confirm");
       return;
     }
+
+    await enroll(courseId, selectedSessionType.courseScheduleId);
   }
   return (
     <section className="flex flex-col p-10 bg-[#FFFFFF] rounded-xl border border-[#F5F5F5]">
@@ -35,16 +41,17 @@ export default function Summary({
         <p>Session Type</p>
         <p className="text-[#292929]">+ ${sessionExtra}</p>
       </div>
+      {enrollError && <p className="text-red-500 text-[14px]">{enrollError}</p>}
       <Button
         type="button"
         className={` 
           cursor-pointer rounded-xl p-2.5 h-15.75 text-[20px] font-semibold  
           ${isDisabled ? "bg-[#EEEDFC] text-[#B7B3F4]" : "bg-[#4f46e5] text-[#ffff]  hover:bg-[#281ED2] duration-300 ease-in-out"}
           `}
-        disabled={isDisabled}
+        disabled={isDisabled || isEnrolling}
         onClick={handleEnrollClick}
       >
-        Enroll Now
+        {isEnrolling ? "Enrolling..." : "Enroll Now"}
       </Button>
     </section>
   );

@@ -291,6 +291,8 @@ export default function Schedule({ courseId, basePrice }) {
         })}
       </ScheduleSection>
       <Summary
+        courseId={courseId}
+        selectedSessionType={selectedSessionType}
         basePrice={basePrice}
         sessionExtra={sessionExtra}
         totalPrice={totalPrice}
