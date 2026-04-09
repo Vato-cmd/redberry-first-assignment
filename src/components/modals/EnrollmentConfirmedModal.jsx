@@ -5,7 +5,7 @@ import Modal from "../UI/Modal";
 import circledBlueTick from "../../assets/circledBlueTick.svg";
 import Button from "../UI/Button";
 
-export default function EnrollmentConfirmed() {
+export default function EnrollmentConfirmedModal() {
   const { closeModal } = useModal();
   const { currentCourse } = useCourse();
   return (

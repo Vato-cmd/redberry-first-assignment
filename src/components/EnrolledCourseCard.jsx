@@ -8,6 +8,8 @@ import hibryd from "../assets/hibryd.svg";
 import inperson from "../assets/inperson.svg";
 import thickTick from "../assets/thick-tick.svg";
 
+import { useModal } from "../context/ModalContext";
+
 import {
   formatSessionTypeName,
   formatTimeSlotLabel,
@@ -17,12 +19,14 @@ import { useEnroll } from "../context/EnrollContext";
 export default function EnrolledCourseCard({ enrollment, onEnrollSuccess }) {
   const { timeRange } = formatTimeSlotLabel(enrollment.schedule.timeSlot.label);
   const { completeCourse } = useEnroll();
+  const { openModal } = useModal();
   const progress = enrollment.progress;
 
   async function handleComplete() {
     try {
       await completeCourse(enrollment.id);
       await onEnrollSuccess?.();
+      openModal("success");
     } catch (error) {}
   }
 
