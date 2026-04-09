@@ -5,14 +5,17 @@ import "./index.css";
 import App from "./App.jsx";
 import { ModalProvider } from "./context/ModalContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { EnrollProvider } from "./context/EnrollContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <ModalProvider>
-          <App />
-        </ModalProvider>
+        <EnrollProvider>
+          <ModalProvider>
+            <App />
+          </ModalProvider>
+        </EnrollProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>,

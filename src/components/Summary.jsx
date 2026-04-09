@@ -14,9 +14,11 @@ export default function Summary({
   function handleEnrollClick() {
     if (!isAuthorized) {
       openModal("login");
+      return;
     }
     if (isAuthorized && !isProfileComplete) {
       openModal("confirm");
+      return;
     }
   }
   return (
