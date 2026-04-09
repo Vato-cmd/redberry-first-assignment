@@ -1,4 +1,6 @@
 import Button from "./UI/Button";
+import { useModal } from "../context/ModalContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Summary({
   basePrice,
@@ -6,6 +8,14 @@ export default function Summary({
   totalPrice,
   isDisabled,
 }) {
+  const { openModal } = useModal();
+  const { isAuthorized, isProfileComplete } = useAuth();
+
+  function handleEnrollClick() {
+    if (!isProfileComplete) {
+      openModal("confirm");
+    }
+  }
   return (
     <section className="flex flex-col p-10 bg-[#FFFFFF] rounded-xl border border-[#F5F5F5]">
       <div className="flex justify-between mb-8 text-[#8A8A8A] font-semibold">
@@ -27,6 +37,7 @@ export default function Summary({
           ${isDisabled ? "bg-[#EEEDFC] text-[#B7B3F4]" : "bg-[#4f46e5] text-[#ffff]  hover:bg-[#281ED2] duration-300 ease-in-out"}
           `}
         disabled={isDisabled}
+        onClick={handleEnrollClick}
       >
         Enroll Now
       </Button>

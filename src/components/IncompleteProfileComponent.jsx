@@ -10,7 +10,7 @@ export default function IncompleteProfileComponent() {
           <TriangleAlert className="w-5.5 h-5.5 text-[#F4A316]" />
           <h2>Authentication Required</h2>
         </div>
-        <p className="text-[#8A8A8A] text-[12px] font-normal">
+        <p className="text-[#8A8A8A] text-[12px] font-normal w-[283.06px]">
           You need sign in to your profile before enrolling in this course.
         </p>
       </div>

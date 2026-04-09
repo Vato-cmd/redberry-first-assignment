@@ -1,10 +1,10 @@
 import mainlogo from "../assets/logo.svg";
 import Button from "./UI/Button.jsx";
 import userLogo from "../assets/User.svg";
-import { Sparkles, BookOpen } from "lucide-react";
 import profileOrange from "../assets/profile-orange.svg";
 import profileGreen from "../assets/profile-green.svg";
 
+import { Sparkles, BookOpen } from "lucide-react";
 import { useModal } from "../context/ModalContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "react-router-dom";
