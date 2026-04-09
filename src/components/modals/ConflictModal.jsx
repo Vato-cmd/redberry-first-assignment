@@ -42,8 +42,9 @@ export default function ConflictModal() {
           Enrollment Conflict
         </h1>
         <p className="text-[#3D3D3D] text-[20px] font-medium w-89 mb-10">
-          You are already enrolled in “{firstConflict?.conflictingCourseName}”
-          with the same schedule:{" "}
+          You are already enrolled in “
+          <strong>{firstConflict?.conflictingCourseName}</strong>” with the same
+          schedule:{" "}
           {formatWeekdayLabel(firstConflict?.schedule.split(" at ")[0])} at{" "}
           {timeRange}
         </p>

@@ -20,7 +20,8 @@ export default function EnrollmentConfirmedModal() {
           Enrollment Confirmed!
         </h1>
         <p className="text-[#3D3D3D] text-[20px] font-medium w-89 mb-10">
-          You've successfully enrolled to the “{currentCourse.title}” Course!
+          You've successfully enrolled to the “
+          <strong>{currentCourse.title}</strong>” Course!
         </p>
         <div className=" flex gap-2">
           <Button

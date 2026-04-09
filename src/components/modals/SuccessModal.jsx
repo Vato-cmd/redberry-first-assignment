@@ -17,7 +17,7 @@ export default function SuccessModal() {
           Congratulations!
         </h1>
         <p className="text-[#3D3D3D] text-[20px] font-medium w-89 mb-10">
-          You've completed “{title}” Course!
+          You've completed “<strong>{title}</strong>” Course!
         </p>
         <div className=" flex gap-2">
           <Button
