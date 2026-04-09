@@ -96,7 +96,10 @@ export default function CourseDetailsPage() {
           </div>
           <div className="w-132.5">
             {course.enrollment ? (
-              <EnrolledCourseCard enrollment={course.enrollment} />
+              <EnrolledCourseCard
+                onEnrollSuccess={loadCourseDetails}
+                enrollment={course.enrollment}
+              />
             ) : (
               <Schedule
                 courseId={id}

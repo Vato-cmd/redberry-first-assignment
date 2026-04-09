@@ -7,16 +7,32 @@ import location from "../assets/location.svg";
 import hibryd from "../assets/hibryd.svg";
 import inperson from "../assets/inperson.svg";
 import thickTick from "../assets/thick-tick.svg";
+
 import {
   formatSessionTypeName,
   formatTimeSlotLabel,
 } from "../utils/scheduleHelpers";
-export default function EnrolledCourseCard({ enrollment }) {
-  const { period, timeRange } = formatTimeSlotLabel(
-    enrollment.schedule.timeSlot.label,
-  );
+import { useEnroll } from "../context/EnrollContext";
+
+export default function EnrolledCourseCard({ enrollment, onEnrollSuccess }) {
+  const { timeRange } = formatTimeSlotLabel(enrollment.schedule.timeSlot.label);
+  const { completeCourse } = useEnroll();
+  const progress = enrollment.progress;
+
+  async function handleComplete() {
+    try {
+      await completeCourse(enrollment.id);
+      await onEnrollSuccess?.();
+    } catch (error) {}
+  }
+
   return (
     <div className="text-[#525252] text-[20px] font-medium w-118.25 flex flex-col py-4.25 px-6.25">
+      <Button
+        className={`${progress === 100 ? "text-[#1DC31D] bg-[#dff0df]" : "text-[#736BEA] bg-[#e8e7f4]"} self-start  p-4 rounded-full mb-5.5`}
+      >
+        <p>{progress === 100 ? "Completed" : "Enrolled"}</p>
+      </Button>
       <div className="flex flex-col gap-5.5 mb-12">
         <p className="flex items-center gap-3">
           <img src={calendar} alt="calendar" />
@@ -57,7 +73,10 @@ export default function EnrolledCourseCard({ enrollment }) {
           ></div>
         </div>
       </div>
-      <Button className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5 ">
+      <Button
+        onClick={handleComplete}
+        className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5"
+      >
         Complete Course
         <img className="w-6 h-6" src={thickTick} alt="tick" />
       </Button>

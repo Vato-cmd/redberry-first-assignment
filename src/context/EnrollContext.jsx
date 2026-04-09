@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { enrollToTheCourse } from "../api/enroll";
+import { enrollToTheCourse, completeEnrolledCourse } from "../api/enroll";
 import { useAuth } from "./AuthContext";
 
 const EnrollContext = createContext(null);
@@ -11,6 +11,16 @@ export function EnrollProvider({ children }) {
 
   const { token } = useAuth();
   console.log(enrolledCourses);
+
+  async function completeCourse(courseId) {
+    try {
+      const response = await completeEnrolledCourse({ courseId, token });
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async function enroll(courseId, courseScheduleId, force = false) {
     try {
@@ -35,7 +45,13 @@ export function EnrollProvider({ children }) {
 
   return (
     <EnrollContext.Provider
-      value={{ enrolledCourses, enroll, isEnrolling, enrollError }}
+      value={{
+        enrolledCourses,
+        enroll,
+        isEnrolling,
+        enrollError,
+        completeCourse,
+      }}
     >
       {children}
     </EnrollContext.Provider>
