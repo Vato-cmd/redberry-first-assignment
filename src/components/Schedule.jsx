@@ -183,6 +183,7 @@ export default function Schedule({ courseId, basePrice }) {
         onToggle={() => toggleSection("session")}
         step={3}
         isCompleted={!openSection.session && selectedSessionTypeId}
+        onEnrollSuccess
       >
         {DEFAULT_SESSION_TYPES.map((defaultSessionType) => {
           const matchedSessionType = sessionTypes.find(

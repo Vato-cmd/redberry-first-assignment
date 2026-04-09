@@ -21,8 +21,13 @@ export async function getFeaturedCourses() {
   return data.data;
 }
 
-export async function getCourseById(id) {
-  const response = await fetch(`${BASE_URL}/courses/${id}`);
+export async function getCourseById(id, token) {
+  const response = await fetch(`${BASE_URL}/courses/${id}`, {
+    headers: {
+      Accept: "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
 
   if (!response.ok) {
     throw new Error("Failed to load the course details");

@@ -1,28 +1,30 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getCourseById } from "../api/courses";
+import { useAuth } from "../context/AuthContext";
+
 import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
 import clock from "../assets/clock.svg";
 import developmentLogo from "../assets/development-logo.svg";
+
 import Schedule from "../components/Schedule";
 import IncompleteProfileComponent from "../components/incompleteProfileComponent";
 import UnAuthorizedUserComponent from "../components/UnAuthorizedUserComponent";
-
-import { useAuth } from "../context/AuthContext";
+import EnrolledCourseCard from "../components/EnrolledCourseCard";
 
 export default function CourseDetailsPage() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
-  const { isAuthorized, isProfileComplete } = useAuth();
+  const { isAuthorized, isProfileComplete, token } = useAuth();
 
   useEffect(() => {
     async function loadCourseDetails() {
-      const data = await getCourseById(id);
+      const data = await getCourseById(id, token);
       setCourse(data);
     }
     loadCourseDetails();
-  }, [id]);
+  }, [id, token]);
 
   if (!course) return <p>Loading...</p>;
 
@@ -89,7 +91,11 @@ export default function CourseDetailsPage() {
             </p>
           </div>
           <div className="w-132.5">
-            <Schedule courseId={id} basePrice={course.basePrice} />
+            {course.enrollment ? (
+              <EnrolledCourseCard enrollment={course.enrollment} />
+            ) : (
+              <Schedule courseId={id} basePrice={course.basePrice} />
+            )}
             {isAuthorized && !isProfileComplete && (
               <IncompleteProfileComponent />
             )}
