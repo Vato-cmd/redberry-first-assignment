@@ -10,6 +10,7 @@ export default function Summary({
   isDisabled,
   courseId,
   selectedSessionType,
+  onEnrollSuccess,
 }) {
   const { openModal } = useModal();
   const { isAuthorized, isProfileComplete } = useAuth();
@@ -24,8 +25,22 @@ export default function Summary({
       openModal("confirm");
       return;
     }
-
-    await enroll(courseId, selectedSessionType.courseScheduleId);
+    try {
+      await enroll(courseId, selectedSessionType.courseScheduleId);
+      await onEnrollSuccess?.();
+      openModal("enroll-confirmed");
+    } catch (error) {
+      if (error.status === 409) {
+        openModal("conflict", {
+          message: error.data?.message,
+          conflicts: error.data?.conflicts || [],
+          courseId: courseId,
+          courseScheduleId: selectedSessionType.courseScheduleId,
+          onEnrollSuccess,
+        });
+        return;
+      }
+    }
   }
   return (
     <section className="flex flex-col p-10 bg-[#FFFFFF] rounded-xl border border-[#F5F5F5]">

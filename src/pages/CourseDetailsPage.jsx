@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getCourseById } from "../api/courses";
 import { useAuth } from "../context/AuthContext";
+import { useCourse } from "../context/CourseContext";
 
 import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
@@ -17,12 +18,15 @@ export default function CourseDetailsPage() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const { isAuthorized, isProfileComplete, token } = useAuth();
+  const { setCurrentCourse } = useCourse();
+
+  async function loadCourseDetails() {
+    const data = await getCourseById(id, token);
+    setCourse(data);
+    setCurrentCourse(data);
+  }
 
   useEffect(() => {
-    async function loadCourseDetails() {
-      const data = await getCourseById(id, token);
-      setCourse(data);
-    }
     loadCourseDetails();
   }, [id, token]);
 
@@ -51,7 +55,7 @@ export default function CourseDetailsPage() {
                 <div className="flex items-center gap-3.75">
                   <p className="flex items-center gap-1 text-[14px]">
                     <img className="w-6 h-6" src={calendar} alt="calendar" />
-                    <p>{course.durationWeeks} Weeks</p>
+                    {course.durationWeeks} Weeks
                   </p>
                   <p className="flex items-center gap-1 text-[14px]">
                     <img className="w-6 h-6" src={clock} alt="clock" />
@@ -94,7 +98,11 @@ export default function CourseDetailsPage() {
             {course.enrollment ? (
               <EnrolledCourseCard enrollment={course.enrollment} />
             ) : (
-              <Schedule courseId={id} basePrice={course.basePrice} />
+              <Schedule
+                courseId={id}
+                basePrice={course.basePrice}
+                onEnrollSuccess={loadCourseDetails}
+              />
             )}
             {isAuthorized && !isProfileComplete && (
               <IncompleteProfileComponent />

@@ -8,7 +8,7 @@ export function validateSignup(formData, step) {
     if (formData.email.length < 3) {
       errors.email = "Email must be at least 3 characters";
     }
-    if (!email) {
+    if (!formData.email) {
       errors.email = "Email is required";
     }
   }

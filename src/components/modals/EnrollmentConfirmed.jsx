@@ -1,11 +1,13 @@
 import { useModal } from "../../context/ModalContext";
+import { useCourse } from "../../context/CourseContext";
 import Modal from "../UI/Modal";
 
 import circledBlueTick from "../../assets/circledBlueTick.svg";
 import Button from "../UI/Button";
 
 export default function EnrollmentConfirmed() {
-  const { closeModal, openModal } = useModal();
+  const { closeModal } = useModal();
+  const { currentCourse } = useCourse();
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115">
       <div className="text-center flex flex-col items-center p-15">
@@ -18,8 +20,7 @@ export default function EnrollmentConfirmed() {
           Enrollment Confirmed!
         </h1>
         <p className="text-[#3D3D3D] text-[20px] font-medium w-89 mb-10">
-          You've successfully enrolled to the “Advanced React & TypeScript
-          Development” Course!
+          You've successfully enrolled to the “{currentCourse.title}” Course!
         </p>
         <div className=" flex gap-2">
           <Button

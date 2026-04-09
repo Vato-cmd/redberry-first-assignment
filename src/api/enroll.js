@@ -23,7 +23,11 @@ export async function enrollToTheCourse({
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Failed to enroll in the course");
+    const error = new Error(data.message || "Failed to enroll in the course");
+    error.status = response.status;
+    error.data = data;
+
+    throw error;
   }
 
   return data;

@@ -11,7 +11,8 @@ export function EnrollProvider({ children }) {
 
   const { token } = useAuth();
   console.log(enrolledCourses);
-  async function enroll(courseId, courseScheduleId) {
+
+  async function enroll(courseId, courseScheduleId, force = false) {
     try {
       setIsEnrolling(true);
       setEnrollError("");
@@ -20,11 +21,13 @@ export function EnrollProvider({ children }) {
         courseId,
         courseScheduleId,
         token,
+        force,
       });
 
       setEnrolledCourses((prev) => [...prev, response.data]);
     } catch (error) {
       setEnrollError(error.message || "Failed to enroll in the course");
+      throw error;
     } finally {
       setIsEnrolling(false);
     }
