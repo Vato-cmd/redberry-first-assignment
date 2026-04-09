@@ -7,12 +7,14 @@ import clock from "../assets/clock.svg";
 import developmentLogo from "../assets/development-logo.svg";
 import Schedule from "../components/Schedule";
 import IncompleteProfileComponent from "../components/incompleteProfileComponent";
+import UnAuthorizedUserComponent from "../components/UnAuthorizedUserComponent";
+
 import { useAuth } from "../context/AuthContext";
 
 export default function CourseDetailsPage() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
-  const { isAuthorized } = useAuth();
+  const { isAuthorized, isProfileComplete } = useAuth();
 
   useEffect(() => {
     async function loadCourseDetails() {
@@ -88,7 +90,10 @@ export default function CourseDetailsPage() {
           </div>
           <div className="w-132.5">
             <Schedule courseId={id} basePrice={course.basePrice} />
-            {isAuthorized && <IncompleteProfileComponent />}
+            {isAuthorized && !isProfileComplete && (
+              <IncompleteProfileComponent />
+            )}
+            {!isAuthorized && <UnAuthorizedUserComponent />}
           </div>
         </div>
       </div>

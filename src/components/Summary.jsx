@@ -12,7 +12,10 @@ export default function Summary({
   const { isAuthorized, isProfileComplete } = useAuth();
 
   function handleEnrollClick() {
-    if (!isProfileComplete) {
+    if (!isAuthorized) {
+      openModal("login");
+    }
+    if (isAuthorized && !isProfileComplete) {
       openModal("confirm");
     }
   }

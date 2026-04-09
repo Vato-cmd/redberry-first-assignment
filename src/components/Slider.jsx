@@ -8,6 +8,7 @@ import ArrowLeftWhite from "../assets/Arrowleft-white.png";
 import ArrowLeftGreyed from "../assets/Arrowleft-greyed.png";
 import ArrowRightWhite from "../assets/Arrowright-white.png";
 import ArrowRightGreyed from "../assets/Arrowright-greyed.png";
+import disabledArrow from "../assets/disabledArrow.svg";
 
 const slides = [
   {
