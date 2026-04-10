@@ -11,6 +11,7 @@ export default function Summary({
   courseId,
   selectedSessionType,
   onEnrollSuccess,
+  courseTitle,
 }) {
   const { openModal } = useModal();
   const { isAuthorized, isProfileComplete } = useAuth();
@@ -28,7 +29,9 @@ export default function Summary({
     try {
       await enroll(courseId, selectedSessionType.courseScheduleId);
       await onEnrollSuccess?.();
-      openModal("enroll-confirmed");
+      openModal("enroll-confirmed", {
+        title: courseTitle,
+      });
     } catch (error) {
       if (error.status === 409) {
         openModal("conflict", {

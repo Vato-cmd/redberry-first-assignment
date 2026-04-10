@@ -4,8 +4,13 @@ import Modal from "../UI/Modal";
 import circledBlueTick from "../../assets/circledBlueTick.svg";
 import Button from "../UI/Button";
 
-export default function EnrollmentConfirmedModal() {
-  const { closeModal } = useModal();
+export default function EnrollmentConfirmedModal({}) {
+  const { closeModal, modal } = useModal();
+  console.log(modal);
+
+  const courseTitle = modal?.props?.title;
+  console.log(courseTitle);
+
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115">
       <div className="text-center flex flex-col items-center p-15">
@@ -18,8 +23,8 @@ export default function EnrollmentConfirmedModal() {
           Enrollment Confirmed!
         </h1>
         <p className="text-[#3D3D3D] text-[20px] font-medium w-89 mb-10">
-          You've successfully enrolled to the “
-          <strong>{currentCourse.title}</strong>” Course!
+          You've successfully enrolled to the “<strong>{courseTitle}</strong>”
+          Course!
         </p>
         <div className=" flex gap-2">
           <Button

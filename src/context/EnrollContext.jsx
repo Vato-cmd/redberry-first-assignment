@@ -4,6 +4,8 @@ import {
   completeEnrolledCourse,
   deleteEnrolledCourse,
 } from "../api/enroll";
+import { submitReview as submitReviewApi } from "../api/review";
+
 import { useAuth } from "./AuthContext";
 
 const EnrollContext = createContext(null);
@@ -15,6 +17,15 @@ export function EnrollProvider({ children }) {
 
   const { token } = useAuth();
   console.log(enrolledCourses);
+
+  async function submitReview({ courseId, rating }) {
+    try {
+      const response = await submitReviewApi({ courseId, rating, token });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async function deleteCourse(enrollmentId) {
     try {
@@ -64,6 +75,7 @@ export function EnrollProvider({ children }) {
         enrollError,
         completeCourse,
         deleteCourse,
+        submitReview,
       }}
     >
       {children}

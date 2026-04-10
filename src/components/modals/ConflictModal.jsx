@@ -1,8 +1,11 @@
-import { useModal } from "../../context/ModalContext";
 import Modal from "../UI/Modal";
+
+import { useModal } from "../../context/ModalContext";
 import { useEnroll } from "../../context/EnrollContext";
+
 import conflict from "../../assets/conflict.svg";
 import Button from "../UI/Button";
+
 import {
   formatWeekdayLabel,
   formatTimeSlotLabel,

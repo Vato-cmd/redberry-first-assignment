@@ -1,17 +1,40 @@
 import { useState } from "react";
 import StarRating from "./UI/StarRating";
+import { useEnroll } from "../context/EnrollContext";
 
-export default function ReviewSection() {
+export default function ReviewSection({ courseId }) {
   const [rating, setRating] = useState(0);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const { submitReview } = useEnroll();
+
+  async function handleRatingSubmit(starValue) {
+    try {
+      setError("");
+      setIsSubmitting(true);
+      setRating(starValue);
+      await submitReview({ courseId, rating: starValue });
+      setIsSubmitted(true);
+    } catch (error) {
+      setError(error.message || "Failed to submit review");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
-    <div className="flex flex-col ga-2">
+    <div className="flex flex-col gap-2 mt-9.75 items-center">
       <p className="text-[#666666] text-[20px] font-medium">
-        Rate your experience
+        {isSubmitted ? "Thanks for your review" : "Rate your experience"}
       </p>
-      <StarRating value={rating} onChange={setRating} />
+      <StarRating
+        value={rating}
+        onChange={handleRatingSubmit}
+        disabled={isSubmitted}
+      />
 
-      <p>Selected rating: {rating}</p>
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 }

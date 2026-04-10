@@ -107,10 +107,12 @@ export default function CourseDetailsPage() {
                 enrollment={course.enrollment}
                 course={course}
                 onEnrollDelete={handleEnrollmentDelete}
+                courseId={course.id}
               />
             ) : (
               <Schedule
                 courseId={id}
+                courseTitle={course.title}
                 basePrice={course.basePrice}
                 onEnrollSuccess={loadCourseDetails}
               />

@@ -11,6 +11,7 @@ import retake from "../assets/retake.svg";
 
 import { useModal } from "../context/ModalContext";
 import StarRating from "./UI/StarRating";
+import ReviewSection from "./ReviewSection";
 
 import {
   formatSessionTypeName,
@@ -23,6 +24,7 @@ export default function EnrolledCourseCard({
   onEnrollSuccess,
   onEnrollDelete,
   course,
+  courseId,
 }) {
   const { timeRange } = formatTimeSlotLabel(enrollment.schedule.timeSlot.label);
   const { completeCourse, deleteCourse } = useEnroll();
@@ -96,13 +98,18 @@ export default function EnrolledCourseCard({
         </div>
       </div>
       {progress === 100 ? (
-        <Button
-          onClick={handleDelete}
-          className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5"
-        >
-          Retake Course
-          <img className="w-6 h-6" src={retake} alt="retake logo" />
-        </Button>
+        <>
+          <Button
+            onClick={handleDelete}
+            className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5"
+          >
+            Retake Course
+            <img className="w-6 h-6" src={retake} alt="retake logo" />
+          </Button>
+          <div>
+            <ReviewSection courseId={courseId} />
+          </div>
+        </>
       ) : (
         <>
           <Button
@@ -112,7 +119,6 @@ export default function EnrolledCourseCard({
             Complete Course
             <img className="w-6 h-6" src={thickTick} alt="tick" />
           </Button>
-          <StarRating />
         </>
       )}
     </div>

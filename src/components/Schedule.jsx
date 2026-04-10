@@ -30,7 +30,12 @@ import {
   TriangleAlert,
 } from "lucide-react";
 
-export default function Schedule({ courseId, basePrice, onEnrollSuccess }) {
+export default function Schedule({
+  courseId,
+  basePrice,
+  onEnrollSuccess,
+  courseTitle,
+}) {
   const {
     weeklySchedules,
     selectedWeeklyScheduleId,
@@ -298,6 +303,7 @@ export default function Schedule({ courseId, basePrice, onEnrollSuccess }) {
         totalPrice={totalPrice}
         isDisabled={!selectedSessionType}
         onEnrollSuccess={onEnrollSuccess}
+        courseTitle={courseTitle}
       />
     </div>
   );
