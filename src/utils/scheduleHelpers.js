@@ -56,7 +56,7 @@ export function formatWeekdayLabel(label) {
   const cleanWeekDays = label.split(" - ");
   const firstDay = cleanWeekDays[0].slice(0, 3);
   const secondDay = cleanWeekDays[cleanWeekDays.length - 1].slice(0, 3);
-  const joinedDays = `${firstDay}-${secondDay}`;
+  const joinedDays = `${firstDay} - ${secondDay}`;
 
   return joinedDays;
 }

@@ -7,6 +7,7 @@ import location from "../assets/location.svg";
 import hibryd from "../assets/hibryd.svg";
 import inperson from "../assets/inperson.svg";
 import thickTick from "../assets/thick-tick.svg";
+import retake from "../assets/retake.svg";
 
 import { useModal } from "../context/ModalContext";
 
@@ -82,13 +83,20 @@ export default function EnrolledCourseCard({
           ></div>
         </div>
       </div>
-      <Button
-        onClick={handleComplete}
-        className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5"
-      >
-        Complete Course
-        <img className="w-6 h-6" src={thickTick} alt="tick" />
-      </Button>
+      {progress === 100 ? (
+        <Button className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5">
+          Retake Course
+          <img className="w-6 h-6" src={retake} alt="retake logo" />
+        </Button>
+      ) : (
+        <Button
+          onClick={handleComplete}
+          className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5"
+        >
+          Complete Course
+          <img className="w-6 h-6" src={thickTick} alt="tick" />
+        </Button>
+      )}
     </div>
   );
 }
