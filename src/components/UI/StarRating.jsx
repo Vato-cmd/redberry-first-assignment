@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Star } from "lucide-react";
 import Button from "./Button";
 
-export default function StarRating({ value, onChange, disabled = false }) {
+export default function StarRating({ value, onChange }) {
   const [hoveredRating, setHoveredRating] = useState(0);
-  const [selectedRating, setSelectedRating] = useState(0);
 
-  const activeRating = hoveredRating || selectedRating;
+  const activeRating = hoveredRating || value;
 
   return (
     <div className="flex gap-4.5" onMouseLeave={() => setHoveredRating(0)}>
@@ -18,7 +17,7 @@ export default function StarRating({ value, onChange, disabled = false }) {
             key={starValue}
             className={`w-12.5 h-12.5 cursor-pointer ${isActive ? "fill-[#F4A316] text-[#F4A316]" : "text-gray-300"}`}
             onMouseEnter={() => setHoveredRating(starValue)}
-            onClick={() => setSelectedRating(starValue)}
+            onClick={() => onChange?.(starValue)}
           />
         );
       })}
