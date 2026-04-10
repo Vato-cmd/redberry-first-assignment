@@ -1,5 +1,4 @@
 import { useModal } from "../../context/ModalContext";
-import { useCourse } from "../../context/CourseContext";
 import Modal from "../UI/Modal";
 
 import success from "../../assets/success.svg";

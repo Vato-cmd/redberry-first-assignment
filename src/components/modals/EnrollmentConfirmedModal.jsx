@@ -1,5 +1,4 @@
 import { useModal } from "../../context/ModalContext";
-import { useCourse } from "../../context/CourseContext";
 import Modal from "../UI/Modal";
 
 import circledBlueTick from "../../assets/circledBlueTick.svg";
@@ -7,7 +6,6 @@ import Button from "../UI/Button";
 
 export default function EnrollmentConfirmedModal() {
   const { closeModal } = useModal();
-  const { currentCourse } = useCourse();
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115">
       <div className="text-center flex flex-col items-center p-15">

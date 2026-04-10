@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getCourseById } from "../api/courses";
 import { useAuth } from "../context/AuthContext";
-import { useCourse } from "../context/CourseContext";
 
 import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
@@ -19,12 +18,10 @@ export default function CourseDetailsPage() {
   const [course, setCourse] = useState(null);
 
   const { isAuthorized, isProfileComplete, token } = useAuth();
-  const { setCurrentCourse } = useCourse();
 
   async function loadCourseDetails() {
     const data = await getCourseById(id, token);
     setCourse(data);
-    setCurrentCourse(data);
   }
   console.log(course);
 

@@ -7,7 +7,6 @@ import star from "../assets/star.svg";
 export default function CoursesInProgress() {
   const [coursesInProgress, setCoursesInProgress] = useState([]);
   const [error, setError] = useState("");
-
   const { token, isAuthorized } = useAuth();
 
   useEffect(() => {
@@ -25,7 +24,6 @@ export default function CoursesInProgress() {
 
     loadCoursesInProgress();
   }, [token, isAuthorized]);
-  console.log(coursesInProgress[0]);
 
   return (
     <div className="w-391.5 mx-auto mt-16">
@@ -84,7 +82,7 @@ export default function CoursesInProgress() {
                   </div>
                 </div>
                 <Link
-                  //   to={`/courses/${enrolledCourse.course.id}`}
+                  to={`/courses/${enrolledCourse.course.id}`}
                   className="flex justify-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg py-3 px-4 h-12 w-22.5 hover:text-[#FFFF] hover:border-[#4f46e5] hover:bg-[#4f46e5]"
                 >
                   View
