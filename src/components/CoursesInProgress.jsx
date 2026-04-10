@@ -56,7 +56,10 @@ export default function CoursesInProgress() {
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2.25">
                     <p className="text-[#8A8A8A] text-[14px] font-medium">
-                      Lecturer {enrolledCourse.course.instructor.name}
+                      Lecturer{" "}
+                      <span className="text-[#666666] font-medium">
+                        {enrolledCourse.course.instructor.name}
+                      </span>
                     </p>
                     <img
                       className="w-[16.62px] h-[16.62px]"

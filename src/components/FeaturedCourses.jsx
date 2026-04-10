@@ -88,7 +88,9 @@ export default function FeaturedCourses() {
                   </h2>
                 </div>
 
-                <Button className="rounded-lg bg-[#4F46E5] text-white font-medium text-[20px] py-4.25 px-6.25">
+                <Button
+                  className={`rounded-lg bg-[#4F46E5] text-white font-medium text-[20px] py-4.25 px-6.25 border-2 hover:bg-[#FFFF] hover:text-[#4F46E5] hover:border-[#958FEF]`}
+                >
                   Details
                 </Button>
               </div>
