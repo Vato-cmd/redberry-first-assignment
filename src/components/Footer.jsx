@@ -1,12 +1,12 @@
 import mainlogo from "../assets/logo.svg";
-import facebook from "../assets/Facebook.png";
-import instagram from "../assets/Instagram.png";
-import linkedin from "../assets/LinkedIn.png";
-import twitter from "../assets/Twitter.png";
-import youtube from "../assets/YouTube.png";
-import phone from "../assets/phone.png";
-import location from "../assets/location.png";
-import contact from "../assets/contact.png";
+import facebook from "../assets/Facebook.svg";
+import instagram from "../assets/Instagram.svg";
+import linkedin from "../assets/LinkedIn.svg";
+import twitter from "../assets/Twitter.svg";
+import youtube from "../assets/YouTube.svg";
+import phone from "../assets/phone.svg";
+import location from "../assets/location.svg";
+import envelope from "../assets/envelope.svg";
 
 export default function Footer() {
   return (
@@ -50,7 +50,7 @@ export default function Footer() {
               Contact
             </h2>
             <p className="flex items-center gap-1.5">
-              <img src={contact} alt="contact email" />
+              <img src={envelope} alt="contact email" />
               contact@company.com
             </p>
             <p className="flex items-center gap-1.5">

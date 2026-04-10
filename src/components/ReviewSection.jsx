@@ -17,7 +17,12 @@ export default function ReviewSection({ courseId }) {
       await submitReview({ courseId, rating: starValue });
       setIsSubmitted(true);
     } catch (error) {
-      setError(error.message || "Failed to submit review");
+      const message = error.message || "Failed to submit review";
+      setError(message);
+
+      if (message.toLowerCase().includes("already rated")) {
+        setIsSubmitted(true);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -31,7 +36,7 @@ export default function ReviewSection({ courseId }) {
       <StarRating
         value={rating}
         onChange={handleRatingSubmit}
-        disabled={isSubmitted}
+        disabled={isSubmitted || isSubmitting}
       />
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
