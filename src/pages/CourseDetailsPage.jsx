@@ -17,6 +17,7 @@ import EnrolledCourseCard from "../components/EnrolledCourseCard";
 export default function CourseDetailsPage() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
+
   const { isAuthorized, isProfileComplete, token } = useAuth();
   const { setCurrentCourse } = useCourse();
 
@@ -26,6 +27,13 @@ export default function CourseDetailsPage() {
     setCurrentCourse(data);
   }
   console.log(course);
+
+  function handleEnrollmentDelete() {
+    setCourse((prev) => ({
+      ...prev,
+      enrollment: null,
+    }));
+  }
 
   useEffect(() => {
     loadCourseDetails();
@@ -101,6 +109,7 @@ export default function CourseDetailsPage() {
                 onEnrollSuccess={loadCourseDetails}
                 enrollment={course.enrollment}
                 course={course}
+                onEnrollDelete={handleEnrollmentDelete}
               />
             ) : (
               <Schedule

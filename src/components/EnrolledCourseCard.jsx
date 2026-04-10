@@ -20,12 +20,14 @@ import { useEnroll } from "../context/EnrollContext";
 export default function EnrolledCourseCard({
   enrollment,
   onEnrollSuccess,
+  onEnrollDelete,
   course,
 }) {
   const { timeRange } = formatTimeSlotLabel(enrollment.schedule.timeSlot.label);
-  const { completeCourse } = useEnroll();
+  const { completeCourse, deleteCourse } = useEnroll();
   const { openModal } = useModal();
   const progress = enrollment.progress;
+
   async function handleComplete() {
     try {
       await completeCourse(enrollment.id);
@@ -34,6 +36,15 @@ export default function EnrolledCourseCard({
         title: course.title,
       });
     } catch (error) {}
+  }
+
+  async function handleDelete() {
+    try {
+      await deleteCourse(enrollment.id);
+      await onEnrollDelete?.();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -84,7 +95,10 @@ export default function EnrolledCourseCard({
         </div>
       </div>
       {progress === 100 ? (
-        <Button className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5">
+        <Button
+          onClick={handleDelete}
+          className="rounded-lg bg-[#4F46E5] text-[20px] font-medium text-[#FFFFFF] h-14.5 flex items-center justify-center gap-2.5"
+        >
           Retake Course
           <img className="w-6 h-6" src={retake} alt="retake logo" />
         </Button>

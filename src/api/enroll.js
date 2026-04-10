@@ -1,5 +1,19 @@
 const BASE_URL = "https://api.redclass.redberryinternship.ge/api";
 
+export async function deleteEnrolledCourse({ enrollmentId, token }) {
+  const response = await fetch(`${BASE_URL}/enrollments/${enrollmentId}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to delete the course");
+  }
+}
+
 export async function completeEnrolledCourse({ courseId, token }) {
   const response = await fetch(`${BASE_URL}/enrollments/${courseId}/complete`, {
     method: "PATCH",
