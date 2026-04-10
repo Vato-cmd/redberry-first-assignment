@@ -8,9 +8,11 @@ import hibryd from "../assets/hibryd.svg";
 import inperson from "../assets/inperson.svg";
 import thickTick from "../assets/thick-tick.svg";
 import retake from "../assets/retake.svg";
+import cross from "../assets/cross.svg";
 
 import { useModal } from "../context/ModalContext";
 import StarRating from "./UI/StarRating";
+
 import ReviewSection from "./ReviewSection";
 
 import {
@@ -106,7 +108,12 @@ export default function EnrolledCourseCard({
             Retake Course
             <img className="w-6 h-6" src={retake} alt="retake logo" />
           </Button>
-          <div>
+          <div className="relative bg-[#FFFFFF] rounded-lg mt-9.75 h-43">
+            <img
+              className="absolute right-2.5 top-2.5 w-[12.5px] h-[12.5px]"
+              src={cross}
+              alt="cross logo"
+            />
             <ReviewSection courseId={courseId} />
           </div>
         </>
