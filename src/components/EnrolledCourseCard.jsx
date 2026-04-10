@@ -32,13 +32,14 @@ export default function EnrolledCourseCard({
   const { completeCourse, deleteCourse } = useEnroll();
   const { openModal } = useModal();
   const progress = enrollment.progress;
-
+  console.log(courseId);
   async function handleComplete() {
     try {
       await completeCourse(enrollment.id);
       await onEnrollSuccess?.();
       openModal("success", {
         title: course.title,
+        courseId: courseId,
       });
     } catch (error) {}
   }
