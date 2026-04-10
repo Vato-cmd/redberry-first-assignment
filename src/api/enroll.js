@@ -10,8 +10,25 @@ export async function deleteEnrolledCourse({ enrollmentId, token }) {
   });
 
   if (!response.ok) {
-    throw new Error(data.message || "Failed to delete the course");
+    throw new Error("Failed to delete the course");
   }
+}
+
+export async function getCoursesInProgress({ token }) {
+  const response = await fetch(`${BASE_URL}/courses/in-progress`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to fetch in-progress courses");
+  }
+  return data;
 }
 
 export async function completeEnrolledCourse({ courseId, token }) {
@@ -42,8 +59,8 @@ export async function enrollToTheCourse({
   const response = await fetch(`${BASE_URL}/enrollments`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
