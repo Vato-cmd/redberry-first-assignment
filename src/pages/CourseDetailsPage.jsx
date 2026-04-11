@@ -7,6 +7,7 @@ import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
 import clock from "../assets/clock.svg";
 import developmentLogo from "../assets/development-logo.svg";
+import { Code2, Palette, TrendingUp, GitFork, Lightbulb } from "lucide-react";
 
 import Schedule from "../components/Schedule";
 import IncompleteProfileComponent from "../components/incompleteProfileComponent";
@@ -74,18 +75,14 @@ export default function CourseDetailsPage() {
                   {avgRating.toFixed(1)}
                 </p>
               </div>
-              <div className="bg-[#FFFFFF] px-3 py-2 rounded-xl">
-                <p className="flex items-center gap-2.5 text-[#666666] font-medium">
-                  <img
-                    className="w-6 h-6"
-                    src={developmentLogo}
-                    alt="development"
-                  />
+              <div className="bg-[#FFFFFF] px-3 py-2 rounded-xl cursor-pointer  group hover:bg-[#dddbfa] transform-all duration-300 ease-in-out">
+                <p className="flex items-center gap-2.5 text-[#666666] font-medium group-hover:text-[#281ED2]">
+                  <Code2 className="w-6 h-6" />
                   {course.category.name}
                 </p>
               </div>
             </div>
-            <div className="inline-flex items-center gap-3 text-[16px] font-medium text-[#666666] bg-[#FFFFFF] px-3 py-2 rounded-xl mb-4.5 cursor-pointer hover:text-[#4F46E5] hover:bg-[#dddbfa]">
+            <div className="inline-flex items-center gap-3 text-[16px] font-medium text-[#666666] bg-[#FFFFFF] px-3 py-2 rounded-xl mb-4.5 cursor-pointer hover:text-[#281ED2] hover:bg-[#dddbfa] transform-all duration-300 ease-in-out">
               <img
                 className="w-7.5 h-7.5 rounded object-cover"
                 src={course.instructor.avatar}

@@ -10,6 +10,17 @@ export async function getCourses() {
   return data.data;
 }
 
+export async function getCategories() {
+  const response = await fetch(`${BASE_URL}/categories`);
+
+  if (!response.ok) {
+    throw new Error("Failed to load the categories");
+  }
+
+  const data = await response.json();
+  return data.data;
+}
+
 export async function getFeaturedCourses() {
   const response = await fetch(`${BASE_URL}/courses/featured`);
 

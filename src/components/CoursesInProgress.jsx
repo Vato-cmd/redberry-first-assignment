@@ -7,6 +7,7 @@ import { calculateAvgRating } from "../utils/calculateAvgRating";
 import { usePanel } from "../context/EnrolledCoursesPanelContext.jsx";
 
 import star from "../assets/star.svg";
+import Button from "./UI/Button.jsx";
 
 export default function CoursesInProgress() {
   const [coursesInProgress, setCoursesInProgress] = useState([]);
@@ -75,7 +76,8 @@ export default function CoursesInProgress() {
         {isLoading && <p>Loading...</p>}
         {coursesInProgress.slice(0, 3).map((enrolledCourse) => {
           return (
-            <div
+            <Link
+              to={`/courses/${enrolledCourse.course.id}`}
               key={enrolledCourse.id}
               className="bg-[#FFFFFF] rounded-xl p-5 w-126.5 h-54.75 mt-8"
             >
@@ -93,9 +95,9 @@ export default function CoursesInProgress() {
                         {enrolledCourse.course.instructor.name}
                       </span>
                     </p>
-                    <p className="flex text-[#525252] text-[14px] font-medium gap-1">
+                    <p className="flex items-center text-[#525252] text-[14px] font-medium gap-1">
                       <img
-                        className="w-[16.62px] h-[16.62px]"
+                        className="w-[16.62px] h-[16.62px] "
                         src={star}
                         alt="star icon"
                       />
@@ -119,14 +121,11 @@ export default function CoursesInProgress() {
                     ></div>
                   </div>
                 </div>
-                <Link
-                  to={`/courses/${enrolledCourse.course.id}`}
-                  className="flex justify-center items-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg  h-12 w-22.5 rounded-2 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#281ED2]"
-                >
+                <Button className="flex justify-center items-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg  h-12 w-22.5 rounded-2 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#281ED2]">
                   View
-                </Link>
+                </Button>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
