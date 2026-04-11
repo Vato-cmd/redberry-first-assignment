@@ -73,7 +73,7 @@ export default function CoursesInProgress() {
       <div className="flex gap-6">
         {error && <p className="text-red-500 mb-4">{error}</p>}
         {isLoading && <p>Loading...</p>}
-        {coursesInProgress.map((enrolledCourse) => {
+        {coursesInProgress.slice(0, 3).map((enrolledCourse) => {
           return (
             <div
               key={enrolledCourse.id}
