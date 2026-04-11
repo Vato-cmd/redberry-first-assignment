@@ -14,7 +14,7 @@ export default function BreadCrumbs({ items = [] }) {
               />
             )}
             <span
-              className={`${index === items.length - 1 ? "text-[#4F46E5]" : "text-[#666666]"} text-[18px] font-medium w-12.75`}
+              className={`${index === items.length - 1 ? "text-[#4F46E5]" : "text-[#666666]"} text-[18px] font-medium `}
             >
               {item}
             </span>

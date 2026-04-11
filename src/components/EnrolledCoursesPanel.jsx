@@ -86,96 +86,100 @@ export default function EnrolledCoursesPanel() {
           <div className="ml-[73.5px] mr-[97.5px]">
             {enrolledCourses.map((enrolledCourse) => {
               return (
-                <div
+                <Link
                   key={enrolledCourse.id}
-                  className="bg-[#FFFFFF] rounded-xl p-5 w-155.75 h-73.75 mt-8 hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]"
+                  to={`/courses/${enrolledCourse.course.id}`}
+                  onClick={closeEnrolledCoursesPanel}
                 >
-                  <div className="flex gap-4 mb-2">
-                    <img
-                      src={enrolledCourse.course.image}
-                      alt="enrolled course image"
-                      className="w-67.25 h-47.75 rounded-[10px] object-cover"
-                    />
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-2.25">
-                        <p className="text-[#8A8A8A] text-[14px] font-medium">
-                          Lecturer{" "}
-                          <span className="text-[#666666] font-medium">
-                            {enrolledCourse.course.instructor.name}
-                          </span>
+                  <div className="bg-[#FFFFFF] rounded-xl p-5 w-155.75 h-73.75 mt-8 hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]">
+                    <div className="flex gap-4 mb-2">
+                      <img
+                        src={enrolledCourse.course.image}
+                        alt="enrolled course image"
+                        className="w-67.25 h-47.75 rounded-[10px] object-cover"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2.25">
+                          <p className="text-[#8A8A8A] text-[14px] font-medium">
+                            Lecturer{" "}
+                            <span className="text-[#666666] font-medium">
+                              {enrolledCourse.course.instructor.name}
+                            </span>
+                          </p>
+                          <p className="flex items-center text-[#525252] text-[14px] font-medium gap-1">
+                            <img
+                              className="w-[16.62px] h-[16.62px]"
+                              src={star}
+                              alt="star icon"
+                            />
+                            {enrolledCourse.course.avgRating}
+                          </p>
+                        </div>
+                        <p className="text-[#141414] text-[20px] font-semibold mb-2 h-12 w-64.25">
+                          {enrolledCourse.course.title}
                         </p>
-                        <p className="flex items-center text-[#525252] text-[14px] font-medium gap-1">
-                          <img
-                            className="w-[16.62px] h-[16.62px]"
-                            src={star}
-                            alt="star icon"
-                          />
-                          {enrolledCourse.course.avgRating}
-                        </p>
-                      </div>
-                      <p className="text-[#141414] text-[20px] font-semibold mb-2 h-12 w-64.25">
-                        {enrolledCourse.course.title}
-                      </p>
-                      <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
-                        <img
-                          className="w-4 h-4"
-                          src={calendar}
-                          alt="calendar"
-                        />
-                        {enrolledCourse.schedule.weeklySchedule.label.replace(
-                          " - ",
-                          "-",
-                        )}
-                      </p>
-                      <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
-                        <img className="w-4 h-4" src={clock} alt="calendar" />
-                        {enrolledCourse.schedule.timeSlot.label
-                          .replace("(", "")
-                          .replace(")", "")}
-                      </p>
-
-                      <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
-                        <img
-                          className="w-4 h-4"
-                          src={inperson}
-                          alt="calendar"
-                        />
-                        {formatSessionTypeName(
-                          enrolledCourse.schedule.sessionType.name,
-                        ).replace("-", " ")}
-                      </p>
-                      <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
-                        {enrolledCourse.schedule.location && (
+                        <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
                           <img
                             className="w-4 h-4"
-                            src={location}
+                            src={calendar}
                             alt="calendar"
                           />
-                        )}
-                        {enrolledCourse.schedule.location}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-[#141414] text-3 font-medium mb-1">
-                        {enrolledCourse.progress}% Complete
-                      </p>
-                      <div className="bg-[#DDDBFA] w-110.5 h-[15.126176834106445px] rounded-[30px] ">
-                        <div
-                          className="bg-[#4F46E5] h-full rounded-[30px]"
-                          style={{ width: `${enrolledCourse.progress}%` }}
-                        ></div>
+                          {enrolledCourse.schedule.weeklySchedule.label.replace(
+                            " - ",
+                            "-",
+                          )}
+                        </p>
+                        <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
+                          <img className="w-4 h-4" src={clock} alt="calendar" />
+                          {enrolledCourse.schedule.timeSlot.label
+                            .replace("(", "")
+                            .replace(")", "")}
+                        </p>
+
+                        <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
+                          <img
+                            className="w-4 h-4"
+                            src={inperson}
+                            alt="calendar"
+                          />
+                          {formatSessionTypeName(
+                            enrolledCourse.schedule.sessionType.name,
+                          ).replace("-", " ")}
+                        </p>
+                        <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
+                          {enrolledCourse.schedule.location && (
+                            <img
+                              className="w-4 h-4"
+                              src={location}
+                              alt="calendar"
+                            />
+                          )}
+                          {enrolledCourse.schedule.location}
+                        </p>
                       </div>
                     </div>
-                    <Link
-                      to={`/courses/${enrolledCourse.course.id}`}
-                      className="flex items-center justify-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg h-12 w-29.25 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#4f46e5]"
-                    >
-                      View
-                    </Link>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-[#141414] text-3 font-medium mb-1">
+                          {enrolledCourse.progress}% Complete
+                        </p>
+                        <div className="bg-[#DDDBFA] w-110.5 h-[15.126176834106445px] rounded-[30px] ">
+                          <div
+                            className="bg-[#4F46E5] h-full rounded-[30px]"
+                            style={{ width: `${enrolledCourse.progress}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                      <Link
+                        to={`/courses/${enrolledCourse.course.id}`}
+                        onClick={closeEnrolledCoursesPanel}
+                        className="flex items-center justify-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg h-12 w-29.25 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#4f46e5]"
+                      >
+                        View
+                      </Link>
+                    </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
