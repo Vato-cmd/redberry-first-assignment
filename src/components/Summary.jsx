@@ -61,7 +61,9 @@ export default function Summary({
       </div>
       <div className="flex justify-between mb-8 text-[#8A8A8A] text-[16px] font-medium">
         <p>Session Type</p>
-        <p className="text-[#292929]">+ ${sessionExtra}</p>
+        <p className="text-[#292929]">
+          {sessionExtra === "Included" ? sessionExtra : `+ $${sessionExtra}`}
+        </p>
       </div>
       {enrollError && <p className="text-red-500 text-[14px]">{enrollError}</p>}
       <Button
