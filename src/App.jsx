@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ModalRoot from "./components/modals/ModalRoot";
+import EnrolledCoursesPanel from "./components/EnrolledCoursesPanel";
 
 import HomePage from "./pages/HomePage";
 import CoursesPage from "./pages/CoursesPage";
@@ -20,7 +21,7 @@ export default function App() {
         </Routes>
         <Footer />
       </div>
-
+      <EnrolledCoursesPanel />
       <ModalRoot />
     </>
   );

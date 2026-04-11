@@ -7,6 +7,7 @@ import { ModalProvider } from "./context/ModalContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { EnrollProvider } from "./context/EnrollContext.jsx";
 import { CourseProvider } from "./context/CourseContext.jsx";
+import { EnrolledCoursesPanelProvider } from "./context/EnrolledCoursesPanelContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -15,7 +16,9 @@ createRoot(document.getElementById("root")).render(
         <EnrollProvider>
           <CourseProvider>
             <ModalProvider>
-              <App />
+              <EnrolledCoursesPanelProvider>
+                <App />
+              </EnrolledCoursesPanelProvider>
             </ModalProvider>
           </CourseProvider>
         </EnrollProvider>
