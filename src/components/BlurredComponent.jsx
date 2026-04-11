@@ -1,5 +1,7 @@
 import blurredImage from "../assets/blurred-image.svg";
 import star from "../assets/star.svg";
+import lock from "../assets/Lock.svg";
+
 import Button from "./UI/Button";
 
 export default function BlurredComponent() {
@@ -8,7 +10,7 @@ export default function BlurredComponent() {
       <h1 className="text-[#000000] text-[40px] font-semibold ">
         Continue Learning
       </h1>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center mb-8">
         <p className="text-[#3D3D3D] text-[18px] font-medium">
           Pick up where you left
         </p>
@@ -16,12 +18,23 @@ export default function BlurredComponent() {
           See All
         </p>
       </div>
-      <div className="flex gap-6">
+      <div className="flex gap-6 relative">
+        <div className="border-2 border-[#ADADAD] bg-[#FFFFFF] w-104.5 h-58.25 rounded-xl py-8 px-14 flex flex-col items-center justify-center absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+          <div className="bg-[#DDDBFA] rounded-full p-5 w-18.5 h-19.25 mb-3">
+            <img className="w-9.25 h-9.25" src={lock} alt="lock icon" />
+          </div>
+          <p className="text-[16px] font-medium text-[#0A0836] mb-6">
+            Sign in to track your learning progress
+          </p>
+          <Button className="bg-[#4F46E5] rounded-lg text-[#F5F5F5] text-[16px] font-medium  h-[42px] w-[83px] ">
+            Log In
+          </Button>
+        </div>
         {[1, 2, 3].map((blurredContent, index) => {
           return (
             <div
               key={index}
-              className="bg-[#FFFFFF] rounded-xl p-5 w-126.5 h-54.75 mt-8"
+              className="bg-[#FFFFFF] rounded-xl p-5 w-126.5 h-54.75"
             >
               <div className="flex gap-4 mb-2">
                 <img
@@ -63,7 +76,7 @@ export default function BlurredComponent() {
                     ></div>
                   </div>
                 </div>
-                <Button className="flex justify-center items-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg  h-12 w-22.5 rounded-2 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#281ED2]">
+                <Button className="flex justify-center items-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium h-12 w-22.5 rounded-lg hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#281ED2]">
                   View
                 </Button>
               </div>
