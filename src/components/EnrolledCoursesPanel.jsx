@@ -3,6 +3,8 @@ import { getEnrolledCourses } from "../api/enroll";
 import { useAuth } from "../context/AuthContext";
 import { usePanel } from "../context/EnrolledCoursesPanelContext";
 import { formatSessionTypeName } from "../utils/scheduleHelpers";
+import { getCourseById } from "../api/courses";
+import { calculateAvgRating } from "../utils/calculateAvgRating";
 
 import star from "../assets/star.svg";
 import calendar from "../assets/calendar.svg";
@@ -27,7 +29,27 @@ export default function EnrolledCoursesPanel() {
       try {
         setError("");
         const data = await getEnrolledCourses(token);
-        setEnrolledCourses(data.data);
+
+        const enrichedCourses = await Promise.all(
+          data.data.map(async (enrolledCourse) => {
+            const fullCourse = await getCourseById(
+              enrolledCourse.course.id,
+              token,
+            );
+
+            const avgRating = calculateAvgRating(fullCourse.reviews);
+
+            return {
+              ...enrolledCourse,
+              course: {
+                ...enrolledCourse.course,
+                avgRating,
+              },
+            };
+          }),
+        );
+
+        setEnrolledCourses(enrichedCourses);
       } catch (error) {
         setError(error.message || "Failed to load enrolled courses");
       }
@@ -80,7 +102,7 @@ export default function EnrolledCoursesPanel() {
                           {enrolledCourse.course.instructor.name}
                         </span>
                       </p>
-                      <p className="flex text-[#525252] text-[14px] font-medium gap-1">
+                      <p className="flex items-center text-[#525252] text-[14px] font-medium gap-1">
                         <img
                           className="w-[16.62px] h-[16.62px]"
                           src={star}
