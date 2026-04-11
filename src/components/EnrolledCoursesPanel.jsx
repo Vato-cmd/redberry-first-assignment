@@ -6,8 +6,6 @@ import { formatSessionTypeName } from "../utils/scheduleHelpers";
 import { getCourseById } from "../api/courses";
 import { calculateAvgRating } from "../utils/calculateAvgRating";
 
-import Button from "./UI/Button";
-
 import star from "../assets/star.svg";
 import calendar from "../assets/calendar.svg";
 import clock from "../assets/clock.svg";
