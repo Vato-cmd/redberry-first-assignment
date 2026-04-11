@@ -1,14 +1,10 @@
 import star from "../assets/star.svg";
 import Button from "./UI/Button";
-import { getFeaturedCourses } from "../api/courses";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useCourse } from "../context/CourseContext";
 
 export default function FeaturedCourses() {
-  const [courses, setCourses] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
   const {
     featuredCourses,
     loadFeaturedCourses,
