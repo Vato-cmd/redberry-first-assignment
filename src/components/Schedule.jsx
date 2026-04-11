@@ -275,8 +275,8 @@ export default function Schedule({
                       {defaultSessionType.label === "Online"
                         ? "Included"
                         : defaultSessionType.label === "In-Person"
-                          ? "+30$"
-                          : "+50$"}
+                          ? "+ 30$"
+                          : "+ 50$"}
                     </p>
                   </div>
                 )}
