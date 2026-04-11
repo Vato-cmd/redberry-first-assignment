@@ -4,6 +4,7 @@ import { getCourseById } from "../api/courses";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import { calculateAvgRating } from "../utils/calculateAvgRating";
+import { usePanel } from "../context/EnrolledCoursesPanelContext.jsx";
 
 import star from "../assets/star.svg";
 
@@ -12,7 +13,7 @@ export default function CoursesInProgress() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { token, isAuthorized } = useAuth();
-  console.log(coursesInProgress);
+  const { openEnrolledCoursesPanel } = usePanel();
 
   useEffect(() => {
     if (!isAuthorized || !token) return;
@@ -62,7 +63,10 @@ export default function CoursesInProgress() {
         <p className="text-[#3D3D3D] text-[18px] font-medium">
           Pick up where you left
         </p>
-        <p className="text-[#4F46E5] text-[20px] font-medium underline underline-offset-[25%] cursor-pointer">
+        <p
+          onClick={openEnrolledCoursesPanel}
+          className="text-[#4F46E5] text-[20px] font-medium underline underline-offset-[25%] cursor-pointer"
+        >
           See All
         </p>
       </div>
@@ -117,7 +121,7 @@ export default function CoursesInProgress() {
                 </div>
                 <Link
                   to={`/courses/${enrolledCourse.course.id}`}
-                  className="flex justify-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg py-3 px-4 h-12 w-22.5 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#4f46e5]"
+                  className="flex justify-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg py-3 px-4 h-12 w-22.5 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#281ED2]"
                 >
                   View
                 </Link>

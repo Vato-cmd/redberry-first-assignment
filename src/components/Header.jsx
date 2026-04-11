@@ -7,11 +7,14 @@ import profileGreen from "../assets/profile-green.svg";
 import { Sparkles, BookOpen } from "lucide-react";
 import { useModal } from "../context/ModalContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
+import { usePanel } from "../context/EnrolledCoursesPanelContext.jsx";
+
 import { Link } from "react-router-dom";
 
 export default function Header() {
   const { openModal } = useModal();
-  const { isAuthorized, user, isProfileComplete } = useAuth();
+  const { isAuthorized, isProfileComplete } = useAuth();
+  const { openEnrolledCoursesPanel } = usePanel();
 
   return (
     <header className="w-full h-27 border-b border-[#D1D1D1] py-6 px-44.25">
@@ -52,13 +55,13 @@ export default function Header() {
               </>
             ) : (
               <>
-                <Link
-                  to=""
+                <Button
+                  onClick={openEnrolledCoursesPanel}
                   className="flex items-center gap-2 mr-9 text-[#525252] cursor-pointer hover:text-[#4F46E5]"
                 >
                   <BookOpen className="w-6.5 h-6.5 " alt="book logo" />
                   <p className="text-[20px]">Enrolled Courses</p>
-                </Link>
+                </Button>
                 <div
                   onClick={() => openModal("profile")}
                   className="relative bg-[#EEEDFC] w-14 h-14 flex items-center justify-center rounded-full cursor-pointer border-2 border-transparent hover:border-[#b7b3f4]"
