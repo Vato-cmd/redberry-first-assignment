@@ -13,6 +13,7 @@ export default function CoursesInProgress() {
   const [isLoading, setIsLoading] = useState(false);
   const { token, isAuthorized } = useAuth();
   console.log(coursesInProgress);
+
   useEffect(() => {
     if (!isAuthorized || !token) return;
 
@@ -61,13 +62,13 @@ export default function CoursesInProgress() {
         <p className="text-[#3D3D3D] text-[18px] font-medium">
           Pick up where you left
         </p>
-        <p className="text-[#4F46E5] text-[20px] font-medium underline underline-offset-[25%]">
+        <p className="text-[#4F46E5] text-[20px] font-medium underline underline-offset-[25%] cursor-pointer">
           See All
         </p>
       </div>
       <div className="flex gap-6">
         {error && <p className="text-red-500 mb-4">{error}</p>}
-
+        {isLoading && <p>Loading...</p>}
         {coursesInProgress.map((enrolledCourse) => {
           return (
             <div

@@ -1,6 +1,7 @@
 import Slider from "../components/Slider";
 import FeaturedCourses from "../components/FeaturedCourses";
 import CoursesInProgress from "../components/CoursesInProgress";
+import EnrolledCoursesPanel from "../components/EnrolledCoursesPanel";
 import { useEnroll } from "../context/EnrollContext";
 export default function HomePage() {
   const { enrolledCourses } = useEnroll();
@@ -9,6 +10,7 @@ export default function HomePage() {
     <>
       <Slider />
       <CoursesInProgress />
+      <EnrolledCoursesPanel />
       <FeaturedCourses />
     </>
   );

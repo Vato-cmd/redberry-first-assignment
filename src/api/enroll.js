@@ -14,6 +14,24 @@ export async function deleteEnrolledCourse({ enrollmentId, token }) {
   }
 }
 
+export async function getEnrolledCourses(token) {
+  const response = await fetch(`${BASE_URL}/enrollments`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to load enrolled courses");
+  }
+
+  return data;
+}
+
 export async function getCoursesInProgress({ token }) {
   const response = await fetch(`${BASE_URL}/courses/in-progress`, {
     method: "GET",
