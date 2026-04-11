@@ -57,7 +57,7 @@ export default function Summary({
       </div>
       <div className="flex justify-between mb-3 text-[#8A8A8A] text-[16px] font-medium">
         <p>Base Price</p>
-        <p className="text-[#292929]">+ ${basePrice}</p>
+        <p className="text-[#292929]">+ ${Number(basePrice).toFixed()}</p>
       </div>
       <div className="flex justify-between mb-8 text-[#8A8A8A] text-[16px] font-medium">
         <p>Session Type</p>
