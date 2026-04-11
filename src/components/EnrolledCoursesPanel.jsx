@@ -14,6 +14,7 @@ import location from "../assets/location.svg";
 import PackageOpen from "../assets/PackageOpen.svg";
 
 import { Link } from "react-router-dom";
+import Button from "./UI/Button";
 
 export default function EnrolledCoursesPanel() {
   const [enrolledCourses, setEnrolledCourses] = useState([]);
@@ -170,13 +171,11 @@ export default function EnrolledCoursesPanel() {
                           ></div>
                         </div>
                       </div>
-                      <Link
-                        to={`/courses/${enrolledCourse.course.id}`}
-                        onClick={closeEnrolledCoursesPanel}
-                        className="flex items-center justify-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg h-12 w-29.25 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#4f46e5]"
-                      >
-                        View
-                      </Link>
+                      <div>
+                        <Button className="flex items-center justify-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg h-12 w-29.25 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#4f46e5]">
+                          View
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </Link>

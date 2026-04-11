@@ -34,7 +34,7 @@ export default function CoursesPage() {
       <div className="grid grid-cols-3 gap-6">
         {courses.map((course) => {
           return (
-            <Link key={courses.id} to={`courses/${course.id}`}>
+            <div key={course.id}>
               <div className="bg-white rounded-xl p-6 cursor-pointer h-full flex flex-col hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]">
                 <img
                   className="w-116.5 h-65.5 object-cover rounded-[10px]"
@@ -83,7 +83,7 @@ export default function CoursesPage() {
                   </Button>
                 </div>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>
