@@ -16,7 +16,8 @@ export default function EnrolledCoursesPanel() {
   const [isLoading, setIsLoading] = useState(false);
 
   const { isAuthorized, token } = useAuth();
-  const { closeEnrolledCoursesPanel, isEnrolledCoursesPanelOpen } = usePanel();
+  const { closeEnrolledCoursesPanel, isEnrolledCoursesPanelOpen, refreshKey } =
+    usePanel();
 
   useEffect(() => {
     if (!isAuthorized || !token) return;
@@ -36,7 +37,7 @@ export default function EnrolledCoursesPanel() {
     }
 
     loadEnrolledCourses();
-  }, [token, isAuthorized]);
+  }, [token, isAuthorized, isEnrolledCoursesPanelOpen, refreshKey]);
   return (
     <div
       className={`fixed inset-0 z-50 transition-all duration-300

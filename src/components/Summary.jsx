@@ -2,6 +2,7 @@ import Button from "./UI/Button";
 import { useModal } from "../context/ModalContext";
 import { useAuth } from "../context/AuthContext";
 import { useEnroll } from "../context/EnrollContext";
+import { usePanel } from "../context/EnrolledCoursesPanelContext";
 
 export default function Summary({
   basePrice,
@@ -16,6 +17,7 @@ export default function Summary({
   const { openModal } = useModal();
   const { isAuthorized, isProfileComplete } = useAuth();
   const { isEnrolling, enroll, enrollError } = useEnroll();
+  const { handlePanelRefreshKey } = usePanel();
 
   async function handleEnrollClick() {
     if (!isAuthorized) {
@@ -29,6 +31,7 @@ export default function Summary({
     try {
       await enroll(courseId, selectedSessionType.courseScheduleId);
       await onEnrollSuccess?.();
+      handlePanelRefreshKey();
       openModal("enroll-confirmed", {
         title: courseTitle,
       });
