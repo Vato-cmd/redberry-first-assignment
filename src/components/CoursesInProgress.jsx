@@ -1,24 +1,51 @@
 import { useState, useEffect } from "react";
 import { getCoursesInProgress } from "../api/enroll";
+import { getCourseById } from "../api/courses";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { calculateAvgRating } from "../utils/calculateAvgRating";
+
 import star from "../assets/star.svg";
 
 export default function CoursesInProgress() {
   const [coursesInProgress, setCoursesInProgress] = useState([]);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const { token, isAuthorized } = useAuth();
-
+  console.log(coursesInProgress);
   useEffect(() => {
     if (!isAuthorized || !token) return;
 
     async function loadCoursesInProgress() {
       try {
+        setIsLoading(true);
         setError("");
         const data = await getCoursesInProgress({ token });
-        setCoursesInProgress(data.data);
+
+        const enrichedCourses = await Promise.all(
+          data.data.map(async (enrolledCourse) => {
+            const fullCourse = await getCourseById(
+              enrolledCourse.course.id,
+              token,
+            );
+
+            const avgRating = calculateAvgRating(fullCourse.reviews);
+
+            return {
+              ...enrolledCourse,
+              course: {
+                ...enrolledCourse.course,
+                avgRating,
+              },
+            };
+          }),
+        );
+
+        setCoursesInProgress(enrichedCourses);
       } catch (error) {
         setError(error.message || "Failed to fetch in-progress course");
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -61,11 +88,14 @@ export default function CoursesInProgress() {
                         {enrolledCourse.course.instructor.name}
                       </span>
                     </p>
-                    <img
-                      className="w-[16.62px] h-[16.62px]"
-                      src={star}
-                      alt="star icon"
-                    />
+                    <p className="flex text-[#525252] text-[14px] font-medium gap-1">
+                      <img
+                        className="w-[16.62px] h-[16.62px]"
+                        src={star}
+                        alt="star icon"
+                      />
+                      {enrolledCourse.course.avgRating}
+                    </p>
                   </div>
                   <p className="text-[#141414] text-[20px] font-semibold">
                     {enrolledCourse.course.title}
