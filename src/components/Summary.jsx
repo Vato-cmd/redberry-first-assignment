@@ -32,6 +32,7 @@ export default function Summary({
       await enroll(courseId, selectedSessionType.courseScheduleId);
       await onEnrollSuccess?.();
       handlePanelRefreshKey();
+
       openModal("enroll-confirmed", {
         title: courseTitle,
       });

@@ -11,6 +11,7 @@ import retake from "../assets/retake.svg";
 import cross from "../assets/cross.svg";
 
 import { useModal } from "../context/ModalContext";
+import { usePanel } from "../context/EnrolledCoursesPanelContext";
 import StarRating from "./UI/StarRating";
 
 import ReviewSection from "./ReviewSection";
@@ -31,15 +32,15 @@ export default function EnrolledCourseCard({
   const { timeRange } = formatTimeSlotLabel(enrollment.schedule.timeSlot.label);
   const { completeCourse, deleteCourse } = useEnroll();
   const { openModal } = useModal();
+  const { handlePanelRefreshKey } = usePanel();
 
   const progress = enrollment.progress;
-
-  console.log(courseId);
 
   async function handleComplete() {
     try {
       await completeCourse(enrollment.id);
       await onEnrollSuccess?.();
+      handlePanelRefreshKey();
       openModal("success", {
         title: course.title,
         courseId: courseId,
@@ -51,6 +52,7 @@ export default function EnrolledCourseCard({
     try {
       await deleteCourse(enrollment.id);
       await onEnrollDelete?.();
+      handlePanelRefreshKey();
     } catch (error) {
       console.log(error);
     }

@@ -37,7 +37,7 @@ export default function FeaturedCourses() {
             to={`/courses/${course.id}`}
             className="block w-126.5"
           >
-            <div className="bg-white rounded-xl p-6 cursor-pointer h-full flex flex-col">
+            <div className="bg-white rounded-xl p-6 cursor-pointer h-full flex flex-col hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]">
               <img
                 className="w-116.5 h-65.5 object-cover rounded-[10px]"
                 src={course.image}

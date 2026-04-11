@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 export default function EnrolledCoursesPanel() {
   const [enrolledCourses, setEnrolledCourses] = useState([]);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const { isAuthorized, token } = useAuth();
   const { closeEnrolledCoursesPanel, isEnrolledCoursesPanelOpen, refreshKey } =
@@ -25,14 +24,10 @@ export default function EnrolledCoursesPanel() {
     async function loadEnrolledCourses() {
       try {
         setError("");
-        setIsLoading(true);
-
         const data = await getEnrolledCourses(token);
         setEnrolledCourses(data.data);
       } catch (error) {
         setError(error.message || "Failed to load enrolled courses");
-      } finally {
-        setIsLoading(false);
       }
     }
 
@@ -51,15 +46,15 @@ export default function EnrolledCoursesPanel() {
             `}
         onClick={(e) => e.stopPropagation()}
       >
-        {error && <p>{error}</p>}
-        {isLoading && <p>loading enrolled courses...</p>}
+        {error && <p className="flex items-center">{error}</p>}
 
         <div className="flex items-center justify-between px-14.25 pt-10.5">
           <h1 className="text-[#0A0A0A] font-semibold text-[40px] flex-start">
             Enrolled Courses
           </h1>
           <p className="text-[16px] font-medium text-[#0A0A0A]">
-            Total Enrollments: {enrolledCourses.length}
+            Total Enrollments{" "}
+            <span className="font-semibold">{enrolledCourses.length}</span>
           </p>
         </div>
         <div className="ml-[73.5px] mr-[97.5px]">
@@ -68,7 +63,7 @@ export default function EnrolledCoursesPanel() {
             return (
               <div
                 key={enrolledCourse.id}
-                className="bg-[#FFFFFF] rounded-xl p-5 w-155.75 h-73.75 mt-8"
+                className="bg-[#FFFFFF] rounded-xl p-5 w-155.75 h-73.75 mt-8 hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]"
               >
                 <div className="flex gap-4 mb-2">
                   <img
