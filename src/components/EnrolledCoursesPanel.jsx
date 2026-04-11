@@ -113,7 +113,13 @@ export default function EnrolledCoursesPanel() {
                       ).replace("-", " ")}
                     </p>
                     <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
-                      <img className="w-4 h-4" src={location} alt="calendar" />
+                      {enrolledCourse.schedule.location && (
+                        <img
+                          className="w-4 h-4"
+                          src={location}
+                          alt="calendar"
+                        />
+                      )}
                       {enrolledCourse.schedule.location}
                     </p>
                   </div>
