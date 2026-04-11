@@ -34,7 +34,7 @@ export default function CoursesPage() {
   }, []);
 
   return (
-    <section className="mx-[177px] mt-[131px] flex gap-22.5">
+    <section className="mx-44.25 mt-32.75 flex gap-22.5">
       <div>
         <Icons />
         <Topics />
