@@ -70,7 +70,7 @@ export default function EnrolledCoursesPanel() {
       <section
         className={`w-198.5 h-screen bg-[#F5F5F5] fixed right-0 top-0 overflow-y-auto no-scrollbar transition-transform duration-300
             ${isEnrolledCoursesPanelOpen ? "translate-x-0" : "translate-x-full"}
-            `}
+            flex flex-col`}
         onClick={(e) => e.stopPropagation()}
       >
         {error && <p className="flex items-center">{error}</p>}
@@ -182,7 +182,7 @@ export default function EnrolledCoursesPanel() {
             })}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center mx-auto my-[273.5px]">
+          <div className="flex flex-col items-center justify-center flex-1">
             <img
               className="w-32.5 h-33 mb-1"
               src={PackageOpen}
@@ -191,12 +191,15 @@ export default function EnrolledCoursesPanel() {
             <h1 className="text-[#130E67] font-semibold text-[24px] mb-2">
               No Enrolled Courses Yet
             </h1>
-            <p className="text-[#130E67] font-medium text-[14px] w-[274px] text-center mb-3">
+            <p className="text-[#130E67] font-medium text-[14px] w-68.5 text-center mb-3">
               Your learning journey starts here! Browse courses to get started.
             </p>
-            <Button className="bg-[#4F46E5] text-white rounded-lg w-[175px] h-[58px] ">
+            <Link
+              to="/courses"
+              className="bg-[#4F46E5] text-white rounded-lg w-43.75 h-14.5 flex items-center justify-center"
+            >
               Browse Courses
-            </Button>
+            </Link>
           </div>
         )}
       </section>
