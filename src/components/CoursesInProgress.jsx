@@ -121,7 +121,7 @@ export default function CoursesInProgress() {
                 </div>
                 <Link
                   to={`/courses/${enrolledCourse.course.id}`}
-                  className="flex justify-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg py-3 px-4 h-12 w-22.5 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#281ED2]"
+                  className="flex justify-center items-center border-2 border-[#958FEF] text-[#4F46E5] text-[16px] font-medium rounded-lg  h-12 w-22.5 rounded-2 hover:text-[#FFFF] hover:border-[#281ED2] hover:bg-[#281ED2]"
                 >
                   View
                 </Link>
