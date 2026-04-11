@@ -12,6 +12,7 @@ import Schedule from "../components/Schedule";
 import IncompleteProfileComponent from "../components/incompleteProfileComponent";
 import UnAuthorizedUserComponent from "../components/UnAuthorizedUserComponent";
 import EnrolledCourseCard from "../components/EnrolledCourseCard";
+import BreadCrumbs from "../components/BreadCrumbs";
 
 export default function CourseDetailsPage() {
   const { id } = useParams();
@@ -23,7 +24,6 @@ export default function CourseDetailsPage() {
     const data = await getCourseById(id, token);
     setCourse(data);
   }
-  console.log(course);
 
   function handleEnrollmentDelete() {
     setCourse((prev) => ({
@@ -37,7 +37,7 @@ export default function CourseDetailsPage() {
   }, [id, token]);
 
   if (!course) return <p>Loading...</p>;
-
+  const breadCrumbItems = ["Home", course.category.name];
   const avgRating =
     course?.reviews.length === 0
       ? 0
@@ -45,6 +45,7 @@ export default function CourseDetailsPage() {
         course.reviews.length;
   return (
     <section className="w-full px-44.25 mt-16">
+      <BreadCrumbs items={breadCrumbItems} />
       <div>
         <h1 className="text-[#141414] font-semibold text-[40px] mb-6">
           {course.title}
