@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCourses } from "../api/courses";
+import Icons from "../components/Icons";
 
 import Button from "../components/UI/Button";
 
@@ -90,6 +91,7 @@ export default function CoursesPage() {
           );
         })}
       </div>
+      <Icons />
     </section>
   );
 }
