@@ -33,6 +33,7 @@ export default function EnrolledCourseCard({
   const { openModal } = useModal();
   const progress = enrollment.progress;
   console.log(courseId);
+
   async function handleComplete() {
     try {
       await completeCourse(enrollment.id);

@@ -24,7 +24,7 @@ export default function StarRating({ value = 0, onChange, disabled = false }) {
             key={starValue}
             type="button"
             disabled={disabled}
-            className="cursor-pointer"
+            className={`cursor-pointer`}
             onMouseEnter={() => {
               if (disabled) return;
               setHoveredRating(starValue);

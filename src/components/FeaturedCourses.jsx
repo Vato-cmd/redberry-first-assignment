@@ -3,30 +3,24 @@ import Button from "./UI/Button";
 import { getFeaturedCourses } from "../api/courses";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useCourse } from "../context/CourseContext";
 
 export default function FeaturedCourses() {
   const [courses, setCourses] = useState([]);
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadFeaturedCourses() {
-      try {
-        setIsLoading(true);
-        setError("");
-        const data = await getFeaturedCourses();
-        setCourses(data);
-      } catch (error) {
-        setError(error.message || "Failed to load featured courses");
-      } finally {
-        setIsLoading(false);
-      }
-    }
+  const {
+    featuredCourses,
+    loadFeaturedCourses,
+    isLoadingFeaturedCourses,
+    error,
+  } = useCourse();
 
+  useEffect(() => {
     loadFeaturedCourses();
   }, []);
 
-  if (isLoading) return <p>Loading featured courses...</p>;
+  if (isLoadingFeaturedCourses) return <p>Loading featured courses...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
@@ -41,7 +35,7 @@ export default function FeaturedCourses() {
       </div>
 
       <div className="w-full flex gap-6 items-stretch">
-        {courses.map((course) => (
+        {featuredCourses.map((course) => (
           <Link
             key={course.id}
             to={`/courses/${course.id}`}

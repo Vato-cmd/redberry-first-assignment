@@ -1,5 +1,5 @@
 import Button from "./Button";
-import iconClose from "../../assets/close-icon.png";
+import cross from "../../assets/cross.svg";
 import backwardsArrow from "../../assets/backwards-arrow.png";
 
 export default function Modal({
@@ -25,7 +25,7 @@ export default function Modal({
           className="absolute right-3.75 top-[16.5px] text-[28px] leading-none text-[#8A8A8A]"
           onClick={onClose}
         >
-          <img src={iconClose} alt="close icon" />
+          <img src={cross} alt="close icon" />
         </Button>
         {showBackwardsArrow && (
           <Button

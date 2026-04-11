@@ -22,6 +22,7 @@ export default function ReviewSection({ courseId }) {
 
       if (message.toLowerCase().includes("already rated")) {
         setIsSubmitted(true);
+        setIsSubmitting(true);
       }
     } finally {
       setIsSubmitting(false);
@@ -33,6 +34,7 @@ export default function ReviewSection({ courseId }) {
       <p className="text-[#666666] text-[20px] font-medium">
         {isSubmitted ? "Thanks for your review" : "Rate your experience"}
       </p>
+
       <StarRating
         value={rating}
         onChange={handleRatingSubmit}
