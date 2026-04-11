@@ -19,3 +19,12 @@ input[type="password"]::-webkit-credentials-auto-fill-button,
 input[type="password"]::-webkit-password-toggle-button {
   display: none;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}

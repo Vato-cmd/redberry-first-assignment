@@ -43,7 +43,7 @@ export default function EnrolledCoursesPanel() {
       onClick={closeEnrolledCoursesPanel}
     >
       <section
-        className={`w-198.5 h-screen bg-[#F5F5F5] fixed right-0 top-0 overflow-y-auto transition-transform duration-300
+        className={`w-198.5 h-screen bg-[#F5F5F5] fixed right-0 top-0 overflow-y-auto no-scrollbar transition-transform duration-300
             ${isEnrolledCoursesPanelOpen ? "translate-x-0" : "translate-x-full"}
             `}
         onClick={(e) => e.stopPropagation()}
