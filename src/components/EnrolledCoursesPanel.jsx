@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getEnrolledCourses } from "../api/enroll";
 import { useAuth } from "../context/AuthContext";
 import { usePanel } from "../context/EnrolledCoursesPanelContext";
+import { formatSessionTypeName } from "../utils/scheduleHelpers";
+
 import star from "../assets/star.svg";
 import calendar from "../assets/calendar.svg";
 import clock from "../assets/clock.svg";
@@ -59,7 +61,6 @@ export default function EnrolledCoursesPanel() {
         </div>
         <div className="ml-[73.5px] mr-[97.5px]">
           {enrolledCourses.map((enrolledCourse) => {
-            console.log(enrolledCourse.schedule.location);
             return (
               <div
                 key={enrolledCourse.id}
@@ -93,16 +94,23 @@ export default function EnrolledCoursesPanel() {
                     </p>
                     <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
                       <img className="w-4 h-4" src={calendar} alt="calendar" />
-                      {enrolledCourse.schedule.weeklySchedule.label}
+                      {enrolledCourse.schedule.weeklySchedule.label.replace(
+                        " - ",
+                        "-",
+                      )}
                     </p>
                     <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
                       <img className="w-4 h-4" src={clock} alt="calendar" />
-                      {enrolledCourse.schedule.timeSlot.label}
+                      {enrolledCourse.schedule.timeSlot.label
+                        .replace("(", "")
+                        .replace(")", "")}
                     </p>
 
                     <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
                       <img className="w-4 h-4" src={inperson} alt="calendar" />
-                      {enrolledCourse.schedule.sessionType.name}
+                      {formatSessionTypeName(
+                        enrolledCourse.schedule.sessionType.name,
+                      ).replace("-", " ")}
                     </p>
                     <p className="flex gap-2 items-center text-[#666666] text-[14px] font-normal h-6.5">
                       <img className="w-4 h-4" src={location} alt="calendar" />
