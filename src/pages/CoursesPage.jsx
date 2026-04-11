@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCourses } from "../api/courses";
+
 import Icons from "../components/Icons";
+import Topics from "../components/Topics";
 
 import Button from "../components/UI/Button";
 
@@ -32,7 +34,11 @@ export default function CoursesPage() {
   }, []);
 
   return (
-    <section>
+    <section className="mx-[177px] mt-[131px] flex gap-22.5">
+      <div>
+        <Icons />
+        <Topics />
+      </div>
       <div className="grid grid-cols-3 gap-6 w-291.75">
         {courses.slice(0, 9).map((course) => {
           return (
@@ -91,7 +97,6 @@ export default function CoursesPage() {
           );
         })}
       </div>
-      <Icons />
     </section>
   );
 }

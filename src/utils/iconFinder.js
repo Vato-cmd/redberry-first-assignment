@@ -4,6 +4,6 @@ export const iconFinder = {
   development: Code2,
   design: Palette,
   business: TrendingUp,
-  "data science": GitFork,
+  datascience: GitFork,
   marketing: Lightbulb,
 };
