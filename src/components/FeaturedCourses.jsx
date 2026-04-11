@@ -8,7 +8,7 @@ export default function FeaturedCourses() {
   const {
     featuredCourses,
     loadFeaturedCourses,
-    isLoadingFeaturedCourses,
+    isLoadingFeaturedCourse,
     error,
   } = useCourse();
 
@@ -16,7 +16,7 @@ export default function FeaturedCourses() {
     loadFeaturedCourses();
   }, []);
 
-  if (isLoadingFeaturedCourses) return <p>Loading featured courses...</p>;
+  if (isLoadingFeaturedCourse) return <p>Loading featured courses...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (

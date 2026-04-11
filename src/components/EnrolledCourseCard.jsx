@@ -31,7 +31,9 @@ export default function EnrolledCourseCard({
   const { timeRange } = formatTimeSlotLabel(enrollment.schedule.timeSlot.label);
   const { completeCourse, deleteCourse } = useEnroll();
   const { openModal } = useModal();
+
   const progress = enrollment.progress;
+
   console.log(courseId);
 
   async function handleComplete() {
