@@ -5,6 +5,7 @@ export async function getCourses({
   topics = [],
   instructors = [],
   sort = "",
+  page = 1,
 }) {
   const params = new URLSearchParams();
 
@@ -15,6 +16,7 @@ export async function getCourses({
   if (sort) {
     params.append("sort", sort);
   }
+  params.append("page", page);
 
   const query = params.toString();
   const url = query ? `${BASE_URL}/courses?${query}` : `${BASE_URL}/courses`;

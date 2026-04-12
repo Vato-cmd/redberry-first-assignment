@@ -9,6 +9,7 @@ import Sort from "../components/Sort";
 import Filters from "../components/Filters";
 
 import Button from "../components/UI/Button";
+import Pagination from "../components/Pagination";
 
 import cross from "../assets/cross.svg";
 import star from "../assets/star.svg";
@@ -19,13 +20,20 @@ export default function CoursesPage() {
   const [loading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState([]);
   const [meta, setMeta] = useState(null);
+  const [page, setPage] = useState();
   const {
     selectedCategoryIds,
     selectedTopicIds,
     selectedInstructorIds,
     resetFilters,
     sort,
+    currentPage,
+    setCurrentPage,
   } = useFilters();
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategoryIds, selectedTopicIds, selectedInstructorIds, sort]);
 
   useEffect(() => {
     async function loadCourses() {
@@ -38,6 +46,7 @@ export default function CoursesPage() {
           topics: selectedTopicIds,
           instructors: selectedInstructorIds,
           sort,
+          page: currentPage,
         });
         if (filteredCourses.courses.length > 0) {
           setCourses(filteredCourses.courses);
@@ -55,7 +64,13 @@ export default function CoursesPage() {
     }
 
     loadCourses();
-  }, [selectedCategoryIds, selectedTopicIds, selectedInstructorIds, sort]);
+  }, [
+    selectedCategoryIds,
+    selectedTopicIds,
+    selectedInstructorIds,
+    sort,
+    currentPage,
+  ]);
 
   if (!courses) return <p>Loading...</p>;
 
@@ -89,7 +104,7 @@ export default function CoursesPage() {
             <Sort />
           </div>
           <div className="grid grid-cols-3 gap-6 w-291.75">
-            {courses.slice(0, 9).map((course) => {
+            {courses.map((course) => {
               const Icon =
                 iconFinder[course.category.name.toLowerCase().replace(" ", "")];
 
@@ -152,6 +167,11 @@ export default function CoursesPage() {
           </div>
         </div>
       </div>
+      <Pagination
+        currentPage={meta?.currentPage || 1}
+        lastPage={meta?.lastPage || 1}
+        onPageChange={setCurrentPage}
+      />
     </section>
   );
 }

@@ -7,6 +7,7 @@ export function FilterProvider({ children }) {
   const [selectedTopicIds, setSelectedTopicIds] = useState([]);
   const [selectedInstructorIds, setSelectedInstructorIds] = useState([]);
   const [sort, setSort] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const activeFilters =
     selectedCategoryIds.length +
@@ -18,6 +19,7 @@ export function FilterProvider({ children }) {
     setSelectedTopicIds([]);
     setSelectedInstructorIds([]);
     setSort("");
+    setCurrentPage(1);
   }
 
   return (
@@ -33,6 +35,8 @@ export function FilterProvider({ children }) {
         setSort,
         resetFilters,
         activeFilters,
+        currentPage,
+        setCurrentPage,
       }}
     >
       {children}
