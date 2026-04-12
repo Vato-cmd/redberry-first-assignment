@@ -4,12 +4,17 @@ export async function getCourses({
   categories = [],
   topics = [],
   instructors = [],
+  sort = "",
 }) {
   const params = new URLSearchParams();
 
   categories.forEach((id) => params.append("categories[]", id));
   topics.forEach((id) => params.append("topics[]", id));
   instructors.forEach((id) => params.append("instructors[]", id));
+
+  if (sort) {
+    params.append("sort", sort);
+  }
 
   const query = params.toString();
   const url = query ? `${BASE_URL}/courses?${query}` : `${BASE_URL}/courses`;
@@ -20,7 +25,11 @@ export async function getCourses({
     throw new Error("Failed to fetch the courses");
   }
   const data = await response.json();
-  return data.data;
+
+  return {
+    courses: data.data,
+    meta: data.meta,
+  };
 }
 
 export async function getCategories() {

@@ -1,8 +1,8 @@
 import rightArrow from "../assets/rightArrow.svg";
 
-export default function BreadCrumbs({ items = [] }) {
+export default function BreadCrumbs({ items = [], className }) {
   return (
-    <div className="flex items-center mb-8.25">
+    <div className={`flex items-center mb-8.25 ${className}`}>
       {items.map((item, index) => {
         return (
           <div className="flex items-center" key={`${item}-${index}`}>

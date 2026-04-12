@@ -26,7 +26,7 @@ export default function Instructors() {
       <h1 className="text-[#666666] text-[18px] font-medium mb-6">
         Instructors
       </h1>
-      <div className="flex gap-2 flex-wrap w-77.25 mb-14">
+      <div className="flex gap-2 flex-wrap w-77.25 mb-6">
         {instructors.map((instructor) => {
           const isSelected = selectedInstructorIds.includes(instructor.id);
           return (

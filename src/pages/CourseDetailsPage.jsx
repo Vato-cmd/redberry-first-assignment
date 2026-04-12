@@ -6,7 +6,6 @@ import { useAuth } from "../context/AuthContext";
 import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
 import clock from "../assets/clock.svg";
-import { Code2, Palette, TrendingUp, GitFork, Lightbulb } from "lucide-react";
 import { iconFinder } from "../utils/iconFinder";
 
 import Schedule from "../components/Schedule";
@@ -42,6 +41,7 @@ export default function CourseDetailsPage() {
   const Icon = iconFinder[course.category.name.toLowerCase().replace(" ", "")];
 
   const breadCrumbItems = ["Home", course.category.name];
+
   const avgRating =
     course?.reviews.length === 0
       ? 0
