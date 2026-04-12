@@ -1,7 +1,20 @@
 const BASE_URL = "https://api.redclass.redberryinternship.ge/api";
 
-export async function getCourses() {
-  const response = await fetch(`${BASE_URL}/courses`);
+export async function getCourses({
+  categories = [],
+  topics = [],
+  instructors = [],
+}) {
+  const params = new URLSearchParams();
+
+  categories.forEach((id) => params.append("categories[]", id));
+  topics.forEach((id) => params.append("topics[]", id));
+  instructors.forEach((id) => params.append("instructors[]", id));
+
+  const query = params.toString();
+  const url = query ? `${BASE_URL}/courses?${query}` : `${BASE_URL}/courses`;
+
+  const response = await fetch(url);
 
   if (!response.ok) {
     throw new Error("Failed to fetch the courses");
@@ -23,7 +36,6 @@ export async function getCategories() {
 
 export async function getTopics(categoryIds = []) {
   const params = new URLSearchParams();
-
   categoryIds.forEach((id) => {
     params.append("categories[]", id);
   });
@@ -32,6 +44,8 @@ export async function getTopics(categoryIds = []) {
     categoryIds.length > 0
       ? `${BASE_URL}/topics?${params.toString()}`
       : `${BASE_URL}/topics`;
+
+  console.log(url);
 
   const response = await fetch(url, {
     headers: {

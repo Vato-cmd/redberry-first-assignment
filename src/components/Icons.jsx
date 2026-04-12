@@ -15,8 +15,6 @@ export default function Icons() {
     loadCategories();
   }, []);
 
-  console.log(selectedCategoryIds);
-
   function handleToggleCategory(categoryId) {
     setSelectedCategoryIds((prev) => {
       return prev.includes(categoryId)

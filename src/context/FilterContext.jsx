@@ -8,6 +8,11 @@ export function FilterProvider({ children }) {
   const [selectedInstructorIds, setSelectedInstructorIds] = useState([]);
   const [sort, setSort] = useState("");
 
+  const activeFilters =
+    selectedCategoryIds.length +
+    selectedTopicIds.length +
+    selectedInstructorIds.length;
+
   function resetFilters() {
     setSelectedCategoryIds([]);
     setSelectedTopicIds([]);
@@ -26,6 +31,8 @@ export function FilterProvider({ children }) {
         setSelectedTopicIds,
         setSelectedInstructorIds,
         setSort,
+        resetFilters,
+        activeFilters,
       }}
     >
       {children}

@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCourses } from "../api/courses";
 import { iconFinder } from "../utils/iconFinder";
+import { useFilters } from "../context/FilterContext";
 
 import Filters from "../components/Filters";
 
 import Button from "../components/UI/Button";
 
+import cross from "../assets/cross.svg";
 import star from "../assets/star.svg";
 import divider from "../assets/divider.svg";
 
@@ -14,6 +16,8 @@ export default function CoursesPage() {
   const [error, setError] = useState("");
   const [loading, setIsLoading] = useState(false);
   const [courses, setCourses] = useState([]);
+  const { selectedCategoryIds, selectedTopicIds, selectedInstructorIds, sort } =
+    useFilters();
 
   useEffect(() => {
     async function loadCourses() {
@@ -21,8 +25,17 @@ export default function CoursesPage() {
         setError("");
         setIsLoading(true);
 
-        const data = await getCourses();
-        setCourses(data);
+        const filteredCourses = await getCourses({
+          categories: selectedCategoryIds,
+          topics: selectedTopicIds,
+          instructors: selectedInstructorIds,
+        });
+        if (filteredCourses.length > 0) {
+          setCourses(filteredCourses);
+        } else {
+          const allCourses = await getCourses();
+          setCourses(allCourses);
+        }
       } catch (error) {
         setError(error.message || "Failed to load the courses");
       } finally {
@@ -31,7 +44,7 @@ export default function CoursesPage() {
     }
 
     loadCourses();
-  }, []);
+  }, [selectedCategoryIds, selectedTopicIds, selectedInstructorIds]);
 
   if (!courses) return <p>Loading...</p>;
   return (
