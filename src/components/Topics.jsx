@@ -21,7 +21,7 @@ export default function Topics({ categoryIds = [] }) {
           return (
             <div
               key={topic.id}
-              className="bg-[#FFFFFF] rounded-xl flex items-center gap-2.5 py-2 px-3 hover:bg-[#dddbfa]  transform-all duration-300 ease-in-out"
+              className="bg-[#FFFFFF] rounded-xl flex items-center gap-2.5 py-2 px-3 hover:bg-[#dddbfa] cursor-pointer transform-all duration-300 ease-in-out"
             >
               <span className="text-[#525252] text-[16px] font-medium hover:text-[#281ED2]">
                 {topic.name}

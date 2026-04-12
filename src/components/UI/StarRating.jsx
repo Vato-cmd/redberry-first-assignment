@@ -35,7 +35,8 @@ export default function StarRating({ value = 0, onChange, disabled = false }) {
             }}
           >
             <Star
-              className={`w-12.5 h-12.5 ${isActive ? "fill-[#F4A316] text-[#F4A316]" : "text-gray-300"}`}
+              strokeWidth={1}
+              className={`w-12.5 h-12.5 ${isActive ? "fill-[#F4A316] text-[#F4A316]" : "text-[#D1D1D1] fill-none"}`}
             />
           </Button>
         );

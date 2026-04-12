@@ -22,7 +22,7 @@ export default function Modal({
         onClick={(e) => e.stopPropagation()}
       >
         <Button
-          className="absolute right-3.75 top-[16.5px] text-[28px] leading-none text-[#8A8A8A]"
+          className="absolute right-3.75 top-[20.5px] text-[28px] leading-none text-[#8A8A8A]"
           onClick={onClose}
         >
           <img src={cross} alt="close icon" />

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import StarRating from "./UI/StarRating";
 import { useEnroll } from "../context/EnrollContext";
+
+import StarRating from "./UI/StarRating";
 
 export default function ReviewSection({ courseId }) {
   const [rating, setRating] = useState(0);
@@ -31,7 +32,7 @@ export default function ReviewSection({ courseId }) {
 
   return (
     <div className="flex flex-col gap-2 mt-9.75 items-center">
-      <p className="text-[#666666] text-[20px] font-medium">
+      <p className="text-[#736BEA] text-[20px] font-medium">
         {isSubmitted ? "Thanks for your review" : "Rate your experience"}
       </p>
 

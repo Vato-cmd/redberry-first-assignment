@@ -67,7 +67,7 @@ export default function LoginModal() {
     }
   }
   return (
-    <Modal isOpen={true} onClose={closeModal} className="max-w-115">
+    <Modal isOpen={true} onClose={closeModal} className="max-w-115 p-12.5">
       <h2 className="text-[32px] font-semibold text-center">Welcome Back</h2>
 
       <p className="text-center text-gray-500 mt-2">

@@ -6,8 +6,8 @@ import { useAuth } from "../context/AuthContext";
 import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
 import clock from "../assets/clock.svg";
-import developmentLogo from "../assets/development-logo.svg";
 import { Code2, Palette, TrendingUp, GitFork, Lightbulb } from "lucide-react";
+import { iconFinder } from "../utils/iconFinder";
 
 import Schedule from "../components/Schedule";
 import IncompleteProfileComponent from "../components/incompleteProfileComponent";
@@ -38,6 +38,9 @@ export default function CourseDetailsPage() {
   }, [id, token]);
 
   if (!course) return <p>Loading...</p>;
+
+  const Icon = iconFinder[course.category.name.toLowerCase().replace(" ", "")];
+
   const breadCrumbItems = ["Home", course.category.name];
   const avgRating =
     course?.reviews.length === 0
@@ -77,7 +80,7 @@ export default function CourseDetailsPage() {
               </div>
               <div className="bg-[#FFFFFF] px-3 py-2 rounded-xl cursor-pointer  group hover:bg-[#dddbfa] transform-all duration-300 ease-in-out">
                 <p className="flex items-center gap-2.5 text-[#666666] font-medium group-hover:text-[#281ED2]">
-                  <Code2 className="w-6 h-6" />
+                  <Icon className="w-6 h-6" />
                   {course.category.name}
                 </p>
               </div>

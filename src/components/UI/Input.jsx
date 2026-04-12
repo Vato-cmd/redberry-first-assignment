@@ -79,7 +79,7 @@ export default function Input({
               readOnly={readOnly}
               onBlur={onBlur}
               placeholder={placeholder}
-              className={`w-full rounded-lg border-[1.5px] py-3 outline-none transition
+              className={`w-full rounded-lg border-[1.5px] py-3 outline-none transition 
                 ${name === "mobileNumber" ? "pl-16 pr-4" : "px-4"}
                 ${
                   disabled

@@ -185,14 +185,18 @@ export default function ProfileModal() {
   const validationErrors = validateProfile(formData);
   const isFormValid = Object.keys(validationErrors).length === 0;
   return (
-    <Modal isOpen={true} onClose={handleCloseModal}>
+    <Modal
+      isOpen={true}
+      onClose={handleCloseModal}
+      className="max-w-115 p-12.5"
+    >
       {isLoading ? (
         <div>User credentials...</div>
       ) : loadError ? (
         <div className="text-[#F4161A]">{loadError}</div>
       ) : (
-        <div className="w-90 mx-auto flex flex-col gap-6">
-          <h1 className="text-[32px] font-semibold text-[#141414] text-center">
+        <div className="gap-6 h-158">
+          <h1 className="text-[32px] font-semibold text-[#141414] text-center mb-6">
             Profile
           </h1>
           <div className="flex items-center gap-3">
@@ -228,7 +232,7 @@ export default function ProfileModal() {
               </p>
             </div>
           </div>
-          <form className="flex flex-col gap-3">
+          <form className="flex flex-col gap-3 mt-6">
             <Input
               label="Full Name"
               type="text"

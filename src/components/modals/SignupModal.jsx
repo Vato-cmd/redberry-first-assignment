@@ -109,7 +109,7 @@ export default function SignupModal() {
     <Modal
       isOpen={true}
       onClose={closeModal}
-      className="max-w-115"
+      className="max-w-115 p-12.5"
       showBackwardsArrow={step > 1}
       onBack={() => setStep((prev) => prev - 1)}
     >

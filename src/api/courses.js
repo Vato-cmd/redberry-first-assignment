@@ -47,6 +47,16 @@ export async function getTopics(categoryIds = []) {
   return data.data;
 }
 
+export async function getInstructors() {
+  const response = await fetch(`${BASE_URL}/instructors`);
+
+  if (!response.ok) {
+    throw new Error("Failed to load instructors");
+  }
+  const data = await response.json();
+  return data.data;
+}
+
 export async function getFeaturedCourses() {
   const response = await fetch(`${BASE_URL}/courses/featured`);
 

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCourses } from "../api/courses";
+import { iconFinder } from "../utils/iconFinder";
 
 import Icons from "../components/Icons";
 import Topics from "../components/Topics";
+import Instructors from "../components/Instructors";
 
 import Button from "../components/UI/Button";
 
@@ -33,14 +35,21 @@ export default function CoursesPage() {
     loadCourses();
   }, []);
 
+  if (!courses) return <p>Loading...</p>;
+  console.log(courses);
+
   return (
     <section className="mx-44.25 mt-32.75 flex gap-22.5">
       <div>
         <Icons />
         <Topics />
+        <Instructors />
       </div>
       <div className="grid grid-cols-3 gap-6 w-291.75">
         {courses.slice(0, 9).map((course) => {
+          const Icon =
+            iconFinder[course.category.name.toLowerCase().replace(" ", "")];
+
           return (
             <Link
               to={`/courses/${course.id}`}
@@ -72,8 +81,9 @@ export default function CoursesPage() {
                 <h2 className="text-[24px] text-[#0A0A0A] font-semibold mb-3">
                   {course.title}
                 </h2>
-                <div className="flex items-center justify-center h-10 w-37.5 rounded-lg text-[#525252] text-[16px] bg-[#F5F5F5] font-medium">
-                  <h2>Development</h2>
+                <div className="flex items-center justify-center h-10 w-37.5 gap-1.5 rounded-lg text-[#525252] text-[16px] bg-[#F5F5F5] font-medium">
+                  <Icon />
+                  <h2>{course.category.name}</h2>
                 </div>
 
                 <div className="flex items-end justify-between mt-auto">
