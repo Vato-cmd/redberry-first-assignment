@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { getCategories } from "../api/courses";
 import { iconFinder } from "../utils/iconFinder";
+import { useFilters } from "../context/FilterContext";
 
-export default function Icons({ selectedCategoryIds, setSelectedCategoryIds }) {
+export default function Icons() {
   const [categories, setCategories] = useState([]);
+  const { selectedCategoryIds, setSelectedCategoryIds } = useFilters();
 
   useEffect(() => {
     async function loadCategories() {
@@ -36,10 +38,10 @@ export default function Icons({ selectedCategoryIds, setSelectedCategoryIds }) {
           return (
             <label
               key={category.id}
-              className={`bg-[#FFFFFF] rounded-xl py-2 px-3 group 
-                           transform-all duration-300 ease-in-out cursor-pointer
-                           ${isSelected ? "bg-[#EEEDFC] text-[#281ED2] border border-[#281ED2]" : "hover:bg-[#DDDBFA]"}
-                           `}
+              className={`group bg-[#FFFFFF] rounded-xl py-2 px-3 cursor-pointer transition-all duration-300 ease-in-out
+    ${
+      isSelected ? "bg-[#EEEDFC] border border-[#281ED2]" : "hover:bg-[#DDDBFA]"
+    }`}
             >
               <input
                 type="checkbox"
@@ -48,8 +50,12 @@ export default function Icons({ selectedCategoryIds, setSelectedCategoryIds }) {
                 onChange={() => handleToggleCategory(category.id)}
               />
               <p
-                className={`flex items-center gap-2.5 text-[#525252] text-[16px] 
-                  font-medium group-hover:text-[#281ED2] ${isSelected ? "text-[#281ED2]" : "text-[#525252]"}`}
+                className={`flex items-center gap-2.5 text-[16px] font-medium transition-colors duration-300
+    ${
+      isSelected
+        ? "text-[#281ED2]"
+        : "text-[#525252] group-hover:text-[#281ED2]"
+    }`}
               >
                 {Icon && <Icon className="w-6 h-6" />}
                 {category.name}
