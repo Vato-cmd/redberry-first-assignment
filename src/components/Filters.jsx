@@ -11,7 +11,7 @@ export default function Filters() {
         selectedCategoryIds={selectedCategoryIds}
         setSelectedCategoryIds={setSelectedCategoryIds}
       />
-      <Topics selectedCategoryIds={selectedCategoryIds} />
+      <Topics categoryIds={selectedCategoryIds} />
       <Instructors />
     </div>
   );

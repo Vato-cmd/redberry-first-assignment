@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import { getCourses } from "../api/courses";
 import { iconFinder } from "../utils/iconFinder";
 
-import Icons from "../components/Icons";
-import Topics from "../components/Topics";
-import Instructors from "../components/Instructors";
+import Filters from "../components/Filters";
 
 import Button from "../components/UI/Button";
 
@@ -36,14 +34,10 @@ export default function CoursesPage() {
   }, []);
 
   if (!courses) return <p>Loading...</p>;
-  console.log(courses);
-
   return (
     <section className="mx-44.25 mt-32.75 flex gap-22.5">
       <div>
-        <Icons />
-        <Topics />
-        <Instructors />
+        <Filters />
       </div>
       <div className="grid grid-cols-3 gap-6 w-291.75">
         {courses.slice(0, 9).map((course) => {

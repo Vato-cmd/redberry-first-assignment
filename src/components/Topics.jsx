@@ -3,15 +3,14 @@ import { getTopics } from "../api/courses";
 
 export default function Topics({ categoryIds = [] }) {
   const [topics, setTopics] = useState([]);
-  console.log(topics);
 
   useEffect(() => {
     async function loadTopics() {
-      const topicsData = await getTopics();
+      const topicsData = await getTopics(categoryIds);
       setTopics(topicsData);
     }
     loadTopics();
-  }, []);
+  }, [categoryIds]);
 
   return (
     <div>
