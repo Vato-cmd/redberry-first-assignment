@@ -118,6 +118,7 @@ export default function CoursesPage() {
                     <Link
                       to={`/courses/${course.id}`}
                       key={course.id}
+                      state={{ from: "browse" }}
                       className="w-93.25 h-112.75 shadow-[0px_2px_8px_rgba(0,0,0,0.09)] rounded-xl"
                     >
                       <div className="bg-white h-full rounded-xl p-5 cursor-pointer flex flex-col hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]">

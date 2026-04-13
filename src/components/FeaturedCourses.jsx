@@ -35,6 +35,7 @@ export default function FeaturedCourses() {
           <Link
             key={course.id}
             to={`/courses/${course.id}`}
+            state={{ from: "home" }}
             className="block w-126.5"
           >
             <div className="bg-white rounded-xl p-6 cursor-pointer h-full flex flex-col hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]">

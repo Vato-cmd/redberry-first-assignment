@@ -80,6 +80,7 @@ export default function CoursesInProgress() {
               <Link
                 to={`/courses/${enrolledCourse.course.id}`}
                 key={enrolledCourse.id}
+                state={{ from: "home" }}
                 className="bg-[#FFFFFF] rounded-xl p-5 w-126.5 h-54.75 mt-8"
               >
                 <div className="flex gap-4 mb-2">

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getCourseById } from "../api/courses";
 import { useAuth } from "../context/AuthContext";
+import { useLocation } from "react-router-dom";
 
 import calendar from "../assets/calendar.svg";
 import star from "../assets/star.svg";
@@ -17,6 +18,9 @@ import BreadCrumbs from "../components/BreadCrumbs";
 export default function CourseDetailsPage() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
+
+  const location = useLocation();
+  const from = location.state?.from;
 
   const { isAuthorized, isProfileComplete, token } = useAuth();
 
@@ -40,7 +44,10 @@ export default function CourseDetailsPage() {
 
   const Icon = iconFinder[course.category.name.toLowerCase().replace(" ", "")];
 
-  const breadCrumbItems = ["Home", course.category.name];
+  const breadCrumbItems =
+    from === "browse"
+      ? ["Home", "Browse", course.category.name]
+      : ["Home", course.category.name];
 
   const avgRating =
     course?.reviews.length === 0
