@@ -18,11 +18,12 @@ import BreadCrumbs from "../components/BreadCrumbs";
 export default function CourseDetailsPage() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
+  console.log(course);
 
   const location = useLocation();
   const from = location.state?.from;
 
-  const { isAuthorized, isProfileComplete, token } = useAuth();
+  const { isAuthorized, isProfileComplete, user, token } = useAuth();
 
   async function loadCourseDetails() {
     const data = await getCourseById(id, token);
@@ -116,6 +117,9 @@ export default function CourseDetailsPage() {
                 course={course}
                 onEnrollDelete={handleEnrollmentDelete}
                 courseId={course.id}
+                reviews={course.reviews}
+                isRated={course.isRated}
+                onReviewSuccess={loadCourseDetails}
               />
             ) : (
               <Schedule

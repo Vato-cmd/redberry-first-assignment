@@ -9,7 +9,7 @@ import { useModal } from "../context/ModalContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import { usePanel } from "../context/EnrolledCoursesPanelContext.jsx";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
   const { openModal } = useModal();
@@ -26,15 +26,22 @@ export default function Header() {
             alt="main logo"
           />
         </Link>
-
         <div className="flex items-center">
-          <Link
+          <NavLink
             to="/courses"
-            className="flex gap-2 text-[#525252] mr-9 cursor-pointer hover:text-[#4F46E5]"
+            end
+            className={({ isActive }) =>
+              `flex gap-2 mr-9 cursor-pointer transition-colors
+              ${
+                isActive
+                  ? "text-[#4F46E5] font-semibold"
+                  : "hover:text-[#4F46E5] text-[#525252]"
+              }`
+            }
           >
             <Sparkles className="h-6.5 w-6.5" alt="browse courses" />
             Browse Courses
-          </Link>
+          </NavLink>
 
           <div className="flex gap-3.75">
             {!isAuthorized ? (

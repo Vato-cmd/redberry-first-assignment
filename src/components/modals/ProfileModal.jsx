@@ -175,10 +175,14 @@ export default function ProfileModal() {
   }
 
   function handleCloseModal() {
-    confirmToast(
-      "Your profile is incomplete. You won't be able to enroll in courses until you complete it. Close anyway?",
-      closeModal,
-    );
+    if (!isProfileComplete) {
+      confirmToast(
+        "Your profile is incomplete. You won't be able to enroll in courses until you complete it. Close anyway?",
+        closeModal,
+      );
+      return;
+    }
+    closeModal();
   }
   const validationErrors = validateProfile(formData);
   const isFormValid = Object.keys(validationErrors).length === 0;

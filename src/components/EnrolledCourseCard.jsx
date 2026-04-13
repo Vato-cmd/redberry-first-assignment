@@ -12,7 +12,6 @@ import cross from "../assets/cross.svg";
 
 import { useModal } from "../context/ModalContext";
 import { usePanel } from "../context/EnrolledCoursesPanelContext";
-import StarRating from "./UI/StarRating";
 
 import ReviewSection from "./ReviewSection";
 
@@ -21,6 +20,7 @@ import {
   formatTimeSlotLabel,
 } from "../utils/scheduleHelpers";
 import { useEnroll } from "../context/EnrollContext";
+import { useState } from "react";
 
 export default function EnrolledCourseCard({
   enrollment,
@@ -28,11 +28,15 @@ export default function EnrolledCourseCard({
   onEnrollDelete,
   course,
   courseId,
+  reviews,
+  isRated,
+  onReviewSuccess,
 }) {
   const { timeRange } = formatTimeSlotLabel(enrollment.schedule.timeSlot.label);
   const { completeCourse, deleteCourse } = useEnroll();
   const { openModal } = useModal();
   const { handlePanelRefreshKey } = usePanel();
+  const [isReviewsDisplayed, setIsReviewsDisplayed] = useState(true);
 
   const progress = enrollment.progress;
 
@@ -44,6 +48,9 @@ export default function EnrolledCourseCard({
       openModal("success", {
         title: course.title,
         courseId: courseId,
+        reviews: course.reviews,
+        isRated: course.isRated,
+        onReviewSuccess: onEnrollSuccess,
       });
     } catch (error) {}
   }
@@ -67,7 +74,7 @@ export default function EnrolledCourseCard({
       </Button>
       <div className="flex flex-col gap-5.5 mb-12">
         <p className="flex items-center gap-3">
-          <img src={calendar} alt="calendar" />
+          <img src={calendarDotted} alt="calendar dotted" />
           {enrollment.schedule.weeklySchedule.label.replace(" - ", "-")}
         </p>
         <p className="flex items-center gap-3">
@@ -114,14 +121,29 @@ export default function EnrolledCourseCard({
             Retake Course
             <img className="w-6 h-6" src={retake} alt="retake logo" />
           </Button>
-          <div className="relative bg-[#FFFFFF] rounded-lg mt-9.75 h-43">
-            <img
-              className="absolute right-2.5 top-2.5 w-[12.5px] h-[12.5px]"
-              src={cross}
-              alt="cross logo"
-            />
-            <ReviewSection courseId={courseId} />
-          </div>
+          {isReviewsDisplayed ? (
+            <div className="relative bg-[#FFFFFF] rounded-lg mt-9.75 h-43">
+              <img
+                className={`absolute right-2.5 top-2.5 w-[12.5px] h-[12.5px] cursor-pointer`}
+                src={cross}
+                alt="cross logo"
+                onClick={() => setIsReviewsDisplayed(!isReviewsDisplayed)}
+              />
+              <ReviewSection
+                courseId={courseId}
+                reviews={reviews}
+                isRated={isRated}
+                onReviewSuccess={onReviewSuccess}
+              />
+            </div>
+          ) : (
+            <p
+              className="text-[#4F46E5] text-[20px] font-semibold mx-auto mt-9.75 cursor-pointer hover:text-[#281ed2]"
+              onClick={() => setIsReviewsDisplayed(!isReviewsDisplayed)}
+            >
+              Show reviews
+            </p>
+          )}
         </>
       ) : (
         <>

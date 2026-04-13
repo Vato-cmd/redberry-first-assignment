@@ -36,7 +36,15 @@ export default function StarRating({ value = 0, onChange, disabled = false }) {
           >
             <Star
               strokeWidth={1}
-              className={`w-12.5 h-12.5 ${isActive ? "fill-[#F4A316] text-[#F4A316]" : "text-[#D1D1D1] fill-none"}`}
+              className={`w-12.5 h-12.5 transition-colors ${
+                disabled
+                  ? isActive
+                    ? "fill-[#F4A316] text-[#F4A316] opacity-70"
+                    : "text-[#D1D1D1] fill-none opacity-50"
+                  : isActive
+                    ? "fill-[#F4A316] text-[#F4A316]"
+                    : "text-[#D1D1D1] fill-none"
+              }`}
             />
           </Button>
         );

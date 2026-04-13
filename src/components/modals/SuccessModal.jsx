@@ -8,8 +8,12 @@ import Button from "../UI/Button";
 
 export default function SuccessModal() {
   const { closeModal, modal } = useModal();
+
   const title = modal?.props?.title;
   const courseId = modal?.props?.courseId;
+  const reviews = modal?.props?.reviews ?? [];
+  const isRated = modal?.props?.isRated ?? false;
+  const onReviewSuccess = modal?.props?.onReviewSuccess;
 
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115 ">
@@ -21,7 +25,12 @@ export default function SuccessModal() {
         <p className="text-[#3D3D3D] text-[20px] font-medium w-89">
           You've completed “<strong>{title}</strong>” Course!
         </p>
-        <ReviewSection courseId={courseId} />
+        <ReviewSection
+          reviews={reviews}
+          isRated={isRated}
+          onReviewSuccess={onReviewSuccess}
+          courseId={courseId}
+        />
 
         <Button
           className="rounded-lg border-2 bg-[#4F46E5] border-[#4F46E5] text-[#FFFFFF] text-[16px] font-medium w-full h-14.5 mt-10"

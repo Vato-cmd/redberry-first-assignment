@@ -23,7 +23,6 @@ export default function EnrolledCoursesPanel() {
   const { isAuthorized, token } = useAuth();
   const { closeEnrolledCoursesPanel, isEnrolledCoursesPanelOpen, refreshKey } =
     usePanel();
-
   useEffect(() => {
     if (!isAuthorized || !token) return;
 
@@ -198,6 +197,7 @@ export default function EnrolledCoursesPanel() {
             <Link
               to="/courses"
               className="bg-[#4F46E5] text-white rounded-lg w-43.75 h-14.5 flex items-center justify-center"
+              onClick={closeEnrolledCoursesPanel}
             >
               Browse Courses
             </Link>
