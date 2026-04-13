@@ -10,6 +10,7 @@ import Filters from "../components/Filters";
 import { X } from "lucide-react";
 import Button from "../components/UI/Button";
 import Pagination from "../components/Pagination";
+import LoadingState from "../components/LoadingState";
 
 import cross from "../assets/cross.svg";
 import star from "../assets/star.svg";
@@ -69,7 +70,7 @@ export default function CoursesPage() {
     currentPage,
   ]);
 
-  if (!courses) return <p>Loading...</p>;
+  if (loading) return <LoadingState />;
 
   const breadCrumbItems = ["Home", "Browse"];
 

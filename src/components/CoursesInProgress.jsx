@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { calculateAvgRating } from "../utils/calculateAvgRating";
 import { usePanel } from "../context/EnrolledCoursesPanelContext.jsx";
 
+import LoadingState from "../components/LoadingState";
+
 import star from "../assets/star.svg";
 import Button from "./UI/Button.jsx";
 
@@ -54,7 +56,9 @@ export default function CoursesInProgress() {
 
     loadCoursesInProgress();
   }, [token, isAuthorized]);
-
+  {
+    isLoading && <LoadingState />;
+  }
   return (
     coursesInProgress.length > 0 && (
       <div className="w-391.5 mx-auto mt-16">
@@ -74,7 +78,7 @@ export default function CoursesInProgress() {
         </div>
         <div className="flex gap-6">
           {error && <p className="text-red-500 mb-4">{error}</p>}
-          {isLoading && <p>Loading...</p>}
+
           {coursesInProgress.slice(0, 3).map((enrolledCourse) => {
             return (
               <Link

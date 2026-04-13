@@ -14,6 +14,7 @@ import IncompleteProfileComponent from "../components/incompleteProfileComponent
 import UnAuthorizedUserComponent from "../components/UnAuthorizedUserComponent";
 import EnrolledCourseCard from "../components/EnrolledCourseCard";
 import BreadCrumbs from "../components/BreadCrumbs";
+import LoadingState from "../components/LoadingState";
 
 export default function CourseDetailsPage() {
   const { id } = useParams();
@@ -23,7 +24,7 @@ export default function CourseDetailsPage() {
   const location = useLocation();
   const from = location.state?.from;
 
-  const { isAuthorized, isProfileComplete, user, token } = useAuth();
+  const { isAuthorized, isProfileComplete, token } = useAuth();
 
   async function loadCourseDetails() {
     const data = await getCourseById(id, token);
@@ -41,7 +42,7 @@ export default function CourseDetailsPage() {
     loadCourseDetails();
   }, [id, token]);
 
-  if (!course) return <p>Loading...</p>;
+  if (!course) return <LoadingState />;
 
   const Icon = iconFinder[course.category.name.toLowerCase().replace(" ", "")];
 

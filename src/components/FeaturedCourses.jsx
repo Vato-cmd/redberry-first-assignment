@@ -1,5 +1,7 @@
 import star from "../assets/star.svg";
 import Button from "./UI/Button";
+import LoadingState from "../components/LoadingState";
+
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useCourse } from "../context/CourseContext";
@@ -16,7 +18,9 @@ export default function FeaturedCourses() {
     loadFeaturedCourses();
   }, []);
 
-  if (isLoadingFeaturedCourse) return <p>Loading featured courses...</p>;
+  if (isLoadingFeaturedCourse) {
+    return <LoadingState />;
+  }
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
