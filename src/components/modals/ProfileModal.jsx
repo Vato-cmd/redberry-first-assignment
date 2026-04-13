@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import profileOrange from "../../assets/profile-orange.svg";
 import profileGreen from "../../assets/profile-green.svg";
 import AvatarUpload from "../UI/AvatarUpload";
+import LoadingState from "../../components/LoadingState";
 
 import tick from "../../assets/tick.svg";
 import pen from "../../assets/pen.svg";
@@ -193,7 +194,7 @@ export default function ProfileModal() {
       className="max-w-115 p-12.5"
     >
       {isLoading ? (
-        <div>User credentials...</div>
+        <LoadingState />
       ) : loadError ? (
         <div className="text-[#F4161A]">{loadError}</div>
       ) : (
