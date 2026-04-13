@@ -3,6 +3,8 @@ import { useState } from "react";
 import { loginUser } from "../../api/auth.js";
 import { useAuth } from "../../context/AuthContext.jsx";
 
+import toast from "react-hot-toast";
+
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
@@ -56,12 +58,10 @@ export default function LoginModal() {
       const data = await loginUser(formData);
 
       login(data.data.user, data.data.token);
-
+      toast.success("Logged in successfully!");
       closeModal();
     } catch (error) {
-      setErrors({
-        general: error.message || "Something went wrong",
-      });
+      toast.error(error.message);
     } finally {
       setIsLoading(false);
     }

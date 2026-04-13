@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { authenticatedUser } from "../../api/auth";
 import { validateProfile } from "../../utils/validateProfile";
 import { updateProfile } from "../../api/auth";
+import { confirmToast } from "../confirmToast";
+import toast from "react-hot-toast";
 
 import profileOrange from "../../assets/profile-orange.svg";
 import profileGreen from "../../assets/profile-green.svg";
@@ -53,7 +55,7 @@ export default function ProfileModal() {
           avatar: null,
         });
       } catch (error) {
-        setLoadError(error.message || "Failed to load profile");
+        setLoadError(error.message || "Failed to update profile");
       } finally {
         setIsLoading(false);
       }
@@ -117,8 +119,10 @@ export default function ProfileModal() {
         avatar: null,
       });
       setIsEditing(false);
+      toast.success("Profile updated successfully!");
     } catch (error) {
       setLoadError(error.message || "Failed to update profile");
+      toast.error(error.message || "Failed to update profile");
     } finally {
       setIsSubmitting(false);
     }
@@ -171,16 +175,10 @@ export default function ProfileModal() {
   }
 
   function handleCloseModal() {
-    if (!isProfileComplete) {
-      const confirmClose = window.confirm(
-        "Your profile is incomplete. You won't be able to enroll in courses until you complete it. Close anyway?",
-      );
-
-      if (!confirmClose) {
-        return;
-      }
-    }
-    closeModal();
+    confirmToast(
+      "Your profile is incomplete. You won't be able to enroll in courses until you complete it. Close anyway?",
+      closeModal,
+    );
   }
   const validationErrors = validateProfile(formData);
   const isFormValid = Object.keys(validationErrors).length === 0;

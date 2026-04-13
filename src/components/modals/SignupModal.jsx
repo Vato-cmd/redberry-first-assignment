@@ -6,6 +6,7 @@ import Input from "../UI/Input";
 import Button from "../UI/Button";
 import AvatarUpload from "../UI/AvatarUpload";
 import { registerUser } from "../../api/auth";
+import toast from "react-hot-toast";
 
 import { validateSignup } from "../../utils/validateSignup";
 
@@ -96,10 +97,9 @@ export default function SignupModal() {
 
       closeModal();
       openModal("login");
+      toast.success("Account created successfully!");
     } catch (error) {
-      setErrors({
-        general: error.message || "Something went wrong",
-      });
+      toast.error(error.message);
     } finally {
       setIsLoading(false);
     }

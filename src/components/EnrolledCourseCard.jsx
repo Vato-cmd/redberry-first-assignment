@@ -1,7 +1,7 @@
 import Button from "./UI/Button";
 
 import clock from "../assets/clock.svg";
-import calendar from "../assets/calendar.svg";
+import calendarDotted from "../assets/dotted-calendar.svg";
 import monitor from "../assets/monitor.svg";
 import location from "../assets/location.svg";
 import hibryd from "../assets/hibryd.svg";
