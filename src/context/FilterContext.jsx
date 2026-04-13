@@ -8,6 +8,7 @@ export function FilterProvider({ children }) {
   const [selectedInstructorIds, setSelectedInstructorIds] = useState([]);
   const [sort, setSort] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [startPage, setStartPage] = useState(1);
 
   const activeFilters =
     selectedCategoryIds.length +
@@ -20,6 +21,7 @@ export function FilterProvider({ children }) {
     setSelectedInstructorIds([]);
     setSort("");
     setCurrentPage(1);
+    setStartPage(1);
   }
 
   return (
@@ -37,6 +39,8 @@ export function FilterProvider({ children }) {
         activeFilters,
         currentPage,
         setCurrentPage,
+        startPage,
+        setStartPage,
       }}
     >
       {children}

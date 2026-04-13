@@ -6,10 +6,8 @@ import BlurredComponent from "../components/BlurredComponent";
 import { useEnroll } from "../context/EnrollContext";
 import { useAuth } from "../context/AuthContext";
 export default function HomePage() {
-  const { enrolledCourses } = useEnroll();
   const { isAuthorized } = useAuth();
 
-  console.log(enrolledCourses);
   return (
     <>
       <Slider />
