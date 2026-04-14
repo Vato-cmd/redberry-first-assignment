@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import Button from "./UI/Button";
 import slide1 from "../assets/slide1.png";
 import slide2 from "../assets/slide2.png";
 import slide3 from "../assets/slide3.png";
-import ArrowLeftWhite from "../assets/Arrowleft-white.png";
-import ArrowLeftGreyed from "../assets/Arrowleft-greyed.png";
-import ArrowRightWhite from "../assets/Arrowright-white.png";
-import ArrowRightGreyed from "../assets/Arrowright-greyed.png";
 
 const slides = [
   {

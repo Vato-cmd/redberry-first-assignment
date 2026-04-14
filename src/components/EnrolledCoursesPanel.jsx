@@ -24,7 +24,7 @@ export default function EnrolledCoursesPanel() {
     usePanel();
 
   useEffect(() => {
-    if (!isAuthorized || !token) return;
+    if (!isAuthorized || !token || !isEnrolledCoursesPanelOpen) return;
 
     async function loadEnrolledCourses() {
       try {
