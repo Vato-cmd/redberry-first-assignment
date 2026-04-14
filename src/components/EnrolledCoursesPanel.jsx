@@ -3,6 +3,7 @@ import { getEnrolledCourses } from "../api/enroll";
 import { useAuth } from "../context/AuthContext";
 import { usePanel } from "../context/EnrolledCoursesPanelContext";
 import { formatSessionTypeName } from "../utils/scheduleHelpers";
+import { getSessionExtra } from "../utils/priceCalculation";
 
 import star from "../assets/star.svg";
 import calendar from "../assets/calendar.svg";
@@ -21,6 +22,7 @@ export default function EnrolledCoursesPanel() {
   const { isAuthorized, token } = useAuth();
   const { closeEnrolledCoursesPanel, isEnrolledCoursesPanelOpen, refreshKey } =
     usePanel();
+
   useEffect(() => {
     if (!isAuthorized || !token) return;
 
@@ -63,6 +65,15 @@ export default function EnrolledCoursesPanel() {
         {enrolledCourses.length > 0 ? (
           <div className="ml-[73.5px] mr-[97.5px]">
             {enrolledCourses.map((enrolledCourse) => {
+              const basePrice = Number(enrolledCourse.course.basePrice) || 0;
+              const sessionExtra = getSessionExtra(
+                enrolledCourse.schedule.sessionType.name,
+              );
+              const extraPrice =
+                typeof sessionExtra === "number" ? sessionExtra : 0;
+
+              const finalPrice = basePrice + extraPrice;
+
               return (
                 <Link
                   key={enrolledCourse.id}
@@ -133,6 +144,13 @@ export default function EnrolledCoursesPanel() {
                             />
                           )}
                           {enrolledCourse.schedule.location}
+                        </p>
+                        <p className="text-[#666666] text-[20px] mt-2">
+                          Final Price:
+                          <span className="text-[#141414] font-semibold">
+                            {" "}
+                            ${finalPrice}{" "}
+                          </span>
                         </p>
                       </div>
                     </div>

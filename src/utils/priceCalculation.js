@@ -1,6 +1,6 @@
 export function getSessionExtra(sessionTypeName) {
-  if (sessionTypeName === "in_person") return 30;
-  if (sessionTypeName === "hybrid") return 50;
+  if (sessionTypeName === "in_person") return 50;
+  if (sessionTypeName === "hybrid") return 30;
   if (sessionTypeName === "online") return "Included";
   return 0;
 }

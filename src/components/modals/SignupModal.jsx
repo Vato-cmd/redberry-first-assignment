@@ -9,12 +9,15 @@ import { registerUser } from "../../api/auth";
 import toast from "react-hot-toast";
 
 import { validateSignup } from "../../utils/validateSignup";
+import { useAuth } from "../../context/AuthContext";
 
 export default function SignupModal() {
   const { closeModal, openModal } = useModal();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
+
+  const { login } = useAuth();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -93,10 +96,10 @@ export default function SignupModal() {
 
     try {
       setIsLoading(true);
-      await registerUser(formData);
+      const data = await registerUser(formData);
 
+      login(data.data.user, data.data.token);
       closeModal();
-      openModal("login");
       toast.success("Account created successfully!");
     } catch (error) {
       toast.error(error.message);

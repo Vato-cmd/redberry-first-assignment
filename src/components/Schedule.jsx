@@ -340,7 +340,7 @@ export default function Schedule({
                       <p
                         className={`text-[14px] font-medium ${isDisabled ? "text-[#D1D1D1]" : "text-[#736BEA]"}`}
                       >
-                        + 30$
+                        + 50$
                       </p>
                     ) : matchedSessionType.name === "online" ? (
                       <p
@@ -352,7 +352,7 @@ export default function Schedule({
                       <p
                         className={`text-[14px] font-medium ${isDisabled ? "text-[#D1D1D1]" : "text-[#736BEA]"}`}
                       >
-                        + 50$
+                        + 30$
                       </p>
                     )}
                   </div>
@@ -406,16 +406,18 @@ export default function Schedule({
                       {defaultSessionType.label !== "Online" && (
                         <MapPin className="w-3 h-3 mr-0.5" />
                       )}
-                      {defaultSessionType.label === "Online"
-                        ? "Google Meet"
-                        : "Chavchavadze St.34"}
+                      {defaultSessionType.label === "Online" ? (
+                        <p className="text-[12px] font-normal">Google Meet</p>
+                      ) : (
+                        "Chavchavadze St.34"
+                      )}
                     </p>
                     <p className="text-[14px] font-medium">
                       {defaultSessionType.label === "Online"
                         ? "Included"
                         : defaultSessionType.label === "In-Person"
-                          ? "+ 30$"
-                          : "+ 50$"}
+                          ? "+ 50$"
+                          : "+ 30$"}
                     </p>
                   </div>
                 )}
