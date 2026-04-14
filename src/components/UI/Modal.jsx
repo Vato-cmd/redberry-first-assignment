@@ -1,6 +1,7 @@
 import Button from "./Button";
 import cross from "../../assets/cross.svg";
 import backwardsArrow from "../../assets/backwards-arrow.png";
+import { useEffect } from "react";
 
 export default function Modal({
   isOpen,
@@ -10,6 +11,22 @@ export default function Modal({
   showBackwardsArrow = false,
   onBack,
 }) {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleKeyDown(e) {
+      if (e.key === "Escape") {
+        onClose?.();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
