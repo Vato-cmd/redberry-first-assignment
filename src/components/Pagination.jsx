@@ -1,56 +1,34 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Button from "./UI/Button";
 
-function getVisiblePages(startPage, lastPage) {
+function getVisiblePages(currentPage, lastPage) {
   const pages = [];
-  const endPage = Math.min(startPage + 2, lastPage - 1);
 
-  if (startPage > 1) {
-    pages.push("left-dots");
+  if (currentPage <= 2) {
+    pages.push(1, 2, 3, "right-dots", lastPage);
+  } else if (currentPage >= lastPage - 2) {
+    pages.push("left-dots", lastPage - 3, lastPage - 2, lastPage - 1, lastPage);
+  } else {
+    pages.push(
+      "left-dots",
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      "right-dots",
+      lastPage,
+    );
   }
-
-  for (let page = startPage; page <= endPage; page++) {
-    pages.push(page);
-  }
-
-  if (endPage < lastPage - 1) {
-    pages.push("right-dots");
-  }
-
-  if (lastPage > endPage) {
-    pages.push(lastPage);
-  }
-  console.log(pages);
 
   return pages;
 }
 
-export default function Pagination({
-  currentPage,
-  lastPage,
-  onPageChange,
-  startPage,
-  setStartPage,
-}) {
+export default function Pagination({ currentPage, lastPage, onPageChange }) {
   if (lastPage <= 1) return null;
 
-  const pages = getVisiblePages(startPage, lastPage);
-  const lastGroupStart = Math.max(1, lastPage - 3);
+  const pages = getVisiblePages(currentPage, lastPage);
 
   function handlePageClick(page) {
     onPageChange(page);
-
-    if (page !== lastPage) {
-      if (page >= 1 && page <= 2) {
-        setStartPage(1);
-      } else if (page === 3) {
-        setStartPage(4);
-      } else if (page >= lastGroupStart) {
-        setStartPage(lastGroupStart);
-      } else {
-        setStartPage(page);
-      }
-    }
   }
 
   return (
@@ -64,13 +42,13 @@ export default function Pagination({
         <ChevronLeft className="w-5 h-5" />
       </Button>
 
-      {pages.map((item) => {
-        if (item === "left-dots") {
+      {pages.map((item, index) => {
+        if (item === `left-dots`) {
           return (
             <Button
-              key="left-dots"
+              key={`left-dots-${index}`}
               type="button"
-              onClick={() => setStartPage(Math.max(1, startPage - 3))}
+              onClick={() => handlePageClick(Math.max(1, currentPage - 1))}
               className="w-10 h-10 rounded-sm border border-[#D1D1D1] bg-white text-[#4F46E5] text-[16px] font-medium hover:text-[white] hover:bg-[#281ed2]"
             >
               ...
@@ -78,13 +56,13 @@ export default function Pagination({
           );
         }
 
-        if (item === "right-dots") {
+        if (item === `right-dots`) {
           return (
             <Button
-              key="right-dots"
+              key={`right-dots-${index}`}
               type="button"
               onClick={() =>
-                setStartPage(Math.min(lastGroupStart, startPage + 3))
+                handlePageClick(Math.min(lastPage, currentPage + 1))
               }
               className="w-10 h-10 rounded-sm border border-[#D1D1D1] bg-white text-[#4F46E5] text-[16px] font-medium hover:text-[white] hover:bg-[#281ed2]"
             >

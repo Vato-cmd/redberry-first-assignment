@@ -198,7 +198,7 @@ export default function ProfileModal() {
       ) : loadError ? (
         <div className="text-[#F4161A]">{loadError}</div>
       ) : (
-        <div className="gap-6 h-158">
+        <div className="gap-6">
           <h1 className="text-[32px] font-semibold text-[#141414] text-center mb-6">
             Profile
           </h1>
