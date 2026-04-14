@@ -3,8 +3,6 @@ import { getEnrolledCourses } from "../api/enroll";
 import { useAuth } from "../context/AuthContext";
 import { usePanel } from "../context/EnrolledCoursesPanelContext";
 import { formatSessionTypeName } from "../utils/scheduleHelpers";
-import { getCourseById } from "../api/courses";
-import { calculateAvgRating } from "../utils/calculateAvgRating";
 
 import star from "../assets/star.svg";
 import calendar from "../assets/calendar.svg";
@@ -30,27 +28,7 @@ export default function EnrolledCoursesPanel() {
       try {
         setError("");
         const data = await getEnrolledCourses(token);
-
-        const enrichedCourses = await Promise.all(
-          data.data.map(async (enrolledCourse) => {
-            const fullCourse = await getCourseById(
-              enrolledCourse.course.id,
-              token,
-            );
-
-            const avgRating = calculateAvgRating(fullCourse.reviews);
-
-            return {
-              ...enrolledCourse,
-              course: {
-                ...enrolledCourse.course,
-                avgRating,
-              },
-            };
-          }),
-        );
-
-        setEnrolledCourses(enrichedCourses);
+        setEnrolledCourses(data.data);
       } catch (error) {
         setError(error.message || "Failed to load enrolled courses");
       }

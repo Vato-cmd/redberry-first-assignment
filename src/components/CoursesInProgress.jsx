@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { getCoursesInProgress } from "../api/enroll";
-import { getCourseById } from "../api/courses";
 import { useAuth } from "../context/AuthContext";
 import { Link } from "react-router-dom";
-import { calculateAvgRating } from "../utils/calculateAvgRating";
 import { usePanel } from "../context/EnrolledCoursesPanelContext.jsx";
 
 import LoadingState from "../components/LoadingState";
@@ -26,27 +24,7 @@ export default function CoursesInProgress() {
         setIsLoading(true);
         setError("");
         const data = await getCoursesInProgress({ token });
-
-        const enrichedCourses = await Promise.all(
-          data.data.map(async (enrolledCourse) => {
-            const fullCourse = await getCourseById(
-              enrolledCourse.course.id,
-              token,
-            );
-
-            const avgRating = calculateAvgRating(fullCourse.reviews);
-
-            return {
-              ...enrolledCourse,
-              course: {
-                ...enrolledCourse.course,
-                avgRating,
-              },
-            };
-          }),
-        );
-
-        setCoursesInProgress(enrichedCourses);
+        setCoursesInProgress(data.data);
       } catch (error) {
         setError(error.message || "Failed to fetch in-progress course");
       } finally {
@@ -56,9 +34,8 @@ export default function CoursesInProgress() {
 
     loadCoursesInProgress();
   }, [token, isAuthorized]);
-  {
-    isLoading && <LoadingState />;
-  }
+
+  if (isLoading) return <LoadingState />;
   return (
     coursesInProgress.length > 0 && (
       <div className="w-391.5 mx-auto mt-16">

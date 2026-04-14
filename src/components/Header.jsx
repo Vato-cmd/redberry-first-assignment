@@ -47,7 +47,7 @@ export default function Header() {
             {!isAuthorized ? (
               <>
                 <Button
-                  className="border-2 border-[#958FEF] text-[#4F46E5] h-15 w-28.5 py-3 px-4 rounded-lg"
+                  className="border-2 border-[#958FEF] text-[#4F46E5] h-15 w-28.5 py-3 px-4 rounded-lg transition-colors duration-300 ease-in-out hover:text-white hover:bg-[#281ED2]"
                   onClick={() => openModal("login")}
                 >
                   Log In

@@ -12,7 +12,6 @@ import Button from "../components/UI/Button";
 import Pagination from "../components/Pagination";
 import LoadingState from "../components/LoadingState";
 
-import cross from "../assets/cross.svg";
 import star from "../assets/star.svg";
 import divider from "../assets/divider.svg";
 import emptySearch from "../assets/empty-search.png";
@@ -70,7 +69,7 @@ export default function CoursesPage() {
     currentPage,
   ]);
 
-  if (loading) return <LoadingState />;
+  // if (loading) return <LoadingState />;
 
   const breadCrumbItems = ["Home", "Browse"];
 
@@ -191,9 +190,6 @@ export default function CoursesPage() {
                 <h2 className="text-[24px] font-semibold text-[#0A0A0A] mb-2">
                   No courses found
                 </h2>
-                <p className="text-[#8A8A8A] text-[16px]">
-                  There are no courses on this page.
-                </p>
                 <img src={emptySearch} alt="empty search" />
               </div>
 
