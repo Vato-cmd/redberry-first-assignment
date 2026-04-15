@@ -118,6 +118,7 @@ export default function Schedule({
           );
 
           const isDisabled = !matchedTimeSlot;
+
           return (
             <ScheduleOption
               key={defaultSlot.key}
@@ -131,7 +132,6 @@ export default function Schedule({
               {matchedTimeSlot ? (
                 <div className="flex items-center justify-center gap-3">
                   {defaultSlot.label === "Morning" ? (
-                    // <CloudSun className="h-6.5 w-6.5" />
                     <svg
                       width="23"
                       height="21"
@@ -145,7 +145,6 @@ export default function Schedule({
                       />
                     </svg>
                   ) : defaultSlot.label === "Afternoon" ? (
-                    // <Sun className="h-6.5 w-6.5" />
                     <svg
                       width="25"
                       height="25"
@@ -159,7 +158,6 @@ export default function Schedule({
                       />
                     </svg>
                   ) : (
-                    // <Moon className="h-6.5 w-6.5" />
                     <svg
                       width="21"
                       height="21"
@@ -183,7 +181,6 @@ export default function Schedule({
               ) : (
                 <div className="flex items-center gap-3 justify-center">
                   {defaultSlot.label === "Morning" ? (
-                    // <CloudSun className="h-6.5 w-6.5" />
                     <svg
                       width="23"
                       height="21"
@@ -197,7 +194,6 @@ export default function Schedule({
                       />
                     </svg>
                   ) : defaultSlot.label === "Afternoon" ? (
-                    // <Sun className="h-6.5 w-6.5" />
                     <svg
                       width="25"
                       height="25"
@@ -211,7 +207,6 @@ export default function Schedule({
                       />
                     </svg>
                   ) : (
-                    // <Moon className="h-6.5 w-6.5" />
                     <svg
                       width="21"
                       height="21"
@@ -400,9 +395,11 @@ export default function Schedule({
                         <MapPin className="w-3 h-3 mr-0.5" />
                       )}
                       {defaultSessionType.label === "Online" ? (
-                        <p className="text-[12px] font-normal">Google Meet</p>
+                        <span className="text-[12px] font-normal">
+                          Google Meet
+                        </span>
                       ) : (
-                        "Chavchavadze St.34"
+                        <span className="font-normal">Chavchavadze St.34</span>
                       )}
                     </p>
                     <p className="text-[14px] font-medium">
