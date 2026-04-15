@@ -56,8 +56,6 @@ export async function getTopics(categoryIds = []) {
       ? `${BASE_URL}/topics?${params.toString()}`
       : `${BASE_URL}/topics`;
 
-  console.log(url);
-
   const response = await fetch(url, {
     headers: {
       Accept: "application/json",

@@ -16,7 +16,6 @@ export function EnrollProvider({ children }) {
   const [enrollError, setEnrollError] = useState("");
 
   const { token } = useAuth();
-  console.log(enrolledCourses);
 
   async function submitReview({ courseId, rating }) {
     try {

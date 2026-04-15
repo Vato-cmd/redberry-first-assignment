@@ -1,6 +1,6 @@
 import Button from "./Button";
 import cross from "../../assets/cross.svg";
-import backwardsArrow from "../../assets/backwards-arrow.png";
+import backwardsArrow from "../../assets/backwards-arrow.svg";
 import { useEffect } from "react";
 
 export default function Modal({

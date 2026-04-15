@@ -1,5 +1,5 @@
-import eye from "../../assets/eye.png";
-import eyeclosed from "../../assets/eye-closed.png";
+import eye from "../../assets/eye.svg";
+import eyeclosed from "../../assets/eyeclosed.svg";
 import arrowDown from "../../assets/arrow-down.svg";
 
 import { useState } from "react";

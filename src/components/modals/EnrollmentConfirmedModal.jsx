@@ -6,10 +6,8 @@ import Button from "../UI/Button";
 
 export default function EnrollmentConfirmedModal({}) {
   const { closeModal, modal } = useModal();
-  console.log(modal);
 
   const courseTitle = modal?.props?.title;
-  console.log(courseTitle);
 
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115">

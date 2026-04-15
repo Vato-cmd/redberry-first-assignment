@@ -19,7 +19,6 @@ import LoadingState from "../components/LoadingState";
 export default function CourseDetailsPage() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
-  console.log(course);
 
   const location = useLocation();
   const from = location.state?.from;

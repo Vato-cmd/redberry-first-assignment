@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import trash from "../../assets/trash.png";
-import uploadicon from "../../assets/upload-icon.png";
+import uploadicon from "../../assets/upload-icon.svg";
 import Button from "./Button";
 
 export default function AvatarUpload({
