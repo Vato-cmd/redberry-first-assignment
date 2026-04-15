@@ -129,9 +129,7 @@ export default function ProfileModal() {
     }
   }
 
-  function handleAvatarChange(e) {
-    const file = e.target.files[0];
-
+  function handleAvatarFile(file) {
     if (!file) return;
 
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
@@ -152,6 +150,11 @@ export default function ProfileModal() {
       ...prev,
       avatar: file,
     }));
+  }
+
+  function handleAvatarChange(e) {
+    const file = e.target.files[0];
+    handleAvatarFile(file);
   }
 
   function handleRemoveAvatar() {
@@ -322,6 +325,7 @@ export default function ProfileModal() {
               file={formData.avatar}
               disabled={!isEditing}
               onChange={handleAvatarChange}
+              onFileSelect={handleAvatarFile}
               onRemove={handleRemoveAvatar}
               error={errors.avatar}
             />
