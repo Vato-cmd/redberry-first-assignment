@@ -19,16 +19,8 @@ import {
   getWeeklyScheduleKey,
   getSessionTypeKey,
 } from "../utils/scheduleHelpers";
-import {
-  CloudSun,
-  Sun,
-  Moon,
-  Monitor,
-  Users,
-  Blend,
-  MapPin,
-  TriangleAlert,
-} from "lucide-react";
+
+import { MapPin, TriangleAlert } from "lucide-react";
 
 export default function Schedule({
   courseId,
@@ -53,6 +45,7 @@ export default function Schedule({
     openSection,
     toggleSection,
   } = useCourseSchedule(courseId);
+
   const selectedSessionType =
     sessionTypes.find((type) => type.id === selectedSessionTypeId) || null;
 

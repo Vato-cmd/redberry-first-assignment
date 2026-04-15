@@ -4,8 +4,6 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function ScheduleSection({
   title,
-  isLoading,
-  loadingText,
   children,
   className,
   isOpen = false,

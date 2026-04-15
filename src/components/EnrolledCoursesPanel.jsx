@@ -146,7 +146,7 @@ export default function EnrolledCoursesPanel() {
                           {enrolledCourse.schedule.location}
                         </p>
                         <p className="text-[#666666] text-[20px] mt-1">
-                          Final Price:
+                          Final Price:{" "}
                           <span className="text-[#141414] font-semibold">
                             ${finalPrice}
                           </span>

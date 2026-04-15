@@ -23,6 +23,9 @@ export function validateSignup(formData, step) {
   }
 
   if (step === 3) {
+    if (!formData.username) {
+      errors.username = "Username is required";
+    }
     if (formData.username.trim().length < 3) {
       errors.username = "Username must be at least 3 characters";
     }

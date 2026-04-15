@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useModal } from "../../context/ModalContext";
+import { registerUser } from "../../api/auth";
 
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import AvatarUpload from "../UI/AvatarUpload";
-import { registerUser } from "../../api/auth";
 import toast from "react-hot-toast";
 
 import { validateSignup } from "../../utils/validateSignup";
@@ -16,6 +16,7 @@ export default function SignupModal() {
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
 
   const { login } = useAuth();
 
@@ -39,6 +40,14 @@ export default function SignupModal() {
       ...prev,
       [name]: "",
       general: "",
+    }));
+  }
+
+  function handleBlur(e) {
+    const { name } = e.target;
+    setTouched((prev) => ({
+      ...prev,
+      [name]: true,
     }));
   }
 
@@ -189,8 +198,9 @@ export default function SignupModal() {
               name="username"
               value={formData.username}
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Username"
-              error={errors.username}
+              error={touched.username ? errors.username : ""}
               required
             />
 

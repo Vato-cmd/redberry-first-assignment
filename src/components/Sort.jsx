@@ -6,6 +6,7 @@ import Button from "./UI/Button";
 export default function Sort() {
   const [open, setOpen] = useState(false);
   const { sort, setSort } = useFilters();
+
   const options = [
     { label: "Newest First", value: "newest" },
     { label: "Price: Low to High", value: "price_asc" },

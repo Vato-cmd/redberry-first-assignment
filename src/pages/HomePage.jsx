@@ -1,10 +1,9 @@
 import Slider from "../components/Slider";
 import FeaturedCourses from "../components/FeaturedCourses";
 import CoursesInProgress from "../components/CoursesInProgress";
-import EnrolledCoursesPanel from "../components/EnrolledCoursesPanel";
 import BlurredComponent from "../components/BlurredComponent";
-import { useEnroll } from "../context/EnrollContext";
 import { useAuth } from "../context/AuthContext";
+
 export default function HomePage() {
   const { isAuthorized } = useAuth();
 
@@ -12,7 +11,6 @@ export default function HomePage() {
     <>
       <Slider />
       {isAuthorized && <CoursesInProgress />}
-      <EnrolledCoursesPanel />
       <FeaturedCourses />
       {!isAuthorized && <BlurredComponent />}
     </>
