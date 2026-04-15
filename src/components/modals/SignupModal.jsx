@@ -58,9 +58,7 @@ export default function SignupModal() {
     }));
   }
 
-  function handleAvatarChange(e) {
-    const file = e.target.files[0];
-
+  function handleAvatarFile(file) {
     if (!file) return;
 
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
@@ -82,6 +80,11 @@ export default function SignupModal() {
       ...prev,
       avatar: file,
     }));
+  }
+
+  function handleAvatarChange(e) {
+    const file = e.target.files[0];
+    handleAvatarFile(file);
   }
 
   function handleNextStep() {
@@ -206,6 +209,7 @@ export default function SignupModal() {
 
             <AvatarUpload
               onChange={handleAvatarChange}
+              onFileSelect={handleAvatarFile}
               error={errors.avatar}
               file={formData.avatar}
               onRemove={handleRemoveAvatar}

@@ -6,11 +6,13 @@ import Button from "./Button";
 export default function AvatarUpload({
   onChange,
   onRemove,
+  onFileSelect,
   error,
   file,
   disabled = false,
 }) {
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [isDragActive, setIsDragActive] = useState(false);
 
   useEffect(() => {
     if (!file) {
@@ -24,6 +26,29 @@ export default function AvatarUpload({
     return () => URL.revokeObjectURL(objectUrl);
   }, [file]);
 
+  function handleDragOver(e) {
+    e.preventDefault();
+    if (disabled) return;
+    setIsDragActive(true);
+  }
+
+  function handleDragLeave() {
+    if (disabled) return;
+    setIsDragActive(false);
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    if (disabled) return;
+
+    setIsDragActive(false);
+
+    const droppedFile = e.dataTransfer.files?.[0];
+    if (!droppedFile) return;
+
+    onFileSelect?.(droppedFile);
+  }
+
   return (
     <div className="flex flex-col">
       <label className="text-[14px] mb-3 font-medium text-[#3D3D3D]">
@@ -32,11 +57,14 @@ export default function AvatarUpload({
 
       {!file && (
         <label
-          className={`flex flex-col items-center justify-center h-35 cursor-pointer border-[1.5px] border-[#D1D1D1] rounded-lg bg-[#F8F8F8] text-center hover:bg-[#EEEDFC]
-            focus-within:bg-[#DDDBFA]
-            ${error && "text-[#F4161A] border-[#F4161A]"}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          className={`flex flex-col items-center justify-center h-35 border-[1.5px] rounded-lg bg-[#F8F8F8] text-center transition
+            ${error ? "text-[#F4161A] border-[#F4161A]" : "border-[#D1D1D1]"}
+            ${isDragActive ? "bg-[#DDDBFA] border-[#958FEF]" : "hover:bg-[#EEEDFC] focus-within:bg-[#DDDBFA]"}
             ${disabled ? "opacity-50 pointer-events-none" : "cursor-pointer"}
-            `}
+          `}
         >
           <img
             src={uploadicon}
@@ -69,8 +97,8 @@ export default function AvatarUpload({
       {file && (
         <div
           className={`mt-2 flex items-center gap-3 rounded-lg border-[1.5px] p-3 h-35 bg-[#EEEDFC]
-        ${error ? "border-[#F4161A]" : "border-[#1DC31D]"} 
-        ${disabled ? "opacity-50" : ""}`}
+            ${error ? "border-[#F4161A]" : "border-[#1DC31D]"} 
+            ${disabled ? "opacity-50" : ""}`}
         >
           <img
             src={previewUrl}
