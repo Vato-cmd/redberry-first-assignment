@@ -9,6 +9,7 @@ export function useCourseSchedule(courseId) {
   const [weeklySchedules, setWeeklySchedules] = useState([]);
   const [timeSlotsByWeekId, setTimeSlotsByWeekId] = useState({});
   const [sessionTypesByKey, setSessionTypesByKey] = useState({});
+
   const [selectedWeeklyScheduleId, setSelectedWeeklyScheduleId] =
     useState(null);
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState(null);
