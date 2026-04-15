@@ -1,19 +1,38 @@
 import { useModal } from "../../context/ModalContext";
+import { useAuth } from "../../context/AuthContext";
+import { getCourseById } from "../../api/courses";
+import { use, useEffect, useState } from "react";
+
 import Modal from "../UI/Modal";
 
 import success from "../../assets/success.svg";
-
 import ReviewSection from "../ReviewSection";
 import Button from "../UI/Button";
 
 export default function SuccessModal() {
   const { closeModal, modal } = useModal();
+  const { token } = useAuth();
 
   const title = modal?.props?.title;
   const courseId = modal?.props?.courseId;
-  const reviews = modal?.props?.reviews ?? [];
-  const isRated = modal?.props?.isRated ?? false;
   const onReviewSuccess = modal?.props?.onReviewSuccess;
+
+  const [course, setCourse] = useState(null);
+  async function LoadCourse() {
+    const data = await getCourseById(courseId, token);
+    setCourse(data);
+  }
+
+  useEffect(() => {
+    if ((!courseId, !token)) return;
+    LoadCourse();
+  }, [courseId, token]);
+
+  async function handleReviewSuccess() {
+    await LoadCourse();
+    await onReviewSuccess?.();
+  }
+  if (!course) return null;
 
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115 ">
@@ -26,9 +45,9 @@ export default function SuccessModal() {
           You've completed “<strong>{title}</strong>” Course!
         </p>
         <ReviewSection
-          reviews={reviews}
-          isRated={isRated}
-          onReviewSuccess={onReviewSuccess}
+          reviews={course.reviews}
+          isRated={course.isRated}
+          onReviewSuccess={handleReviewSuccess}
           courseId={courseId}
         />
 

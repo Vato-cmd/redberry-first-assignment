@@ -6,7 +6,7 @@ import { formatSessionTypeName } from "../utils/scheduleHelpers";
 import { getSessionExtra } from "../utils/priceCalculation";
 
 import star from "../assets/star.svg";
-import calendar from "../assets/calendar.svg";
+import calendar from "../assets/dotted-calendar.svg";
 import clock from "../assets/clock.svg";
 import inperson from "../assets/inperson.svg";
 import location from "../assets/location.svg";
@@ -80,7 +80,7 @@ export default function EnrolledCoursesPanel() {
                   to={`/courses/${enrolledCourse.course.id}`}
                   onClick={closeEnrolledCoursesPanel}
                 >
-                  <div className="bg-[#FFFFFF] rounded-xl p-5 w-155.75 h-73.75 mt-8 hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]">
+                  <div className="bg-[#FFFFFF] rounded-xl p-5 w-155.75 h-77.75 mt-8 hover:shadow-[4px_4px_8px_rgba(0,0,0,0.06)]">
                     <div className="flex gap-4 mb-2">
                       <img
                         src={enrolledCourse.course.image}
@@ -145,11 +145,10 @@ export default function EnrolledCoursesPanel() {
                           )}
                           {enrolledCourse.schedule.location}
                         </p>
-                        <p className="text-[#666666] text-[20px] mt-2">
+                        <p className="text-[#666666] text-[20px] mt-1">
                           Final Price:
                           <span className="text-[#141414] font-semibold">
-                            {" "}
-                            ${finalPrice}{" "}
+                            ${finalPrice}
                           </span>
                         </p>
                       </div>

@@ -48,8 +48,6 @@ export default function EnrolledCourseCard({
       openModal("success", {
         title: course.title,
         courseId: courseId,
-        reviews: course.reviews,
-        isRated: course.isRated,
         onReviewSuccess: onEnrollSuccess,
       });
     } catch (error) {}
@@ -68,7 +66,7 @@ export default function EnrolledCourseCard({
   return (
     <div className="text-[#525252] text-[20px] font-medium w-118.25 flex flex-col py-4.25 px-6.25">
       <Button
-        className={`${progress === 100 ? "text-[#1DC31D] bg-[#dff0df]" : "text-[#736BEA] bg-[#e8e7f4]"} self-start  p-4 rounded-full mb-5.5`}
+        className={`${progress === 100 ? "text-[#1DC31D] bg-[#dff0df]" : "text-[#736BEA] bg-[#e8e7f4]"} self-start p-4 rounded-full mb-5.5`}
       >
         <p>{progress === 100 ? "Completed" : "Enrolled"}</p>
       </Button>

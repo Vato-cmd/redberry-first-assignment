@@ -18,8 +18,7 @@ export default function ReviewSection({
   const { user } = useAuth();
 
   const currentUserReview = reviews.find((review) => review.userId === user.id);
-
-  const existingRating = currentUserReview?.rating;
+  const existingRating = currentUserReview?.rating ?? 0;
 
   async function handleRatingSubmit(starValue) {
     try {

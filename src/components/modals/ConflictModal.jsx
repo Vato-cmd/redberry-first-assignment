@@ -20,13 +20,16 @@ export default function ConflictModal() {
   const onEnrollSuccess = modal?.props?.onEnrollSuccess;
   const conflicts = modal?.props?.conflicts || [];
   const firstConflict = conflicts[0];
+  const title = modal?.props?.title;
 
   async function handleForceEnroll() {
     try {
       await enroll(courseId, courseScheduleId, true);
       await onEnrollSuccess?.();
       closeModal();
-      openModal("enroll-confirmed");
+      openModal("enroll-confirmed", {
+        title,
+      });
     } catch (error) {}
   }
 

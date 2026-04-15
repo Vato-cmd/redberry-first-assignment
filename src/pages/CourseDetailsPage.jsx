@@ -73,11 +73,11 @@ export default function CourseDetailsPage() {
             <div className="mt-[26.5px] flex justify-between gap-4 mb-4.5">
               <div className="flex justify-between items-center flex-1 text-[#525252] font-medium">
                 <div className="flex items-center gap-3.75">
-                  <p className="flex items-center gap-1 text-[14px]">
+                  <p className="flex items-center gap-1.75 text-[14px]">
                     <img className="w-6 h-6" src={calendar} alt="calendar" />
                     {course.durationWeeks} Weeks
                   </p>
-                  <p className="flex items-center gap-1 text-[14px]">
+                  <p className="flex items-center gap-1.75 text-[14px]">
                     <img className="w-6 h-6" src={clock} alt="clock" />
                     {course.hours} Hours
                   </p>

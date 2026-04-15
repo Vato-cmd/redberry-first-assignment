@@ -32,6 +32,7 @@ export default function Summary({
       await enroll(courseId, selectedSessionType.courseScheduleId);
       await onEnrollSuccess?.();
       handlePanelRefreshKey();
+      console.log(courseTitle);
 
       openModal("enroll-confirmed", {
         title: courseTitle,
@@ -44,6 +45,7 @@ export default function Summary({
           courseId: courseId,
           courseScheduleId: selectedSessionType.courseScheduleId,
           onEnrollSuccess,
+          title: courseTitle,
         });
         return;
       }
