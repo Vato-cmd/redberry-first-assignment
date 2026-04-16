@@ -14,7 +14,7 @@ import LoadingState from "../../components/LoadingState";
 
 import tick from "../../assets/tick.svg";
 import pen from "../../assets/pen.svg";
-import user from "../../assets/user.svg";
+import user from "../../assets/User.svg";
 
 import Modal from "../UI/Modal";
 import Input from "../UI/Input";

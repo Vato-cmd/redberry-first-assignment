@@ -1,4 +1,4 @@
-import mainlogo from "../assets/logo.svg";
+import mainlogo from "../assets/Logo.svg";
 import Button from "./UI/Button.jsx";
 import userLogo from "../assets/User.svg";
 import profileOrange from "../assets/profile-orange.svg";

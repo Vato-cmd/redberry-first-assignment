@@ -10,7 +10,7 @@ import clock from "../assets/clock.svg";
 import { iconFinder } from "../utils/iconFinder";
 
 import Schedule from "../components/Schedule";
-import IncompleteProfileComponent from "../components/incompleteProfileComponent";
+import IncompleteProfileComponent from "../components/IncompleteProfileComponent";
 import UnAuthorizedUserComponent from "../components/UnAuthorizedUserComponent";
 import EnrolledCourseCard from "../components/EnrolledCourseCard";
 import BreadCrumbs from "../components/BreadCrumbs";
