@@ -6,6 +6,7 @@ import Button from "../UI/Button";
 
 export default function ConfirmProfileModal() {
   const { closeModal, openModal } = useModal();
+
   return (
     <Modal isOpen={true} onClose={closeModal} className="max-w-115">
       <div className="text-center flex flex-col items-center p-15">
